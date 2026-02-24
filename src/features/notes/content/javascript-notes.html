@@ -1913,6 +1913,26 @@ let grade = marks >= 90 ? "A" : marks >= 75 ? "B" : "C";</code></pre>
         <button class="btn" id="runConditionalDemo">Show Conditional Output</button>
         <div class="output" id="conditionalOutput">Click "Show Conditional Output"</div>
 
+        <h3>Switch Case Program: Day in Week using <code>prompt()</code></h3>
+        <pre><code>let dayInput = prompt("Enter day number (1-7)");
+let day = Number(dayInput);
+let dayName;
+
+switch (day) {
+  case 1: dayName = "Monday"; break;
+  case 2: dayName = "Tuesday"; break;
+  case 3: dayName = "Wednesday"; break;
+  case 4: dayName = "Thursday"; break;
+  case 5: dayName = "Friday"; break;
+  case 6: dayName = "Saturday"; break;
+  case 7: dayName = "Sunday"; break;
+  default: dayName = "Invalid day number";
+}
+
+alert(dayName);</code></pre>
+        <button class="btn" id="runPromptSwitchDemo">Run Prompt Switch Demo</button>
+        <div class="output" id="promptSwitchOutput">Click "Run Prompt Switch Demo"</div>
+
         <div class="memory">
           <strong>Memory Trick:</strong> <code>I-IE-EI-S-T</code> =
           <strong>I</strong>f, <strong>I</strong>f-else, <strong>E</strong>lse-if,
@@ -3435,6 +3455,8 @@ const data = await res.json();</code></pre>
 
     const conditionalDemoBtn = document.getElementById("runConditionalDemo");
     const conditionalOutput = document.getElementById("conditionalOutput");
+    const promptSwitchDemoBtn = document.getElementById("runPromptSwitchDemo");
+    const promptSwitchOutput = document.getElementById("promptSwitchOutput");
 
     conditionalDemoBtn.addEventListener("click", () => {
       const marks = 72;
@@ -3471,6 +3493,51 @@ const data = await res.json();</code></pre>
         "day = " + day + " -> " + dayName + " (switch)",
         "",
         "if statement idea: executes only when condition is true."
+      ].join("\n");
+    });
+
+    promptSwitchDemoBtn.addEventListener("click", () => {
+      const dayInput = prompt("Enter day number (1-7):");
+
+      if (dayInput === null) {
+        promptSwitchOutput.textContent = "Prompt cancelled by user.";
+        return;
+      }
+
+      const day = Number(dayInput.trim());
+      let dayName;
+
+      switch (day) {
+        case 1:
+          dayName = "Monday";
+          break;
+        case 2:
+          dayName = "Tuesday";
+          break;
+        case 3:
+          dayName = "Wednesday";
+          break;
+        case 4:
+          dayName = "Thursday";
+          break;
+        case 5:
+          dayName = "Friday";
+          break;
+        case 6:
+          dayName = "Saturday";
+          break;
+        case 7:
+          dayName = "Sunday";
+          break;
+        default:
+          dayName = "Invalid day number";
+      }
+
+      promptSwitchOutput.textContent = [
+        "Prompt Switch Output:",
+        "input = \"" + dayInput + "\"",
+        "Number(input) = " + (Number.isNaN(day) ? "NaN" : day),
+        "result -> " + dayName
       ].join("\n");
     });
 
