@@ -1,0 +1,227 @@
+:root {
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --text: #142033;
+  --muted: #5f6b7d;
+  --primary: #0d9488;
+  --primary-dark: #0f766e;
+  --accent: #2563eb;
+  --line: #d7e0ed;
+  --radius: 14px;
+  --shadow-sm: 0 3px 10px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 14px 32px rgba(15, 23, 42, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.app-shell {
+  min-height: 100%;
+  padding: 20px 16px 42px;
+  background:
+    radial-gradient(1200px 500px at -10% -20%, #dff5ff 0%, transparent 50%),
+    radial-gradient(900px 400px at 120% -20%, #dbf7f0 0%, transparent 45%),
+    var(--bg);
+}
+
+.app-wrap {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.site-nav {
+  position: sticky;
+  top: 8px;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-nav-link {
+  text-decoration: none;
+  border: 1px solid #b9d4ff;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.site-nav-link:hover {
+  background: #dbeafe;
+}
+
+.site-nav-link.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.hero {
+  border-radius: 18px;
+  padding: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #0891b2 45%, var(--accent));
+  box-shadow: var(--shadow-lg);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.8vw, 2.3rem);
+}
+
+.hero p {
+  margin: 8px 0 0;
+  max-width: 760px;
+  opacity: 0.95;
+}
+
+.cards-grid {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.topic-card {
+  text-decoration: none;
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.topic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.13);
+}
+
+.topic-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.topic-status {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: #effcf9;
+  border: 1px solid #b4efe2;
+  color: #115e59;
+}
+
+.topic-summary {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.topic-link {
+  margin-top: 4px;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.note-page {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.note-header {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+}
+
+.note-header h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+}
+
+.note-header p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.note-state,
+.not-found {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+.inline-link {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.note-document-surface {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.note-document-content {
+  min-height: 78vh;
+}
+
+.note-document-content .container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 14px 10px 26px;
+  }
+
+  .site-nav {
+    position: static;
+  }
+
+  .hero {
+    padding: 18px;
+  }
+}
