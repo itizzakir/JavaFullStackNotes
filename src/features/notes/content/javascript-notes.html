@@ -687,6 +687,7 @@
         <a href="#js-fetch">13) Fetch API Practicals</a>
         <a href="#js-atlas">Property Atlas</a>
         <a href="#js-revision">Revision Quiz</a>
+        <a href="#js-basic-programs">Interview Programming Q&A</a>
       </nav>
       <div class="tag-row">
         <span class="tag">Single HTML File</span>
@@ -723,6 +724,7 @@
           <li><a href="#js-fetch">Fetch API with GET, POST, and parallel requests</a></li>
           <li><a href="#js-atlas">JavaScript Property Atlas</a></li>
           <li><a href="#js-revision">Revision Quiz</a></li>
+          <li><a href="#js-basic-programs">20 basic interview programming questions with JavaScript solutions</a></li>
         </ol>
         <div class="memory">
           <strong>Memory Track:</strong> <code>Syntax -> Data -> Control -> Functions -> Collections -> Objects -> DOM -> Async -> APIs</code>
@@ -3008,6 +3010,202 @@ const data = await res.json();</code></pre>
         </div>
 
         <p class="footer">Send the next topic/photo and I will extend this same file in the same style.</p>
+        </details>
+      </section>
+
+      <section class="card" id="js-basic-programs" data-keywords="javascript interview basic programming questions solutions coding practice">
+        <details>
+          <summary>47) 20 Basic Programming Interview Questions (with Solutions)</summary>
+          <p>These are common beginner-to-intermediate interview coding questions in JavaScript with direct solutions.</p>
+          <ol>
+            <li>
+              <p><strong>Q1) Reverse a string</strong></p>
+              <pre><code>function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+// reverseString("javascript") -> "tpircsavaj"</code></pre>
+            </li>
+            <li>
+              <p><strong>Q2) Check if a string is palindrome</strong></p>
+              <pre><code>function isPalindrome(str) {
+  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return clean === clean.split("").reverse().join("");
+}
+// isPalindrome("Madam") -> true</code></pre>
+            </li>
+            <li>
+              <p><strong>Q3) Find largest among three numbers</strong></p>
+              <pre><code>function largestOfThree(a, b, c) {
+  return Math.max(a, b, c);
+}
+// largestOfThree(10, 45, 21) -> 45</code></pre>
+            </li>
+            <li>
+              <p><strong>Q4) Find factorial of a number</strong></p>
+              <pre><code>function factorial(n) {
+  if (n &lt; 0) return null;
+  let result = 1;
+  for (let i = 2; i &lt;= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+// factorial(5) -> 120</code></pre>
+            </li>
+            <li>
+              <p><strong>Q5) Generate first n Fibonacci numbers</strong></p>
+              <pre><code>function fibonacciSeries(n) {
+  if (n &lt;= 0) return [];
+  if (n === 1) return [0];
+  const arr = [0, 1];
+  for (let i = 2; i &lt; n; i++) {
+    arr.push(arr[i - 1] + arr[i - 2]);
+  }
+  return arr;
+}
+// fibonacciSeries(7) -> [0, 1, 1, 2, 3, 5, 8]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q6) Check whether a number is prime</strong></p>
+              <pre><code>function isPrime(n) {
+  if (n &lt;= 1) return false;
+  for (let i = 2; i * i &lt;= n; i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+// isPrime(29) -> true</code></pre>
+            </li>
+            <li>
+              <p><strong>Q7) Print all prime numbers in a range</strong></p>
+              <pre><code>function primesInRange(start, end) {
+  const result = [];
+  for (let n = start; n &lt;= end; n++) {
+    if (isPrime(n)) result.push(n);
+  }
+  return result;
+}
+// primesInRange(10, 30) -> [11, 13, 17, 19, 23, 29]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q8) Count vowels in a string</strong></p>
+              <pre><code>function countVowels(str) {
+  const matches = str.match(/[aeiou]/gi);
+  return matches ? matches.length : 0;
+}
+// countVowels("JavaScript") -> 3</code></pre>
+            </li>
+            <li>
+              <p><strong>Q9) Remove duplicates from an array</strong></p>
+              <pre><code>function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+// removeDuplicates([1, 2, 2, 3, 1]) -> [1, 2, 3]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q10) Find second largest number in an array</strong></p>
+              <pre><code>function secondLargest(arr) {
+  const unique = [...new Set(arr)].sort((a, b) =&gt; b - a);
+  return unique.length &gt;= 2 ? unique[1] : null;
+}
+// secondLargest([10, 5, 20, 20, 8]) -> 10</code></pre>
+            </li>
+            <li>
+              <p><strong>Q11) Find sum of all elements in an array</strong></p>
+              <pre><code>function sumArray(arr) {
+  return arr.reduce((sum, n) =&gt; sum + n, 0);
+}
+// sumArray([4, 7, 1]) -> 12</code></pre>
+            </li>
+            <li>
+              <p><strong>Q12) Swap two numbers without temporary variable</strong></p>
+              <pre><code>function swap(a, b) {
+  [a, b] = [b, a];
+  return [a, b];
+}
+// swap(10, 20) -> [20, 10]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q13) Find frequency of each character in a string</strong></p>
+              <pre><code>function charFrequency(str) {
+  const freq = {};
+  for (const ch of str) {
+    freq[ch] = (freq[ch] || 0) + 1;
+  }
+  return freq;
+}
+// charFrequency("aabcc") -> { a: 2, b: 1, c: 2 }</code></pre>
+            </li>
+            <li>
+              <p><strong>Q14) Check whether two strings are anagrams</strong></p>
+              <pre><code>function isAnagram(a, b) {
+  const clean = (s) =&gt; s.toLowerCase().replace(/[^a-z0-9]/g, "").split("").sort().join("");
+  return clean(a) === clean(b);
+}
+// isAnagram("listen", "silent") -> true</code></pre>
+            </li>
+            <li>
+              <p><strong>Q15) Find missing number in range 1..n</strong></p>
+              <pre><code>function findMissingNumber(arr, n) {
+  const expected = (n * (n + 1)) / 2;
+  const actual = arr.reduce((sum, x) =&gt; sum + x, 0);
+  return expected - actual;
+}
+// findMissingNumber([1, 2, 3, 5], 5) -> 4</code></pre>
+            </li>
+            <li>
+              <p><strong>Q16) FizzBuzz from 1 to n</strong></p>
+              <pre><code>function fizzBuzz(n) {
+  const out = [];
+  for (let i = 1; i &lt;= n; i++) {
+    if (i % 15 === 0) out.push("FizzBuzz");
+    else if (i % 3 === 0) out.push("Fizz");
+    else if (i % 5 === 0) out.push("Buzz");
+    else out.push(String(i));
+  }
+  return out;
+}
+// fizzBuzz(15) -> [..., "14", "FizzBuzz"]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q17) Count words in a sentence</strong></p>
+              <pre><code>function countWords(sentence) {
+  const trimmed = sentence.trim();
+  if (!trimmed) return 0;
+  return trimmed.split(/\s+/).length;
+}
+// countWords("JavaScript is very powerful") -> 4</code></pre>
+            </li>
+            <li>
+              <p><strong>Q18) Find common elements (intersection) of two arrays</strong></p>
+              <pre><code>function intersection(arr1, arr2) {
+  const set2 = new Set(arr2);
+  return [...new Set(arr1)].filter((x) =&gt; set2.has(x));
+}
+// intersection([1, 2, 3], [2, 3, 4]) -> [2, 3]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q19) Flatten a nested array</strong></p>
+              <pre><code>function flattenArray(arr) {
+  return arr.flat(Infinity);
+}
+// flattenArray([1, [2, [3, 4]], 5]) -> [1, 2, 3, 4, 5]</code></pre>
+            </li>
+            <li>
+              <p><strong>Q20) Check if a number is Armstrong number</strong></p>
+              <pre><code>function isArmstrong(n) {
+  const digits = String(n).split("").map(Number);
+  const power = digits.length;
+  const total = digits.reduce((sum, d) =&gt; sum + d ** power, 0);
+  return total === n;
+}
+// isArmstrong(153) -> true</code></pre>
+            </li>
+          </ol>
+
+          <div class="memory">
+            <strong>Interview Tip:</strong> For each program, explain <code>time complexity</code> and at least one <code>edge case</code>.
+          </div>
         </details>
       </section>
     </main>
