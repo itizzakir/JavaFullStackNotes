@@ -2268,6 +2268,49 @@ let mixed = [1, "hi", true, null, [1, 2]];  // heterogeneous style</code></pre>
           </table>
         </div>
 
+        <h3>Best Example for Each Method</h3>
+        <p>Use this as a quick interview revision sheet. Focus on the <strong>Mutates?</strong> column.</p>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Best Example</th>
+                <th>Result</th>
+                <th>Mutates?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>length</code></td><td><code>const a = [10, 20, 30]; a.length</code></td><td><code>3</code></td><td>No</td></tr>
+              <tr><td><code>indexOf()</code></td><td><code>[1, 2, 3, 2].indexOf(2)</code></td><td><code>1</code></td><td>No</td></tr>
+              <tr><td><code>lastIndexOf()</code></td><td><code>[1, 2, 3, 2].lastIndexOf(2)</code></td><td><code>3</code></td><td>No</td></tr>
+              <tr><td><code>concat()</code></td><td><code>[1, 2].concat([3, 4])</code></td><td><code>[1, 2, 3, 4]</code></td><td>No</td></tr>
+              <tr><td><code>push()</code></td><td><code>let a = [1, 2]; a.push(3)</code></td><td><code>a = [1, 2, 3]</code></td><td>Yes</td></tr>
+              <tr><td><code>pop()</code></td><td><code>let a = [1, 2, 3]; a.pop()</code></td><td><code>a = [1, 2]</code></td><td>Yes</td></tr>
+              <tr><td><code>unshift()</code></td><td><code>let a = [2, 3]; a.unshift(1)</code></td><td><code>a = [1, 2, 3]</code></td><td>Yes</td></tr>
+              <tr><td><code>shift()</code></td><td><code>let a = [1, 2, 3]; a.shift()</code></td><td><code>a = [2, 3]</code></td><td>Yes</td></tr>
+              <tr><td><code>splice()</code></td><td><code>let a = [1, 2, 3, 4]; a.splice(1, 2, "X")</code></td><td><code>a = [1, "X", 4]</code></td><td>Yes</td></tr>
+              <tr><td><code>slice()</code></td><td><code>[1, 2, 3, 4].slice(1, 3)</code></td><td><code>[2, 3]</code></td><td>No</td></tr>
+              <tr><td><code>reverse()</code></td><td><code>let a = [1, 2, 3]; a.reverse()</code></td><td><code>a = [3, 2, 1]</code></td><td>Yes</td></tr>
+              <tr><td><code>join()</code></td><td><code>["a", "b", "c"].join("-")</code></td><td><code>"a-b-c"</code></td><td>No</td></tr>
+              <tr><td><code>flat()</code></td><td><code>[1, [2, [3]]].flat(2)</code></td><td><code>[1, 2, 3]</code></td><td>No</td></tr>
+              <tr><td><code>map()</code></td><td><code>[1, 2, 3].map((x) => x * 2)</code></td><td><code>[2, 4, 6]</code></td><td>No</td></tr>
+              <tr><td><code>forEach()</code></td><td><code>let s = 0; [1,2,3].forEach((x) => s += x)</code></td><td><code>s = 6</code></td><td>No</td></tr>
+              <tr><td><code>filter()</code></td><td><code>[1, 2, 3, 4].filter((x) => x % 2 === 0)</code></td><td><code>[2, 4]</code></td><td>No</td></tr>
+              <tr><td><code>reduce()</code></td><td><code>[1, 2, 3, 4].reduce((a, x) => a + x, 0)</code></td><td><code>10</code></td><td>No</td></tr>
+              <tr><td><code>find()</code></td><td><code>[5, 8, 12].find((x) => x &gt; 6)</code></td><td><code>8</code></td><td>No</td></tr>
+              <tr><td><code>findIndex()</code></td><td><code>[5, 8, 12].findIndex((x) => x &gt; 6)</code></td><td><code>1</code></td><td>No</td></tr>
+              <tr><td><code>some()</code></td><td><code>[1, 3, 5, 8].some((x) => x % 2 === 0)</code></td><td><code>true</code></td><td>No</td></tr>
+              <tr><td><code>every()</code></td><td><code>[2, 4, 6].every((x) => x % 2 === 0)</code></td><td><code>true</code></td><td>No</td></tr>
+              <tr><td><code>sort()</code></td><td><code>let a = [10, 2, 30]; a.sort((x, y) => x - y)</code></td><td><code>a = [2, 10, 30]</code></td><td>Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="warning">
+          <strong>Sort interview tip:</strong> default <code>sort()</code> compares as strings.
+          For numbers, use <code>(a, b) =&gt; a - b</code> (ascending) or <code>(a, b) =&gt; b - a</code> (descending).
+        </div>
+
         <h3>Most Important: <code>forEach</code> vs <code>map</code> vs <code>filter</code> vs <code>reduce</code></h3>
         <div class="table-wrap">
           <table class="compare-table">
@@ -3541,6 +3584,7 @@ const data = await res.json();</code></pre>
       const someCheck = [5, 10, 15, 20].some((n) => n > 18);
       const everyCheck = [5, 10, 15, 20].every((n) => n > 0);
       const sorted = [30, 2, 100, 15].sort((a, b) => a - b);
+      const defaultSorted = [30, 2, 100, 15].sort();
       const forEachCollected = [];
       [1, 2, 3].forEach((n) => forEachCollected.push(n + 1));
 
@@ -3564,9 +3608,11 @@ const data = await res.json();</code></pre>
         "findIndex(>12) -> " + foundIndex,
         "some(>18) -> " + someCheck,
         "every(>0) -> " + everyCheck,
+        "sort() default (string compare) -> [" + defaultSorted.join(", ") + "]",
         "sort(asc) -> [" + sorted.join(", ") + "]",
         "indexOf(10) -> " + index + ", lastIndexOf(10) -> " + lastIndex,
-        "length of base -> " + base.length
+        "length of base -> " + base.length,
+        "Mutates original: push, pop, unshift, shift, splice, reverse, sort"
       ].join("\n");
     });
 
