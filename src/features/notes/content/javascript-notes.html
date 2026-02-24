@@ -2685,6 +2685,27 @@ const y = JSON.parse(x);</code></pre>
         <pre><code>const li = document.createElement("li");
 li.innerText = "New Item";
 list.appendChild(li);</code></pre>
+
+        <h3>Form Submit + Session Storage (DOM Example)</h3>
+        <p>Select form elements with DOM APIs, prevent default submit, build object, and store it in session storage.</p>
+        <pre><code>let form = document.querySelector("form");
+let username = document.getElementById("uname");
+let email = document.getElementById("umail");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // console.log(username.value, email.value);
+
+  let userData = {
+    username: username.value,
+    email: email.value
+  };
+
+  // console.log(userData);
+  sessionStorage.setItem("userDetails", JSON.stringify(userData));
+});</code></pre>
+
         <button class="btn" id="runDomAdvancedDemo">Run DOM Advanced Demo</button>
         <div class="output" id="domAdvancedOutput">Click "Run DOM Advanced Demo"</div>
         <ul id="dynamicDomList"></ul>
