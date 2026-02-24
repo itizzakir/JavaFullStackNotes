@@ -2406,7 +2406,7 @@ const b = [...a, 3, 4];</code></pre>
         </details>
       </section>
 
-      <section class="card" id="js-objects" data-keywords="objects destructuring date json localstorage sessionstorage keys values entries assign freeze seal">
+      <section class="card" id="js-objects" data-keywords="objects destructuring date json localstorage sessionstorage keys values entries assign freeze seal isfrozen issealed create">
         <details>
           <summary>36) Objects in JavaScript</summary>
         <p>An object is a collection of key-value pairs representing properties (state) and methods (behavior).</p>
@@ -2418,8 +2418,160 @@ const b = [...a, 3, 4];</code></pre>
   }
 };</code></pre>
 
-        <h3>Important Object Methods</h3>
-        <p><code>Object.keys()</code>, <code>Object.values()</code>, <code>Object.entries()</code>, <code>Object.freeze()</code>, <code>Object.isFrozen()</code>, <code>Object.seal()</code>, <code>Object.isSealed()</code>, <code>Object.create()</code>, <code>Object.assign()</code></p>
+        <h3>Important Object Methods (Details + Example)</h3>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>What it does</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Object.values(obj)</code></td>
+                <td>Returns an array of object's own enumerable values.</td>
+                <td><code>Object.values({ id: 1, name: "Sam" }) // [1, "Sam"]</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.keys(obj)</code></td>
+                <td>Returns an array of object's own enumerable keys.</td>
+                <td><code>Object.keys({ id: 1, name: "Sam" }) // ["id", "name"]</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.entries(obj)</code></td>
+                <td>Returns an array of <code>[key, value]</code> pairs.</td>
+                <td><code>Object.entries({ id: 1 }) // [["id", 1]]</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.seal(obj)</code></td>
+                <td>Prevents add/delete of properties, but allows updating existing values.</td>
+                <td><code>const a = Object.seal({ x: 1 }); a.x = 2; // allowed</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.isSealed(obj)</code></td>
+                <td>Checks whether an object is sealed.</td>
+                <td><code>Object.isSealed(Object.seal({})) // true</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.freeze(obj)</code></td>
+                <td>Prevents add/delete/update of properties (top-level only).</td>
+                <td><code>const a = Object.freeze({ x: 1 }); a.x = 2; // ignored</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.isFrozen(obj)</code></td>
+                <td>Checks whether an object is frozen.</td>
+                <td><code>Object.isFrozen(Object.freeze({})) // true</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.assign(target, ...sources)</code></td>
+                <td>Copies enumerable properties from source objects to target (shallow copy).</td>
+                <td><code>Object.assign({}, { a: 1 }, { b: 2 }) // {a:1, b:2}</code></td>
+              </tr>
+              <tr>
+                <td><code>Object.create(proto)</code></td>
+                <td>Creates a new object with the given prototype.</td>
+                <td><code>const obj = Object.create({ role: "student" });</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Difference: <code>keys()</code> vs <code>values()</code> vs <code>entries()</code></h3>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Return Type</th>
+                <th>Best Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Object.keys(obj)</code></td>
+                <td>Array of keys</td>
+                <td>Looping when you only need property names.</td>
+              </tr>
+              <tr>
+                <td><code>Object.values(obj)</code></td>
+                <td>Array of values</td>
+                <td>Calculations/summaries when keys are not needed.</td>
+              </tr>
+              <tr>
+                <td><code>Object.entries(obj)</code></td>
+                <td>Array of <code>[key, value]</code> pairs</td>
+                <td>Useful for destructuring in loops and converting to Map.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Difference: <code>seal()</code> vs <code>freeze()</code></h3>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th><code>Object.seal()</code></th>
+                <th><code>Object.freeze()</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Add new property</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Delete existing property</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Update existing property value</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Check method</td>
+                <td><code>Object.isSealed(obj)</code></td>
+                <td><code>Object.isFrozen(obj)</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Difference: <code>assign()</code> vs <code>create()</code></h3>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Main Goal</th>
+                <th>Key Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Object.assign()</code></td>
+                <td>Copy or merge object properties</td>
+                <td>Copies own enumerable properties; shallow copy.</td>
+              </tr>
+              <tr>
+                <td><code>Object.create()</code></td>
+                <td>Create new object with prototype link</td>
+                <td>Does not copy source keys unless you add them manually.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning">
+          <strong>Important:</strong> <code>seal()</code>, <code>freeze()</code>, and <code>assign()</code> are shallow for nested objects.
+        </div>
+
         <button class="btn" id="runObjectDemo">Show Object Output</button>
         <div class="output" id="objectOutput">Click "Show Object Output"</div>
 
@@ -2738,7 +2890,7 @@ const data = await res.json();</code></pre>
               </tr>
               <tr>
                 <td>Object</td>
-                <td><code>keys</code>, <code>values</code>, <code>entries</code>, <code>assign</code>, <code>freeze</code>, <code>seal</code>, <code>hasOwn</code></td>
+                <td><code>keys</code>, <code>values</code>, <code>entries</code>, <code>assign</code>, <code>create</code>, <code>freeze/isFrozen</code>, <code>seal/isSealed</code>, <code>hasOwn</code></td>
                 <td>Objects model entities via key-value pairs and utility helpers.</td>
               </tr>
               <tr>
@@ -2797,7 +2949,7 @@ const data = await res.json();</code></pre>
           <li>7 primitive types: string, number, bigint, boolean, undefined, null, symbol.</li>
           <li>Arrays hold ordered values and support transformation using <code>map/filter/reduce</code>.</li>
           <li>Rest collects arguments; spread expands values.</li>
-          <li>Objects use key-value pairs; know <code>keys/values/entries/assign/freeze/seal</code>.</li>
+          <li>Objects use key-value pairs; know <code>keys/values/entries/assign/create/freeze/seal</code> with <code>isFrozen/isSealed</code>.</li>
           <li>Object destructuring extracts properties quickly with rename/default/rest support.</li>
           <li>JSON conversion: <code>stringify</code> and <code>parse</code>.</li>
           <li>localStorage is persistent; sessionStorage is session-bound.</li>
@@ -3702,21 +3854,35 @@ const data = await res.json();</code></pre>
       const values = Object.values(user);
       const entries = Object.entries(user);
 
-      const frozen = Object.freeze({ x: 1 });
-      const sealed = Object.seal({ y: 2 });
+      const sealed = Object.seal({ city: "Pune", level: 1 });
+      sealed.city = "Mumbai"; // allowed
+      sealed.track = "MERN"; // ignored
+      delete sealed.level; // ignored
+
+      const frozen = Object.freeze({ score: 99 });
+      frozen.score = 100; // ignored
+
+      const source = { name: "Sam", skills: { primary: "JS" } };
+      const assigned = Object.assign({}, source);
+      assigned.name = "Asha";
+      assigned.skills.primary = "React"; // shows shallow copy behavior
+
       const fromProto = Object.create({ role: "student" });
       fromProto.name = "Asha";
-      const assigned = Object.assign({}, user, { city: "Pune" });
 
       objectOutput.textContent = [
         "Object Output:",
         "Object.keys(user) -> [" + keys.join(", ") + "]",
         "Object.values(user) -> [" + values.join(", ") + "]",
         "Object.entries(user) -> " + JSON.stringify(entries),
-        "Object.isFrozen(frozen) -> " + Object.isFrozen(frozen),
         "Object.isSealed(sealed) -> " + Object.isSealed(sealed),
+        "sealed after update/add/delete -> " + JSON.stringify(sealed),
+        "Object.isFrozen(frozen) -> " + Object.isFrozen(frozen),
+        "frozen.score after reassignment attempt -> " + frozen.score,
+        "Object.assign shallow copy -> source.skills.primary = " + source.skills.primary,
+        "assigned copy -> " + JSON.stringify(assigned),
         "Object.create proto role -> " + fromProto.role,
-        "Object.assign({}, user, {city:'Pune'}) -> " + JSON.stringify(assigned)
+        "created has own 'role' -> " + Object.prototype.hasOwnProperty.call(fromProto, "role")
       ].join("\n");
     });
 
