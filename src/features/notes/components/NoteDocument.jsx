@@ -221,6 +221,165 @@ function handleInternalNavigation(event, navigate) {
   navigate(href);
 }
 
+function removeQueryParamFromCurrentUrl(paramName) {
+  const currentUrl = new URL(window.location.href);
+  if (!currentUrl.searchParams.has(paramName)) {
+    return;
+  }
+
+  currentUrl.searchParams.delete(paramName);
+  const nextUrl = `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`;
+  window.history.replaceState(window.history.state, "", nextUrl);
+}
+
+function getNoteScrollStorageKey(pathname) {
+  return `note-scroll:${pathname}`;
+}
+
+function isReturnFromPracticeReferrer() {
+  try {
+    const referrerUrl = new URL(document.referrer);
+    return (
+      referrerUrl.origin === window.location.origin &&
+      referrerUrl.pathname.startsWith("/javascript-practice/")
+    );
+  } catch {
+    return false;
+  }
+}
+
+function restoreNoteScrollPosition(contentRoot) {
+  const currentUrl = new URL(window.location.href);
+  const hasYQueryParam = currentUrl.searchParams.has("y");
+  const yParam = currentUrl.searchParams.get("y");
+  const queryYValue = Number.parseInt(yParam ?? "", 10);
+  const storedYParam = window.sessionStorage.getItem(getNoteScrollStorageKey(currentUrl.pathname));
+  const storedYValue = Number.parseInt(storedYParam ?? "", 10);
+
+  const yValue =
+    Number.isFinite(queryYValue) && queryYValue >= 0
+      ? queryYValue
+      : !hasYQueryParam && isReturnFromPracticeReferrer() && Number.isFinite(storedYValue) && storedYValue >= 0
+        ? storedYValue
+        : Number.NaN;
+
+  const hasYValue = Number.isFinite(yValue) && yValue >= 0;
+  let hashId = "";
+
+  if (currentUrl.hash) {
+    try {
+      hashId = decodeURIComponent(currentUrl.hash.slice(1));
+    } catch {
+      hashId = currentUrl.hash.slice(1);
+    }
+  }
+
+  if (!hasYValue && !hashId) {
+    return () => {};
+  }
+
+  const startedAt = Date.now();
+  const maxDurationMs = 6000;
+  let frameId = null;
+  let intervalId = null;
+  let disposed = false;
+
+  const stop = () => {
+    disposed = true;
+
+    if (frameId !== null) {
+      window.cancelAnimationFrame(frameId);
+      frameId = null;
+    }
+
+    if (intervalId !== null) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+  };
+
+  const scrollToHash = () => {
+    if (!hashId) {
+      return false;
+    }
+
+    const escapedHashId = escapeCssIdentifier(hashId);
+    const targetElement =
+      contentRoot.querySelector(`#${escapedHashId}`) || document.getElementById(hashId);
+
+    if (!targetElement) {
+      return false;
+    }
+
+    targetElement.scrollIntoView({ block: "start" });
+    return true;
+  };
+
+  const finish = (tryHashFallback) => {
+    if (disposed) {
+      return;
+    }
+
+    if (tryHashFallback) {
+      scrollToHash();
+    }
+
+    if (hasYQueryParam) {
+      removeQueryParamFromCurrentUrl("y");
+    }
+
+    stop();
+  };
+
+  const restoreTick = () => {
+    if (disposed) {
+      return;
+    }
+
+    const timedOut = Date.now() - startedAt > maxDurationMs;
+
+    if (hasYValue) {
+      window.scrollTo(0, yValue);
+
+      const reachedY = Math.abs(window.scrollY - yValue) <= 2;
+      if (reachedY) {
+        finish(false);
+        return;
+      }
+
+      if (timedOut) {
+        finish(true);
+        return;
+      }
+    } else {
+      const foundHash = scrollToHash();
+      if (foundHash || timedOut) {
+        stop();
+        return;
+      }
+    }
+
+    frameId = window.requestAnimationFrame(restoreTick);
+  };
+
+  // Interval is a second channel for late layout shifts outside rAF timing.
+  if (hasYValue) {
+    intervalId = window.setInterval(() => {
+      if (disposed) {
+        return;
+      }
+
+      window.scrollTo(0, yValue);
+      if (Math.abs(window.scrollY - yValue) <= 2) {
+        finish(false);
+      }
+    }, 120);
+  }
+
+  frameId = window.requestAnimationFrame(restoreTick);
+  return stop;
+}
+
 export default function NoteDocument({ noteDocument }) {
   const hostRef = useRef(null);
   const navigate = useNavigate();
@@ -253,6 +412,27 @@ export default function NoteDocument({ noteDocument }) {
     contentRoot.className = "note-document-content";
     contentRoot.innerHTML = noteDocument.bodyHtml;
     hostElement.append(contentRoot);
+
+    const scrollStorageKey = getNoteScrollStorageKey(window.location.pathname);
+    let persistFrameId = null;
+    const persistScrollPosition = () => {
+      window.sessionStorage.setItem(scrollStorageKey, String(Math.max(0, Math.round(window.scrollY))));
+    };
+    const schedulePersistScrollPosition = () => {
+      if (persistFrameId !== null) {
+        return;
+      }
+
+      persistFrameId = window.requestAnimationFrame(() => {
+        persistFrameId = null;
+        persistScrollPosition();
+      });
+    };
+
+    persistScrollPosition();
+    window.addEventListener("scroll", schedulePersistScrollPosition, { passive: true });
+
+    const stopScrollRestore = restoreNoteScrollPosition(contentRoot);
 
     const onContentClick = (event) => {
       handleInternalNavigation(event, navigate);
@@ -288,6 +468,12 @@ export default function NoteDocument({ noteDocument }) {
 
     return () => {
       isDisposed = true;
+      if (persistFrameId !== null) {
+        window.cancelAnimationFrame(persistFrameId);
+      }
+      persistScrollPosition();
+      window.removeEventListener("scroll", schedulePersistScrollPosition);
+      stopScrollRestore();
       contentRoot.removeEventListener("click", onContentClick);
       timerRegistry.clearAll();
       hostElement.replaceChildren();

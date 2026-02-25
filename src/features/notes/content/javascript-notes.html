@@ -354,6 +354,47 @@
       color: var(--muted);
     }
 
+    .practice-inline {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fbfdff;
+    }
+
+    .practice-inline > summary {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #0f3f7a;
+    }
+
+    .practice-inline > p {
+      margin-top: 8px;
+    }
+
+    .practice-inline details {
+      margin-top: 8px;
+      border: 1px dashed #b9cde7;
+      border-radius: 10px;
+      padding: 8px;
+      background: #ffffff;
+    }
+
+    .practice-inline details > summary {
+      margin: 0;
+      font-size: 0.94rem;
+      color: #154d84;
+    }
+
+    .practice-frame {
+      width: 100%;
+      min-height: 520px;
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+
     .tree {
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -1127,6 +1168,28 @@ document.write("JavaScript");</code></pre>
             <div class="output" id="writeOutput">Click "Show Output"</div>
           </div>
         </div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <p class="small">Open below practice directly here without leaving this topic.</p>
+          <details>
+            <summary>02) Events Practice (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/02-events-form.html"
+              title="02 Events Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+          <details>
+            <summary>05) DOM Selectors + Dynamic Elements (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/05-dom-selectors-create.html"
+              title="05 DOM Selectors Dynamic Elements Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2096,6 +2159,18 @@ let result = add(5, 2);</code></pre>
         </ul>
         <button class="btn" id="runFunctionBasicDemo">Show Function Output</button>
         <div class="output" id="functionBasicOutput">Click "Show Function Output"</div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>07) Functions + Programming Practice (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/07-functions-programs.html"
+              title="07 Functions Programming Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2719,6 +2794,18 @@ const y = JSON.parse(x);</code></pre>
         </div>
         <button class="btn" id="runStorageDemo">Show Storage Output</button>
         <div class="output" id="storageOutput">Click "Show Storage Output"</div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>01) Web Storage Practice (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/01-web-storage.html"
+              title="01 Web Storage Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
       </details>
       </section>
 
@@ -2774,6 +2861,27 @@ form.addEventListener("submit", (e) => {
         <button class="btn" id="runDomAdvancedDemo">Run DOM Advanced Demo</button>
         <div class="output" id="domAdvancedOutput">Click "Run DOM Advanced Demo"</div>
         <ul id="dynamicDomList"></ul>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>05) DOM Selectors + createElement (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/05-dom-selectors-create.html"
+              title="05 DOM Selectors createElement Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+          <details>
+            <summary>06) TODO App (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/06-todo-app.html"
+              title="06 TODO App Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2801,6 +2909,18 @@ form.addEventListener("submit", (e) => {
             <div class="output" id="eventsOutput">Do click / key / hover actions here.</div>
           </div>
         </div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>02) Events Practice (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/02-events-form.html"
+              title="02 Events Practice Inline Section 41"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2820,6 +2940,27 @@ form.addEventListener("submit", (e) => {
         </ul>
         <button class="btn" id="runAsyncBasicsDemo">Show Async Basics Output</button>
         <div class="output" id="asyncBasicsOutput">Click "Show Async Basics Output"</div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>03) Callback -> Promise -> async/await (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/03-callback-promise-async.html"
+              title="03 Callback Promise Async Await Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+          <details>
+            <summary>04) Timers + Promise + Fetch (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/04-timers-promises-fetch.html"
+              title="04 Timers Promise Fetch Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2904,6 +3045,27 @@ p.then((data) => {
           <strong>Memory Trick:</strong> <code>P-F-R</code> =
           <strong>P</strong>ending, <strong>F</strong>ulfilled, <strong>R</strong>ejected.
         </div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>03) Callback/Promise/async Flow (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/03-callback-promise-async.html"
+              title="03 Promise Flow Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+          <details>
+            <summary>04) Promise Lifecycle Demos (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/04-timers-promises-fetch.html"
+              title="04 Promise Lifecycle Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2930,6 +3092,18 @@ p.then((data) => {
 }</code></pre>
         <button class="btn" id="runAsyncAwaitDemo">Show Async/Await Output</button>
         <div class="output" id="asyncAwaitOutput">Click "Show Async/Await Output"</div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>03) async/await Sequence with Error Handling (Inline)</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/03-callback-promise-async.html"
+              title="03 Async Await Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -2971,6 +3145,18 @@ const data = await res.json();</code></pre>
           <strong>Interview points:</strong> Check <code>response.ok</code>, handle <code>try/catch</code>,
           parse using <code>response.json()</code>, and remember CORS can block requests.
         </div>
+        <details class="practice-inline">
+          <summary>Practice Content in Same Topic (Bottom)</summary>
+          <details>
+            <summary>04) Fetch (GitHub + JSONPlaceholder) Inline Practice</summary>
+            <iframe
+              class="practice-frame"
+              src="/javascript-practice/04-timers-promises-fetch.html"
+              title="04 Fetch Practice Inline"
+              loading="lazy"
+            ></iframe>
+          </details>
+        </details>
         </details>
       </section>
 
@@ -3276,6 +3462,18 @@ const data = await res.json();</code></pre>
           <div class="memory">
             <strong>Interview Tip:</strong> For each program, explain <code>time complexity</code> and at least one <code>edge case</code>.
           </div>
+          <details class="practice-inline">
+            <summary>Practice Content in Same Topic (Bottom)</summary>
+            <details>
+              <summary>07) Functions + Programs (Inline)</summary>
+              <iframe
+                class="practice-frame"
+                src="/javascript-practice/07-functions-programs.html"
+                title="07 Functions Programs Inline Practice"
+                loading="lazy"
+              ></iframe>
+            </details>
+          </details>
         </details>
       </section>
     </main>
@@ -4707,6 +4905,93 @@ const data = await res.json();</code></pre>
         "4) Deferred scripts execute in order",
         "5) Best for DOM-dependent application scripts"
       ].join("\n");
+    });
+
+    // Carry source topic + exact scroll position when opening practice pages.
+    const practiceReferenceLinks = Array.from(document.querySelectorAll("a[href^=\"/javascript-practice/\"]"));
+    const originalPracticeHrefMap = new WeakMap();
+
+    practiceReferenceLinks.forEach((link) => {
+      originalPracticeHrefMap.set(link, link.getAttribute("href") || "");
+    });
+
+    function getCurrentTopicHash(fallbackHash) {
+      const sections = document.querySelectorAll("section[id]");
+      let activeSectionId = "";
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 160) {
+          activeSectionId = section.id;
+        }
+      });
+
+      if (activeSectionId) {
+        return "#" + activeSectionId;
+      }
+
+      if (fallbackHash) {
+        return fallbackHash;
+      }
+
+      return window.location.hash || "";
+    }
+
+    function buildBackLinkFromValue() {
+      const topicHash = getCurrentTopicHash(window.location.hash || "");
+
+      const backUrl = new URL(window.location.pathname, window.location.origin);
+      backUrl.searchParams.set("y", String(Math.max(0, Math.round(window.scrollY))));
+
+      if (topicHash) {
+        backUrl.hash = topicHash;
+      }
+
+      return backUrl.pathname + backUrl.search + backUrl.hash;
+    }
+
+    function updatePracticeReferenceLinks() {
+      const fromValue = buildBackLinkFromValue();
+
+      practiceReferenceLinks.forEach((link) => {
+        const hrefValue = originalPracticeHrefMap.get(link);
+        if (!hrefValue) {
+          return;
+        }
+
+        try {
+          const targetUrl = new URL(hrefValue, window.location.origin);
+          targetUrl.searchParams.set("from", fromValue);
+          link.setAttribute("href", targetUrl.pathname + targetUrl.search + targetUrl.hash);
+        } catch (_error) {
+          // Ignore malformed href and keep original link.
+        }
+      });
+    }
+
+    let updateFrameId = null;
+    const schedulePracticeLinkRefresh = () => {
+      if (updateFrameId !== null) {
+        return;
+      }
+
+      updateFrameId = window.requestAnimationFrame(() => {
+        updateFrameId = null;
+        updatePracticeReferenceLinks();
+      });
+    };
+
+    updatePracticeReferenceLinks();
+
+    window.addEventListener("scroll", schedulePracticeLinkRefresh, { passive: true });
+    window.addEventListener("resize", schedulePracticeLinkRefresh);
+    window.addEventListener("hashchange", schedulePracticeLinkRefresh);
+
+    practiceReferenceLinks.forEach((link) => {
+      link.addEventListener("pointerdown", updatePracticeReferenceLinks);
+      link.addEventListener("click", updatePracticeReferenceLinks);
+      link.addEventListener("auxclick", updatePracticeReferenceLinks);
+      link.addEventListener("focus", updatePracticeReferenceLinks);
     });
   </script>
 </body>

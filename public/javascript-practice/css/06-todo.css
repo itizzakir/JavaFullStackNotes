@@ -27,6 +27,22 @@ body {
   font-weight: 700;
 }
 
+.header-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.header-links a {
+  font-weight: 700;
+}
+
+.header-links a.secondary-link {
+  opacity: 0.95;
+  font-weight: 600;
+}
+
 .panel {
   margin-top: 14px;
   background: #fff;
