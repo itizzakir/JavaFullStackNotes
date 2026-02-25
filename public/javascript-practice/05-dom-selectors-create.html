@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05 - DOM Selectors and Dynamic Elements</title>
+  <link rel="stylesheet" href="./css/practice.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>05) DOM Selectors and createElement Practice</h1>
+      <p>getElementById, getElementsByClassName, querySelector, querySelectorAll, and dynamic element creation.</p>
+      <a class="back-link" href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="card two-col">
+      <div>
+        <h2>Static Demo Area</h2>
+        <div id="demo">Document Object Model</div>
+        <div id="test" class="test">Class test element 1</div>
+        <div class="test">Class test element 2</div>
+        <div class="test">Class test element 3</div>
+
+        <label for="namedInput">Named input</label>
+        <input name="inp" id="namedInput" value="Input A" />
+        <input name="inp" value="Input B" />
+      </div>
+
+      <div>
+        <h2>Actions</h2>
+        <div class="toolbar">
+          <button id="runSelectors">Run Selectors Demo</button>
+          <button id="runCreate" class="btn-secondary">Create Elements</button>
+          <button id="removeClass" class="btn-danger">Remove class from #test</button>
+        </div>
+
+        <div id="dynamicArea" class="demo-box" style="margin-top: 10px;">
+          Dynamic area
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Output</h2>
+      <pre id="domOutput" class="output">Run a DOM action to see output...</pre>
+    </section>
+  </div>
+
+  <script src="./js/05-dom-selectors-create.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>03 - Callback Hell, Promise, Async/Await</title>
+  <link rel="stylesheet" href="./css/practice.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>03) Callback Hell -> Promise -> Async/Await</h1>
+      <p>Same task flow shown in three styles for easy comparison.</p>
+      <a class="back-link" href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="card">
+      <h2>Run Any Flow</h2>
+      <div class="toolbar">
+        <button id="runCallback">Run Callback Hell</button>
+        <button id="runPromise" class="btn-secondary">Run Promise Chain</button>
+        <button id="runAsyncAwait">Run async/await</button>
+      </div>
+      <small class="hint">In Promise and async/await flow, task4 rejects intentionally to show error handling.</small>
+      <pre id="flowOutput" class="output">Click a button to run task flow...</pre>
+    </section>
+  </div>
+
+  <script src="./js/03-callback-promise-async.js"></script>
+</body>
+</html>

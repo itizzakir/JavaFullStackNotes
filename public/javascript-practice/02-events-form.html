@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>02 - Events and Form Inputs</title>
+  <link rel="stylesheet" href="./css/practice.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>02) Events Practice</h1>
+      <p>click, dblclick, mouseenter, mouseleave, keydown, keyup, change and password toggle.</p>
+      <a class="back-link" href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="card two-col">
+      <div>
+        <h2>Button and Mouse Events</h2>
+        <div class="toolbar">
+          <button id="btn">Click / Double Click Me</button>
+          <span class="badge">check output below</span>
+        </div>
+
+        <div id="demo" class="event-box" style="margin-top: 10px;">Hover this box (mouseenter / mouseleave)</div>
+
+        <div class="color-row" style="margin-top: 10px;">
+          <span class="color-pill test">red</span>
+          <span class="color-pill test">green</span>
+          <span class="color-pill test">blue</span>
+          <span class="color-pill test">teal</span>
+        </div>
+        <small class="hint">Hover color pills to apply their text color as background.</small>
+      </div>
+
+      <div>
+        <h2>Keyboard + Change + Show Password</h2>
+        <label for="inp">Type in input:</label>
+        <input id="inp" type="text" placeholder="Press keys here" />
+
+        <label for="citySelect">Change event demo:</label>
+        <select id="citySelect">
+          <option value="">Select city</option>
+          <option value="Pune">Pune</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Hyderabad">Hyderabad</option>
+        </select>
+
+        <label for="psw">Password</label>
+        <input id="psw" type="password" placeholder="Enter password" />
+        <label>
+          <input id="check" type="checkbox" style="width: auto; margin-right: 6px;" />
+          <span id="show">Show password</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Output</h2>
+      <pre id="eventsOutput" class="output">Perform any event to see logs...</pre>
+    </section>
+  </div>
+
+  <script src="./js/02-events-form.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 - Web Storage</title>
+  <link rel="stylesheet" href="./css/practice.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>01) Web Storage Practice</h1>
+      <p>Practice localStorage and sessionStorage methods with form data storage.</p>
+      <a class="back-link" href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="card two-col">
+      <div>
+        <h2>Storage Actions</h2>
+        <div class="toolbar">
+          <button id="setLocal">set localStorage</button>
+          <button id="getLocal">get localStorage</button>
+          <button id="removeLocal" class="btn-secondary">remove local key</button>
+          <button id="clearLocal" class="btn-danger">clear localStorage</button>
+        </div>
+        <div class="toolbar">
+          <button id="setSession">set sessionStorage</button>
+          <button id="getSession">get sessionStorage</button>
+          <button id="removeSession" class="btn-secondary">remove session key</button>
+          <button id="clearSession" class="btn-danger">clear sessionStorage</button>
+        </div>
+      </div>
+
+      <div>
+        <h2>Form to Storage</h2>
+        <form id="userForm">
+          <label for="uname">Username</label>
+          <input id="uname" type="text" placeholder="Enter username" required />
+
+          <label for="umail">Email</label>
+          <input id="umail" type="email" placeholder="Enter email" required />
+
+          <button type="submit">Save User (local + session)</button>
+        </form>
+        <small class="hint">Saves as <code>userDetails</code> with JSON.stringify.</small>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Output</h2>
+      <pre id="storageOutput" class="output">Click actions to see storage result...</pre>
+    </section>
+  </div>
+
+  <script src="./js/01-web-storage.js"></script>
+</body>
+</html>

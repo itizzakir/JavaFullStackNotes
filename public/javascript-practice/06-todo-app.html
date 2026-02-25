@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>06 - TODO App Practice</title>
+  <link rel="stylesheet" href="./css/06-todo.css" />
+</head>
+<body>
+  <div class="todo-wrap">
+    <header class="todo-header">
+      <h1>06) TODO List Practice</h1>
+      <p>Dynamic element creation with edit/save and delete actions.</p>
+      <a href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="panel">
+      <h2>Add Task</h2>
+      <div class="new-task-form">
+        <form id="taskForm">
+          <input type="text" placeholder="enter a task" id="inputTask" />
+          <input type="submit" value="Add Task" />
+        </form>
+      </div>
+    </section>
+
+    <main class="panel">
+      <h2>Task Lists</h2>
+      <div class="tasks" id="tasks"></div>
+    </main>
+  </div>
+
+  <script src="./js/06-todo-app.js"></script>
+</body>
+</html>

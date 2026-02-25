@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>04 - Timers, Promise, Fetch</title>
+  <link rel="stylesheet" href="./css/practice.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>04) setTimeout, setInterval, Promise, Fetch</h1>
+      <p>Practice timer APIs, Promise lifecycle, and API fetch examples.</p>
+      <a class="back-link" href="./index.html">Back to Practice Index</a>
+    </header>
+
+    <section class="card">
+      <h2>Run Demos</h2>
+      <div class="toolbar">
+        <button id="runTimers">Run Timers Demo</button>
+        <button id="runPromiseDemo" class="btn-secondary">Run Promise Demo</button>
+        <button id="fetchGithub">Fetch GitHub Users</button>
+        <button id="fetchJsonPlaceholder" class="btn-secondary">Fetch JSONPlaceholder</button>
+      </div>
+      <pre id="asyncOutput" class="output">Click a demo button to start...</pre>
+    </section>
+
+    <section class="card">
+      <h2>Fetched Users (GitHub)</h2>
+      <div id="store" class="two-col"></div>
+    </section>
+  </div>
+
+  <script src="./js/04-timers-promises-fetch.js"></script>
+</body>
+</html>
