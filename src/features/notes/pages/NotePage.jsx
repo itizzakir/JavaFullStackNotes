@@ -118,7 +118,7 @@ export default function NotePage() {
   }
 
   return (
-    <section className="note-page">
+    <section className={`note-page note-page-${note.id}`}>
       <header className="note-header">
         <h1>{note.title}</h1>
         <p>{note.summary}</p>
