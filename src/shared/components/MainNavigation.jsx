@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { notesCatalog } from "../../features/notes/data/notesCatalog";
 
 function navLinkClassName({ isActive }) {
@@ -10,14 +10,27 @@ export default function MainNavigation({ onToggleTheme, theme }) {
 
   return (
     <nav className="site-nav" aria-label="Primary navigation">
-      <NavLink className={navLinkClassName} end to="/">
-        Home
-      </NavLink>
-      {notesCatalog.map((note) => (
-        <NavLink className={navLinkClassName} key={note.id} to={`/notes/${note.id}`}>
-          {note.shortLabel}
+      <Link className="site-brand" to="/">
+        <span className="site-brand-mark" aria-hidden="true">
+          <img alt="" src="/project-logo.svg" />
+        </span>
+        <span className="site-brand-text">
+          <strong>ShazeeVerse</strong>
+          <small>Java Full Stack Notes</small>
+        </span>
+      </Link>
+
+      <div className="site-nav-links">
+        <NavLink className={navLinkClassName} end to="/">
+          Home
         </NavLink>
-      ))}
+        {notesCatalog.map((note) => (
+          <NavLink className={navLinkClassName} key={note.id} to={`/notes/${note.id}`}>
+            {note.shortLabel}
+          </NavLink>
+        ))}
+      </div>
+
       <div className="site-nav-actions">
         <button
           aria-label={`Switch to ${nextThemeLabel}`}

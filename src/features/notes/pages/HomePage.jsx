@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <section className="home-page">
       <header className="hero">
-        <h1>Java Full Stack Notes</h1>
+        <h1>ShazeeVerse</h1>
         <p>
           Pure React notes portal with route-based modules for HTML, JavaScript, Java, and React.
         </p>
