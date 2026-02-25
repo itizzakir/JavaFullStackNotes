@@ -210,11 +210,19 @@ const noteSource = `
     <section class="card">
       <details open>
         <summary>1) What is a Module?</summary>
+        <p>
+          A module is a separate JavaScript file with its own scope. Variables and functions
+          inside one module do not automatically become global in other files.
+        </p>
         <ul>
           <li>A module is a file that contains related JavaScript code.</li>
           <li>Modules help split large application code into smaller organized files.</li>
           <li>Modules are used to exchange data/functions from one file to another.</li>
         </ul>
+        <p>
+          In real projects, modules improve readability, reusability, and team collaboration.
+          One developer can work on one module without breaking another module.
+        </p>
         <div class="note">
           <strong>Simple meaning:</strong> write in one file, reuse in another file.
         </div>
@@ -226,6 +234,9 @@ const noteSource = `
           <li><strong>CommonJS modules</strong> (mostly server-side Node.js style).</li>
           <li><strong>ES6 modules</strong> (modern browser + React + modern Node style).</li>
         </ul>
+        <div class="note">
+          <strong>Easy memory trick:</strong> old Node style = CommonJS, modern JS/React style = ES Modules.
+        </div>
       </details>
     </section>
 
@@ -235,6 +246,11 @@ const noteSource = `
         <p>
           CommonJS uses <code>module.exports</code> and <code>require()</code>.
         </p>
+        <ul>
+          <li><code>module.exports</code> means "send from this file".</li>
+          <li><code>require()</code> means "receive from another file".</li>
+          <li>This is synchronous loading style and was standard in classic Node.js apps.</li>
+        </ul>
         <div class="warning">
           In this project, <code>package.json</code> has <code>"type": "module"</code>,
           so CommonJS demo files should use <code>.cjs</code> extension.
@@ -281,11 +297,16 @@ console.log(val.test());</code></pre>
           <li>Uses <code>export</code> (send) and <code>import</code> (receive).</li>
           <li>Two main export types: <strong>default export</strong> and <strong>named export</strong>.</li>
         </ul>
+        <p>
+          React apps generally use ES modules everywhere. Vite and modern bundlers read
+          these imports and build optimized bundles for browser execution.
+        </p>
 
         <details>
           <summary>4.1) Default Export</summary>
           <ul>
             <li>One file can have only one default export.</li>
+            <li>Import name can be changed freely by the consumer module.</li>
           </ul>
           <pre><code>// main.js
 const x = 1000;
@@ -300,6 +321,7 @@ console.log(x);</code></pre>
           <summary>4.2) Named Export</summary>
           <ul>
             <li>One file can export multiple named values.</li>
+            <li>Imported names must match exported names (unless you alias with <code>as</code>).</li>
           </ul>
           <pre><code>// main.js
 export const x = 10;
@@ -315,6 +337,9 @@ console.log(obj);</code></pre>
 
         <details>
           <summary>4.3) Default + Named Together</summary>
+          <p>
+            This pattern is common: export one primary value as default and additional helpers as named exports.
+          </p>
           <pre><code>// main.js
 const x = 10;
 export default x;
@@ -335,6 +360,9 @@ console.log(test(5, 3));</code></pre>
 
         <details open>
           <summary>4.4) <code>as</code> Keyword (Your Example)</summary>
+          <p>
+            <code>as</code> lets you rename exports/imports to avoid name conflicts and improve readability.
+          </p>
           <div class="two-col">
             <div>
               <h3><code>main.js</code></h3>
@@ -408,6 +436,10 @@ console.log(demo(5, 3));</code></pre>
             </tbody>
           </table>
         </div>
+        <div class="note">
+          <strong>Interview answer:</strong> In modern React projects we prefer ES modules because they are
+          standard JavaScript syntax and integrate cleanly with browser tooling.
+        </div>
       </details>
     </section>
 
@@ -418,6 +450,9 @@ console.log(demo(5, 3));</code></pre>
           <li>Install Node.js first. Verify using <code>node -v</code>.</li>
           <li>Use Vite to create React app quickly.</li>
         </ul>
+        <p>
+          Vite provides fast startup and fast hot reload during development, which is why it is preferred now.
+        </p>
         <pre><code>step 1: npm create vite@latest
 step 2: enter project name
 step 3: select framework -> React
@@ -427,6 +462,9 @@ step 6: npm install
 step 7: npm run dev</code></pre>
         <div class="note">
           <strong>Run command:</strong> <code>npm run dev</code>
+        </div>
+        <div class="warning">
+          If install fails, check Node version first and then run <code>npm install</code> again.
         </div>
       </details>
     </section>
@@ -442,6 +480,10 @@ step 7: npm run dev</code></pre>
           <li>React is used to build single page applications (SPA).</li>
           <li>React supports both client-side rendering and server-side rendering.</li>
         </ul>
+        <p>
+          React is declarative: you describe what UI should look like for a state, React updates DOM efficiently.
+          This improves maintainability compared with manual DOM manipulation.
+        </p>
         <div class="note">
           <strong>Version idea:</strong> <code>major.minor.patch</code> (example <code>19.2.0</code>).
         </div>
@@ -451,6 +493,9 @@ step 7: npm run dev</code></pre>
     <section class="card">
       <details>
         <summary>8) SPA vs MPA</summary>
+        <p>
+          In SPA, routing is handled in JavaScript; in MPA, each route usually loads a new HTML page from server.
+        </p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -484,6 +529,9 @@ step 7: npm run dev</code></pre>
             </tbody>
           </table>
         </div>
+        <div class="note">
+          <strong>Rule:</strong> Most modern dashboards and app-like UIs prefer SPA. Content-heavy websites often combine MPA and SSR.
+        </div>
       </details>
     </section>
 
@@ -493,24 +541,28 @@ step 7: npm run dev</code></pre>
         <p>
           <code>src</code> is the main working folder. Most app logic/components are written there.
         </p>
-        <pre><code>src/
-├─ App.jsx
-├─ global.css
-├─ main.jsx
-├─ assets/
-│  └─ react.svg
-└─ components/
-   ├─ Footer.jsx
-   ├─ Header.jsx
-   ├─ Main.jsx
-   ├─ Side1.jsx
-   └─ Side2.jsx</code></pre>
+<pre><code>src/
+|-- App.jsx
+|-- global.css
+|-- main.jsx
+|-- assets/
+|   |-- react.svg
+|-- components/
+    |-- Footer.jsx
+    |-- Header.jsx
+    |-- Main.jsx
+    |-- Side1.jsx
+    |-- Side2.jsx</code></pre>
         <ul>
           <li><code>node_modules</code>: third-party libraries</li>
           <li><code>public</code>: static files</li>
           <li><code>src</code>: application source code</li>
           <li><code>package.json</code>: dependencies + scripts</li>
         </ul>
+        <p>
+          As project grows, keep feature-wise grouping (for example <code>features/auth</code>, <code>features/cart</code>)
+          so files stay maintainable.
+        </p>
       </details>
     </section>
 
@@ -521,6 +573,11 @@ step 7: npm run dev</code></pre>
           Virtual DOM is a lightweight in-memory representation of the UI.
           React compares updates in virtual DOM and syncs only necessary changes to real DOM.
         </p>
+        <ul>
+          <li>State/props change triggers new virtual tree generation.</li>
+          <li>React runs diff algorithm against previous tree.</li>
+          <li>Only changed nodes are patched in real DOM.</li>
+        </ul>
         <div class="note">
           <strong>Reconciliation:</strong> process of updating real DOM using virtual DOM diff.
         </div>
@@ -530,6 +587,10 @@ step 7: npm run dev</code></pre>
     <section class="card">
       <details open>
         <summary>11) JSX Basics, Rules, and Expressions</summary>
+        <p>
+          JSX is syntax sugar. Browser does not understand JSX directly, so tooling compiles JSX into
+          <code>React.createElement</code> calls before execution.
+        </p>
         <details>
           <summary>11.1) JSX and React.createElement</summary>
           <pre><code>// Actual way (without JSX)
@@ -552,6 +613,8 @@ const ele = React.createElement(
             <li>Every JSX tag must be closed: <code>&lt;h1&gt;&lt;/h1&gt;</code>, <code>&lt;img /&gt;</code>.</li>
             <li>Multiple JSX elements must be wrapped in one parent element.</li>
             <li>Prefer wrapping return JSX in parentheses.</li>
+            <li>Use <code>className</code> instead of <code>class</code> in JSX.</li>
+            <li>Inline style uses object format, for example <code>style={{ color: "red" }}</code>.</li>
           </ul>
         </details>
 
@@ -568,6 +631,9 @@ const ele = React.createElement(
   );
 }</code></pre>
         </details>
+        <div class="note">
+          <strong>Interview point:</strong> anything inside <code>{ }</code> is JavaScript expression, not a full statement.
+        </div>
       </details>
     </section>
 
@@ -577,8 +643,16 @@ const ele = React.createElement(
         <p>
           A component is a reusable building block of UI. Components keep logic and UI for one section together.
         </p>
+        <p>
+          Components receive data via <code>props</code>. UI changes mostly come from
+          state updates and parent-to-child data flow.
+        </p>
         <details>
           <summary>12.1) Class Based Component (CBC)</summary>
+          <p>
+            Class components use <code>extends React.Component</code> and <code>render()</code>.
+            Historically they were used for state and lifecycle methods.
+          </p>
           <pre><code>import React from "react";
 
 class Child extends React.Component {
@@ -596,6 +670,10 @@ export default Child;</code></pre>
 
         <details>
           <summary>12.2) Functional Based Component (FBC)</summary>
+          <p>
+            Functional components are now the standard style in modern React.
+            With Hooks, they can manage state and side effects too.
+          </p>
           <pre><code>function App() {
   return (
     &lt;div&gt;
@@ -613,6 +691,34 @@ export default App;</code></pre>
   );
 };</code></pre>
         </details>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Aspect</th>
+                <th>Class Component</th>
+                <th>Functional Component</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Syntax</td>
+                <td>ES6 class + render method</td>
+                <td>JavaScript function</td>
+              </tr>
+              <tr>
+                <td>State handling</td>
+                <td><code>this.state</code>, <code>setState</code></td>
+                <td>Hooks like <code>useState</code></td>
+              </tr>
+              <tr>
+                <td>Current preference</td>
+                <td>Legacy/less common for new code</td>
+                <td>Preferred in modern React</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </details>
     </section>
 
@@ -621,6 +727,10 @@ export default App;</code></pre>
         <summary>13) Component Composition Example (Your Files)</summary>
         <p>
           Component composition means calling one component inside another, for example <code>&lt;Header /&gt;</code> inside <code>App</code>.
+        </p>
+        <p>
+          Composition helps split layout into reusable blocks. Here <code>App</code> is parent layout and
+          <code>Header/Main/Side/Footer</code> are child modules.
         </p>
         <details>
           <summary><code>App.jsx</code></summary>
@@ -778,6 +888,10 @@ export default Footer;</code></pre>
           <button class="btn" id="showCompositionOutput">Show Composition Output</button>
         </div>
         <div class="output" id="compositionOutput">Click to view expected rendered layout order.</div>
+        <div class="note">
+          <strong>Best practice:</strong> keep each component focused on one responsibility, pass data through props,
+          and avoid duplicating layout logic across files.
+        </div>
       </details>
     </section>
   </div>
