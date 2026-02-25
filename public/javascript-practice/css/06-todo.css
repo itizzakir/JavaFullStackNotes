@@ -111,6 +111,49 @@ body {
   background-color: #b91c1c;
 }
 
+.code-panel {
+  margin-top: 14px;
+}
+
+.code-drop {
+  margin-top: 10px;
+  border: 1px solid #cde5d4;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.code-drop summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  padding: 10px 12px;
+  background: #f2fbf5;
+}
+
+.code-drop summary::-webkit-details-marker {
+  display: none;
+}
+
+.code-drop[open] summary {
+  border-bottom: 1px solid #cde5d4;
+}
+
+pre.code-block {
+  margin: 0;
+  padding: 12px;
+  background: #0b1f17;
+  color: #d6fce4;
+  border: 0;
+  border-radius: 0;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 @media (max-width: 640px) {
   .new-task-form form {
     grid-template-columns: 1fr;

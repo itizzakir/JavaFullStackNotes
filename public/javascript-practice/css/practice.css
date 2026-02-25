@@ -218,6 +218,49 @@ small.hint {
   border: 1px solid #a7e9c2;
 }
 
+.code-panel {
+  margin-top: 14px;
+}
+
+.code-drop {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.code-drop summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  padding: 10px 12px;
+  background: #f4f8ff;
+}
+
+.code-drop summary::-webkit-details-marker {
+  display: none;
+}
+
+.code-drop[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+pre.code-block {
+  margin: 0;
+  padding: 12px;
+  background: #0f172a;
+  color: #dbe7ff;
+  border: 0;
+  border-radius: 0;
+  max-height: 420px;
+  overflow: auto;
+  white-space: pre;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 @media (max-width: 640px) {
   .container {
     width: 96%;
