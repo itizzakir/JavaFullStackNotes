@@ -29,7 +29,7 @@ export default function NotePage() {
   useEffect(() => {
     let isActive = true;
 
-    if (!note) {
+    if (!note || note.status !== "Ready") {
       return () => {
         isActive = false;
       };
@@ -75,6 +75,23 @@ export default function NotePage() {
 
   if (!note) {
     return <NotFoundPage />;
+  }
+
+  if (note.status !== "Ready") {
+    return (
+      <section className="note-page">
+        <header className="note-header">
+          <h1>{note.title}</h1>
+          <p>{note.summary}</p>
+        </header>
+        <div className="note-state">
+          <p>This section is planned. Add notes later when ready.</p>
+          <Link className="inline-link" to="/">
+            Back to home
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   const isLoading = noteState.noteId !== note.id;

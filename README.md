@@ -1,7 +1,8 @@
 # Java Full Stack Notes (Pure React)
 
 This project is now a pure React + React Router app.  
-All note modules are served through React routes and rendered inline in React (no iframe pages in `public/`).
+All note modules are served through React routes and rendered inline in React.
+Note source content lives in JSX modules under `src/features/notes/content/`.
 
 ## Tech stack
 
@@ -16,12 +17,14 @@ All note modules are served through React routes and rendered inline in React (n
 - `/notes/html` -> HTML Notes
 - `/notes/javascript` -> JavaScript Notes
 - `/notes/java` -> Java Notes
+- `/notes/react` -> React Notes
 
 Legacy URLs still work through React redirects:
 
 - `/html-notes.html` -> `/notes/html`
 - `/javascript-notes.html` -> `/notes/javascript`
 - `/java-notes.html` -> `/notes/java`
+- `/react-notes.html` -> `/notes/react`
 - `/notes.html` -> `/notes/javascript`
 
 ## Folder structure
@@ -41,9 +44,10 @@ src/
 |       |   |-- NoteDocument.jsx
 |       |   |-- NotesGrid.jsx
 |       |-- content/
-|       |   |-- html-notes.html
-|       |   |-- javascript-notes.html
-|       |   `-- java-notes.html
+|       |   |-- html-notes.jsx
+|       |   |-- javascript-notes.jsx
+|       |   |-- java-notes.jsx
+|       |   `-- react-notes.jsx
 |       |-- data/
 |       |   |-- noteContentLoader.js
 |       |   `-- notesCatalog.js

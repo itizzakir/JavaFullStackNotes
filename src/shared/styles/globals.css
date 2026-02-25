@@ -125,6 +125,17 @@ body {
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.13);
 }
 
+.topic-card-disabled {
+  cursor: default;
+  border-style: dashed;
+  background: linear-gradient(135deg, #ffffff, #f9fbff);
+}
+
+.topic-card-disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
 .topic-title {
   font-size: 1.08rem;
   font-weight: 700;
@@ -139,6 +150,12 @@ body {
   background: #effcf9;
   border: 1px solid #b4efe2;
   color: #115e59;
+}
+
+.topic-status.planned {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #9a3412;
 }
 
 .topic-summary {

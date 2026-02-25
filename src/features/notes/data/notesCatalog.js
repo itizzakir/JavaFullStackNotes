@@ -21,6 +21,14 @@ export const notesCatalog = Object.freeze([
     shortLabel: "Java",
     status: "Ready",
     summary: "Java section with matching design and starter structure for expansion."
+  },
+  {
+    id: "react",
+    title: "React Notes",
+    shortLabel: "React",
+    status: "Ready",
+    summary:
+      "React module notes with CommonJS vs ES modules and proper import/export examples."
   }
 ]);
 

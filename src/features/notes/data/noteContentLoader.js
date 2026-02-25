@@ -1,14 +1,12 @@
 import { parseNoteDocument } from "../utils/parseNoteDocument";
 
-const noteModules = import.meta.glob("../content/*.html", {
-  query: "?raw",
-  import: "default"
-});
+const noteModules = import.meta.glob("../content/*.jsx", { import: "default" });
 
 const contentPathByNoteId = Object.freeze({
-  html: "../content/html-notes.html",
-  javascript: "../content/javascript-notes.html",
-  java: "../content/java-notes.html"
+  html: "../content/html-notes.jsx",
+  javascript: "../content/javascript-notes.jsx",
+  java: "../content/java-notes.jsx",
+  react: "../content/react-notes.jsx"
 });
 
 export async function loadNoteDocument(noteId) {

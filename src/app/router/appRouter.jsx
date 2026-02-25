@@ -26,6 +26,10 @@ export const appRouter = createBrowserRouter([
         element: <Navigate to="/notes/java" replace />
       },
       {
+        path: "react-notes.html",
+        element: <Navigate to="/notes/react" replace />
+      },
+      {
         path: "notes.html",
         element: <Navigate to="/notes/javascript" replace />
       },
