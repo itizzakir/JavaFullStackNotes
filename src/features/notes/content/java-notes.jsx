@@ -26,6 +26,10 @@ const noteSource = `
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Arial, sans-serif;
@@ -97,6 +101,42 @@ const noteSource = `
       max-width: 900px;
     }
 
+    .topic-nav {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .topic-nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+    }
+
+    .topic-nav a:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.87rem;
+      background: rgba(255, 255, 255, 0.17);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+    }
+
     .toolbar {
       margin: 14px 0 18px;
       display: grid;
@@ -104,12 +144,16 @@ const noteSource = `
       gap: 10px;
     }
 
+    .toolbar input,
     .toolbar button {
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 10px 12px;
       font-size: 0.95rem;
       background: #fff;
+    }
+
+    .toolbar button {
       cursor: pointer;
       border-color: var(--primary);
       background: var(--primary);
@@ -465,6 +509,15 @@ const noteSource = `
         grid-template-columns: 1fr;
       }
 
+      .topic-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topic-nav a {
+        text-align: center;
+      }
+
       .keyword-grid {
         grid-template-columns: 1fr;
       }
@@ -483,14 +536,40 @@ const noteSource = `
     <header class="hero">
       <h1>Java Full Notes</h1>
       <p>All Java topics are organized in collapsible summary blocks. Introduction and Literals are added at the beginning as requested.</p>
+      <nav class="topic-nav" aria-label="Quick topic navigation">
+        <a href="#java-introduction">Introduction</a>
+        <a href="#variables-identifiers">Variables</a>
+        <a href="#keywords">Keywords</a>
+        <a href="#datatypes">Datatypes</a>
+        <a href="#type-conversions">Type Conversion</a>
+        <a href="#operators">Operators</a>
+        <a href="#statements">Statements</a>
+        <a href="#arrays">Arrays</a>
+        <a href="#string-handling">Strings</a>
+        <a href="#java-features">Java Features</a>
+        <a href="#methods">Methods</a>
+        <a href="#scanner">Scanner</a>
+        <a href="#oops">OOPs</a>
+        <a href="#polymorphism">Polymorphism</a>
+        <a href="#inheritance">Inheritance</a>
+        <a href="#upcasting-downcasting">Up/Down Casting</a>
+        <a href="#slip-tests">Slip Tests</a>
+      </nav>
+      <div class="tag-row">
+        <span class="tag">Collapsible Notes</span>
+        <span class="tag">Quick Navigation</span>
+        <span class="tag">Search Filter</span>
+        <span class="tag">Code + Tables</span>
+      </div>
     </header>
 
     <section class="toolbar">
+      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting..." />
       <button id="expandBtn" type="button">Expand All</button>
       <button id="collapseBtn" type="button" class="secondary">Collapse All</button>
     </section>
 
-    <main class="grid">
+    <main class="grid" id="main-notes">
       <section class="card" id="java-introduction">
         <details>
           <summary>1.java Introduction, java parts, Basic java program syntax, Literals</summary>
@@ -3276,6 +3355,201 @@ System.out.println(count);</code></pre>
                 </table>
               </details>
             </div>
+
+            <h3>Slip Test on String Handling (15 Questions)</h3>
+
+            <div class="qa-item">
+              <p>S1. How many classes contains String Handling? What are they?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>4 classes: <code>String</code>, <code>StringBuffer</code>, <code>StringBuilder</code>, <code>StringTokenizer</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S2. What is String?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>String</code> is a predefined class used to store a sequence of characters inside double quotes.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S3. Purpose of String?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>Purpose of String is to store and process text data (multiple characters).</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S4. Difference between literal and new keyword?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Way</th>
+                      <th>Storage</th>
+                      <th>Object creation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Literal</td>
+                      <td>String Constant Pool (SCP)</td>
+                      <td>Same value reuses object</td>
+                    </tr>
+                    <tr>
+                      <td><code>new String()</code></td>
+                      <td>Heap</td>
+                      <td>Creates new object each time</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S5. Difference between <code>equals()</code> and <code>==</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>equals()</code> compares content/data. <code>==</code> compares reference (memory address).</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S6. Difference between mutable and immutable?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Mutable</strong>: data can be changed in same object (e.g., StringBuffer, StringBuilder).</p>
+                <p><strong>Immutable</strong>: data cannot be changed; new object is created (e.g., String).</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S7. Difference between String, StringBuffer, StringBuilder?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Class</th>
+                      <th>Mutable?</th>
+                      <th>Synchronized?</th>
+                      <th>Thread-safe?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>String</td>
+                      <td>No</td>
+                      <td>Immutable behavior</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>StringBuffer</td>
+                      <td>Yes</td>
+                      <td>Yes</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>StringBuilder</td>
+                      <td>Yes</td>
+                      <td>No</td>
+                      <td>No (faster in single thread)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S8.</p>
+              <pre><code>String s1="Virat";
+String s2="Virat";
+System.out.println(s1.equals(s2)); // ?
+System.out.println(s1==s2);        // ?</code></pre>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>s1.equals(s2)</code> -> <strong>true</strong></p>
+                <p><code>s1==s2</code> -> <strong>true</strong> (same SCP reference)</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S9.</p>
+              <pre><code>String s3=new String("dhoni");
+String s4=new String("dhoni");
+System.out.println(s3.equals(s4)); // ?
+System.out.println(s3==s4);        // ?</code></pre>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>s3.equals(s4)</code> -> <strong>true</strong></p>
+                <p><code>s3==s4</code> -> <strong>false</strong> (different heap objects)</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S10. What is StringTokenizer? purpose?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>StringTokenizer</code> is a predefined class in <code>java.util</code> used to break string into tokens using delimiter.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S11. purpose of <code>charAt()</code>? Example?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>charAt()</code> returns character at given index.</p>
+                <pre><code>String s="Virat";
+System.out.println(s.charAt(2)); // r</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S12. purpose of <code>length()</code>? Example?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>length()</code> returns total number of characters in string.</p>
+                <pre><code>String s="Virat";
+System.out.println(s.length()); // 5</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S13. purpose of <code>split()</code>? Example?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>split()</code> divides string into array based on delimiter.</p>
+                <pre><code>String s="java-python-c";
+System.out.println(Arrays.toString(s.split("-")));
+// [java, python, c]</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S14. purpose of <code>toCharArray()</code>? Example?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>toCharArray()</code> converts string to character array.</p>
+                <pre><code>String s="Java";
+System.out.println(Arrays.toString(s.toCharArray()));
+// [J, a, v, a]</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>S15. purpose of <code>substring()</code>? Example?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>substring()</code> returns part of string by index range.</p>
+                <pre><code>String s="Hemanth";
+System.out.println(s.substring(2,5)); // man
+System.out.println(s.substring(4));   // nth</code></pre>
+              </details>
+            </div>
           </div>
         </details>
       </section>
@@ -3570,6 +3844,250 @@ if(x!=y && y!=z && z!=x) System.out.println(x+" "+y+" "+z);
 String os="aradhya", ks="radhyaa";
 String ns=os.concat(os);
 System.out.println(ns.contains(ks)?"Rotational string":"Not Rotational string");</code></pre>
+
+          <h3>Programs on Strings (I/p and O/p Format)</h3>
+          <ol>
+            <li>
+              <p>Check 1st character is vowel or consonant.</p>
+              <p class="sub">I/p: <code>String s="virat"</code> | O/p: <code>consonant</code></p>
+              <pre><code>String s="virat";
+char ch=s.charAt(0);
+if("aeiouAEIOU".indexOf(ch)>=0) System.out.println("vowel");
+else System.out.println("consonant");</code></pre>
+            </li>
+
+            <li>
+              <p>Check each character is vowel or consonant.</p>
+              <p class="sub">I/p: <code>String s="virat"</code></p>
+              <pre><code>String s="virat";
+for(int i=0;i&lt;s.length();i++)
+{
+  char ch=s.charAt(i);
+  if("aeiouAEIOU".indexOf(ch)>=0) System.out.println("vowel");
+  else System.out.println("consonant");
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Copy one String into another String.</p>
+              <p class="sub">I/p: <code>s1="virat"</code> | O/p: <code>s2="virat"</code></p>
+              <pre><code>String s1="virat";
+String s2="";
+for(int i=0;i&lt;s1.length();i++)
+{
+  s2=s2+s1.charAt(i);
+}
+System.out.println(s2);</code></pre>
+            </li>
+
+            <li>
+              <p>Reverse a String.</p>
+              <p class="sub">I/p: <code>s1="virat"</code> | O/p: <code>tariv</code></p>
+              <pre><code>String s1="virat";
+String rev="";
+for(int i=s1.length()-1;i>=0;i--)
+{
+  rev=rev+s1.charAt(i);
+}
+System.out.println(rev);</code></pre>
+            </li>
+
+            <li>
+              <p>Convert 1st character into capital.</p>
+              <p class="sub">I/p: <code>s1="virat"</code> | O/p: <code>Virat</code></p>
+              <pre><code>String s1="virat";
+char first=s1.charAt(0);
+char upper=(char)(first-32);
+String out=upper+s1.substring(1);
+System.out.println(out);</code></pre>
+            </li>
+
+            <li>
+              <p>Check String is palindrome or not.</p>
+              <p class="sub">I/p: <code>s1="mam"</code> | O/p: <code>palindrome</code></p>
+              <pre><code>String s1="mam";
+String rev="";
+for(int i=s1.length()-1;i>=0;i--) rev+=s1.charAt(i);
+System.out.println(s1.equals(rev)?"palindrome":"not palindrome");</code></pre>
+            </li>
+
+            <li>
+              <p>Check String is anagram or not.</p>
+              <p class="sub">I/p: <code>s1="bhav", s2="bhva"</code> | O/p: <code>anagram</code></p>
+              <pre><code>String s1="bhav";
+String s2="bhva";
+char[] c1=s1.toCharArray();
+char[] c2=s2.toCharArray();
+Arrays.sort(c1);
+Arrays.sort(c2);
+System.out.println(Arrays.equals(c1,c2)?"anagram":"not anagram");</code></pre>
+            </li>
+
+            <li>
+              <p>Count capitals, small letters, digits, symbols.</p>
+              <p class="sub">I/p: <code>"Bhav2001@#"</code></p>
+              <pre><code>String s="Bhav2001@#";
+int upper=0, lower=0, digits=0, symbols=0;
+for(int i=0;i&lt;s.length();i++)
+{
+  char ch=s.charAt(i);
+  if(ch>='A'&&ch<='Z') upper++;
+  else if(ch>='a'&&ch<='z') lower++;
+  else if(ch>='0'&&ch<='9') digits++;
+  else symbols++;
+}
+System.out.println("Capital letters===>"+upper);
+System.out.println("Small letters=====>"+lower);
+System.out.println("digits============>"+digits);
+System.out.println("symbols===========>"+symbols);</code></pre>
+            </li>
+
+            <li>
+              <p>Print ASCII values in String.</p>
+              <p class="sub">I/p: <code>"abcd"</code> | O/p: <code>97 98 99 100</code></p>
+              <pre><code>String s="abcd";
+for(int i=0;i&lt;s.length();i++)
+{
+  System.out.print((int)s.charAt(i)+" ");
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Convert uppercase characters into lowercase.</p>
+              <p class="sub">I/p: <code>"vIrAt"</code> | O/p: <code>virat</code></p>
+              <pre><code>String s1="vIrAt";
+String out="";
+for(int i=0;i&lt;s1.length();i++)
+{
+  char ch=s1.charAt(i);
+  if(ch>='A'&&ch<='Z') out+=(char)(ch+32);
+  else out+=ch;
+}
+System.out.println(out);</code></pre>
+            </li>
+
+            <li>
+              <p>Print length of each word.</p>
+              <p class="sub">I/p: <code>{"virat","is","a","champ"}</code> | O/p: <code>5 2 1 5</code></p>
+              <pre><code>String[] s={"virat","is","a","champ"};
+for(int i=0;i&lt;s.length;i++)
+{
+  System.out.print(s[i].length()+" ");
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Reverse each word.</p>
+              <p class="sub">I/p: <code>{"virat","is","a","champ"}</code> | O/p: <code>tariv si a pmahc</code></p>
+              <pre><code>String[] s={"virat","is","a","champ"};
+for(int i=0;i&lt;s.length;i++)
+{
+  for(int j=s[i].length()-1;j>=0;j--)
+  {
+    System.out.print(s[i].charAt(j));
+  }
+  System.out.print(" ");
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Print longest word.</p>
+              <p class="sub">I/p: <code>{"virat","is","a","champion"}</code> | O/p: <code>champion</code></p>
+              <pre><code>String[] s={"virat","is","a","champion"};
+int idx=0;
+for(int i=1;i&lt;s.length;i++)
+{
+  if(s[i].length()>s[idx].length()) idx=i;
+}
+System.out.println(s[idx]);</code></pre>
+            </li>
+
+            <li>
+              <p>Remove spaces without predefined methods.</p>
+              <p class="sub">I/p: <code>"virat is a champ"</code> | O/p: <code>viratisachamp</code></p>
+              <pre><code>String s="virat is a champ";
+String res="";
+for(int i=0;i&lt;s.length();i++)
+{
+  char ch=s.charAt(i);
+  if(ch!=' ') res+=ch;
+}
+System.out.println(res);</code></pre>
+            </li>
+
+            <li>
+              <p>Print frequency of each character.</p>
+              <p class="sub">I/p: <code>"abcaba"</code> | O/p: <code>a---3 b---2 c---1</code></p>
+              <pre><code>String s="abcaba";
+for(char ch='a';ch&lt;='z';ch++)
+{
+  int count=0;
+  for(int i=0;i&lt;s.length();i++) if(s.charAt(i)==ch) count++;
+  if(count>0) System.out.println(ch+"---"+count);
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Print duplicate characters.</p>
+              <p class="sub">I/p: <code>"abcaba"</code> | O/p: <code>a---3 b---2</code></p>
+              <pre><code>String s="abcaba";
+for(char ch='a';ch&lt;='z';ch++)
+{
+  int count=0;
+  for(int i=0;i&lt;s.length();i++) if(s.charAt(i)==ch) count++;
+  if(count>1) System.out.println(ch+"---"+count);
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Print unique characters.</p>
+              <p class="sub">I/p: <code>"abcaba"</code> | O/p: <code>c---1</code></p>
+              <pre><code>String s="abcaba";
+for(char ch='a';ch&lt;='z';ch++)
+{
+  int count=0;
+  for(int i=0;i&lt;s.length();i++) if(s.charAt(i)==ch) count++;
+  if(count==1) System.out.println(ch+"---"+count);
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Print characters in alphabet order position.</p>
+              <p class="sub">I/p: <code>"bacd"</code> | O/p: <code>2 1 3 4</code></p>
+              <pre><code>String s="bacd";
+for(int i=0;i&lt;s.length();i++)
+{
+  System.out.print((s.charAt(i)-96)+" ");
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Print all String permutations.</p>
+              <pre><code>String s="abc";
+for(char x='a';x&lt;='c';x++)
+{
+  for(char y='a';y&lt;='c';y++)
+  {
+    for(char z='a';z&lt;='c';z++)
+    {
+      if(x!=y && y!=z && z!=x)
+      {
+        System.out.println(x+""+y+""+z);
+      }
+    }
+  }
+}</code></pre>
+            </li>
+
+            <li>
+              <p>Check one String rotation is another String.</p>
+              <pre><code>String s1="aradhya";
+String s2="radhyaa";
+String doubled=s1+s1;
+if(doubled.contains(s2)) System.out.println("rotation");
+else System.out.println("not rotation");</code></pre>
+            </li>
+          </ol>
         </details>
       </section>
 
@@ -3922,16 +4440,1624 @@ class Sample
 }</code></pre>
         </details>
       </section>
+
+      <section class="card" id="scanner">
+        <details>
+          <summary>21.Scanner</summary>
+
+          <h3>Scanner</h3>
+          <ol>
+            <li>Scanner is a predefined class.</li>
+            <li>Purpose of Scanner is to take input from console (command prompt) and print output.</li>
+            <li>Scanner is present in <code>java.util</code> package.</li>
+          </ol>
+
+          <h3>Steps to take input from Scanner</h3>
+          <ol>
+            <li>Import <code>java.util</code> package.</li>
+            <li>Create object for Scanner class.</li>
+            <li>Use proper input methods based on datatype.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Datatype</th>
+                <th>Scanner method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>int</td><td><code>nextInt()</code></td></tr>
+              <tr><td>float</td><td><code>nextFloat()</code></td></tr>
+              <tr><td>double</td><td><code>nextDouble()</code></td></tr>
+              <tr><td>boolean</td><td><code>nextBoolean()</code></td></tr>
+              <tr><td>char</td><td><code>next().charAt(index)</code></td></tr>
+              <tr><td>String (single word)</td><td><code>next()</code></td></tr>
+              <tr><td>String (multiple words)</td><td><code>nextLine()</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>Examples</h3>
+          <pre><code>import java.util.Scanner;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    int a=sc.nextInt();
+    System.out.println("output is"+a); // output is12
+  }
+}</code></pre>
+
+          <pre><code>import java.util.*;
+class Sample
+{
+  public static void main(String[] args)
+  {
+    Scanner s1=new Scanner(System.in);
+    System.out.println("enter float num=");
+    float num=s1.nextFloat();
+    System.out.println(num);
+  }
+}</code></pre>
+
+          <pre><code>import java.util.*;
+class Sample
+{
+  public static void main(String[] args)
+  {
+    Scanner s1=new Scanner(System.in);
+    System.out.println("enter double num=");
+    double num=s1.nextDouble();
+    System.out.println(num);
+  }
+}</code></pre>
+
+          <pre><code>import java.util.*;
+class Sample
+{
+  public static void main(String[] args)
+  {
+    Scanner s1=new Scanner(System.in);
+    System.out.println("enter boolean value=");
+    boolean b=s1.nextBoolean();
+    System.out.println(b);
+  }
+}</code></pre>
+
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    System.out.println("enter char value=");
+    char ch=sc.next().charAt(0);
+    System.out.println(ch);
+  }
+}</code></pre>
+
+          <pre><code>enter char value=
+99
+9</code></pre>
+
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    System.out.println("enter string 1 word=");
+    String s=sc.next();
+    System.out.println(s);
+  }
+}</code></pre>
+
+          <pre><code>enter string 1 word=
+Ajay is java student
+Ajay</code></pre>
+
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    System.out.println("enter string no.of words=");
+    String s=sc.nextLine();
+    System.out.println(s);
+  }
+}</code></pre>
+
+          <pre><code>enter string no.of words=
+Hemanth is a good boy
+Hemanth is a good boy</code></pre>
+
+          <h3>Difference between <code>next()</code> and <code>nextLine()</code></h3>
+          <ol>
+            <li><code>next()</code> takes only one word (stops at space).</li>
+            <li><code>nextLine()</code> takes complete line including spaces.</li>
+          </ol>
+
+          <h3>Array input using Scanner</h3>
+          <pre><code>import java.util.*;
+public class Demo
+{
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    System.out.println("enter size=");
+    int size=sc.nextInt();
+
+    int[] arr=new int[size];
+    System.out.println("enter elements");
+    for(int i=0;i&lt;arr.length;i++)
+    {
+      arr[i]=sc.nextInt();
+    }
+    System.out.println(Arrays.toString(arr));
+  }
+}</code></pre>
+
+          <pre><code>enter size=
+3
+enter elements
+2
+4
+6
+[2, 4, 6]</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="oops">
+        <details>
+          <summary>22.OOPs Introduction, Variables, Methods and Blocks</summary>
+
+          <h3>OOPs</h3>
+          <ol>
+            <li>OOPs stands for Object Oriented Programming System.</li>
+            <li>OOPs is not a technology.</li>
+            <li>OOPs is a technique or methodology.</li>
+            <li>OOPs contains 4 principles:</li>
+          </ol>
+          <ol>
+            <li>Inheritance</li>
+            <li>Polymorphism</li>
+            <li>Encapsulation</li>
+            <li>Abstraction</li>
+          </ol>
+          <p>To implement these principles, we require class and object.</p>
+
+          <h3>Difference between object oriented and object based language</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Definition</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Object oriented language</td>
+                <td>Supports inheritance and runtime polymorphism.</td>
+                <td>Java, C++, Python, .NET</td>
+              </tr>
+              <tr>
+                <td>Object based language</td>
+                <td>Does not support inheritance and runtime polymorphism.</td>
+                <td>JavaScript, VBScript</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Class</h3>
+          <ol>
+            <li>Class is a non-primitive/reference datatype.</li>
+            <li>Class is a collection of variables and methods.</li>
+          </ol>
+          <h3>Syntax</h3>
+          <pre><code>class ClassName
+{
+  variables...
+  methods...
+}</code></pre>
+          <pre><code>class Demo
+{
+  int a=5;
+  int b=6;
+  public static void main(String[] args)
+  {
+  }
+}</code></pre>
+
+          <h3>Object</h3>
+          <ol>
+            <li>Object is an instance of class.</li>
+            <li>Instance means allocating memory address to instance variables.</li>
+          </ol>
+
+          <h3>Variables</h3>
+          <ol>
+            <li>Variable is a container.</li>
+            <li>Purpose is to store operand (value, variable, expression).</li>
+            <li>There are 3 types of variables:</li>
+          </ol>
+          <ol>
+            <li>Instance/non-static variables</li>
+            <li>Static variables</li>
+            <li>Local variables</li>
+          </ol>
+          <div class="warn">There is no global variable in Java.</div>
+
+          <h3>1. Instance/non-static variables</h3>
+          <ol>
+            <li>Defined outside method and without <code>static</code> keyword.</li>
+            <li>Stored in heap area.</li>
+            <li>Accessed by object or object reference.</li>
+            <li>Have default values.</li>
+            <li>Purpose: store different values.</li>
+          </ol>
+          <p><strong>Object:</strong> contains data, preferred for one-time access.</p>
+          <p><strong>Object reference:</strong> contains hashcode, preferred for multiple access.</p>
+
+          <h3>2. Static variables</h3>
+          <ol>
+            <li>Defined outside method and with <code>static</code> keyword.</li>
+            <li>Stored in method area.</li>
+            <li>Can be accessed in 4 ways:</li>
+          </ol>
+          <ol>
+            <li>By using object</li>
+            <li>By using object reference</li>
+            <li>By using directly</li>
+            <li>By using class name</li>
+          </ol>
+          <ol start="4">
+            <li>Static variables have default values.</li>
+            <li>Purpose: store common values.</li>
+          </ol>
+          <div class="warn">Accessing static variables by object/object reference is not recommended in industry standards.</div>
+          <p>Use class name especially when local variable name and static variable name are same or when accessing from other classes.</p>
+
+          <h3>3. Local variables</h3>
+          <ol>
+            <li>Defined inside method (without static keyword).</li>
+            <li>Formal parameters are also local variables.</li>
+            <li>Stored in stack area.</li>
+            <li>Accessed only directly.</li>
+            <li>No default values.</li>
+            <li>Must be initialized before use.</li>
+            <li>Purpose: perform operations/tasks.</li>
+          </ol>
+
+          <h3>Object Reference Syntax</h3>
+          <pre><code>ClassName referenceVar = new ClassName();  // object reference</code></pre>
+
+          <h3>Anonymous/Unreferenced Object</h3>
+          <p>Object created without storing in a reference variable.</p>
+          <pre><code>new ClassName();</code></pre>
+
+          <h3>new keyword</h3>
+          <ol>
+            <li><code>new</code> is a dynamic memory allocator.</li>
+            <li>Allocates memory to instance variables at runtime.</li>
+          </ol>
+
+          <h3>Examples on Variables and Object</h3>
+          <pre><code>class Emp
+{
+  int a=12;
+  public static void main(String[] args)
+  {
+    Emp e1=new Emp();
+    System.out.println(e1); // Emp@379619aa
+  }
+}</code></pre>
+
+          <pre><code>class Student
+{
+  int a=5;           // instance variable
+  static int b=9;    // static variable
+  void welcome(int d) // local variable d
+  {
+    int r=14;        // local variable
+  }
+  public static void main(String[] args)
+  {
+    int c=12;        // local variable
+  }
+}</code></pre>
+
+          <pre><code>class Student
+{
+  int a=12;
+  public static void main(String[] args)
+  {
+    Student s1=new Student();
+    System.out.println(s1.a);
+    System.out.println(new Student().a); // anonymous object
+  }
+}</code></pre>
+
+          <pre><code>class Emp
+{
+  int s;
+  String a;
+  boolean b;
+  char c;
+  float d;
+  public static void main(String[] args)
+  {
+    Emp e1=new Emp();
+    System.out.println(e1.s); //0
+    System.out.println(e1.a); //null
+    System.out.println(e1.b); //false
+    System.out.println(e1.c); // blank char
+    System.out.println(e1.d); //0.0
+  }
+}</code></pre>
+
+          <pre><code>class Emp
+{
+  static int a=56;
+  public static void main(String[] args)
+  {
+    Emp e1=new Emp();
+    System.out.println(e1.a);      // by object
+    System.out.println(new Emp().a); // anonymous object
+    System.out.println(a);         // directly
+    System.out.println(Emp.a);     // by class name
+  }
+}</code></pre>
+
+          <pre><code>class Emp
+{
+  public static void main(String[] args)
+  {
+    int a=12;
+    System.out.println(a); // valid
+  }
+}</code></pre>
+
+          <pre><code>class Emp
+{
+  public static void main(String[] args)
+  {
+    int a;
+    System.out.println(a); // compile-time error (not initialized)
+  }
+}</code></pre>
+
+          <pre><code>class StudentInfo
+{
+  static String iname="Durga";
+  int sno;
+  String sname;
+  long mobile;
+
+  void display(int no,String name,long mob)
+  {
+    sno=no;
+    sname=name;
+    mobile=mob;
+    System.out.println(sno+" "+sname+" "+mobile+" "+iname);
+  }
+
+  public static void main(String[] args)
+  {
+    StudentInfo s1=new StudentInfo();
+    s1.display(1,"Hemanth",88888);
+    s1.display(2,"Parithosh",88871);
+    s1.display(3,"Ajay",88123);
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  static int a=6;
+}
+class B
+{
+  static int c=9;
+  public static void main(String[] args)
+  {
+    System.out.println(c);
+    System.out.println(A.a);
+  }
+}</code></pre>
+
+          <h3>Methods</h3>
+          <ol>
+            <li>Methods is a collection of group of statements.</li>
+            <li>Purpose is to perform task and produce code reusability.</li>
+            <li>Two types: instance methods and static methods.</li>
+          </ol>
+
+          <h3>1. Instance methods</h3>
+          <ol>
+            <li>Defined without static keyword.</li>
+            <li>Used for different task behavior.</li>
+            <li>Accessed using object or object reference.</li>
+          </ol>
+          <pre><code>class Demo
+{
+  void m1()
+  {
+    System.out.println("welcome to instance");
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    d1.m1();
+    new Demo().m1();
+  }
+}</code></pre>
+
+          <h3>2. Static methods</h3>
+          <ol>
+            <li>Defined with static keyword.</li>
+            <li>Used for common task behavior.</li>
+            <li>Accessed by object, object reference, directly, class name.</li>
+          </ol>
+          <pre><code>class Demo
+{
+  static void m1()
+  {
+    System.out.println("welcome to static");
+  }
+  public static void main(String[] args)
+  {
+    Demo.m1();
+    m1();
+  }
+}</code></pre>
+
+          <h3>Blocks</h3>
+          <ol>
+            <li>Block is a group of statements inside <code>{ }</code>.</li>
+            <li>Two types: instance block and static block.</li>
+          </ol>
+
+          <h3>1. Instance block</h3>
+          <ol>
+            <li>Defined without static keyword.</li>
+            <li>Executes whenever object/object reference is created.</li>
+          </ol>
+          <pre><code>class Demo
+{
+  {
+    System.out.println("welcome to instance block");
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    new Demo();
+  }
+}</code></pre>
+
+          <h3>2. Static block</h3>
+          <ol>
+            <li>Defined with static keyword.</li>
+            <li>Executes whenever class loads.</li>
+          </ol>
+          <pre><code>class Demo
+{
+  static
+  {
+    System.out.println("welcome to static");
+  }
+  public static void main(String[] args)
+  {
+  }
+}</code></pre>
+
+          <h3>Execution order example</h3>
+          <pre><code>class Demo
+{
+  int a=12;
+  static int b=13;
+
+  void m1()
+  {
+    System.out.println("instance method");
+  }
+
+  static void m2()
+  {
+    System.out.println("static method");
+  }
+
+  {
+    System.out.println("instance block");
+  }
+
+  static
+  {
+    System.out.println("static block");
+  }
+
+  public static void main(String[] args)
+  {
+    int c=14;
+    System.out.println(c);
+    m2();
+    Demo d1=new Demo();
+    System.out.println(d1.a);
+    d1.m1();
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="polymorphism">
+        <details>
+          <summary>23.Polymorphism and final</summary>
+
+          <h3>Polymorphism</h3>
+          <ol>
+            <li><strong>Poly</strong> means many and <strong>morphism</strong> means forms (many forms).</li>
+            <li>The ability to have more than one form is called polymorphism.</li>
+            <li>Polymorphism has 2 types:</li>
+          </ol>
+          <ol>
+            <li>Compile-time / static polymorphism</li>
+            <li>Run-time / dynamic polymorphism</li>
+          </ol>
+
+          <h3>1. Compile-time / static polymorphism</h3>
+          <p>Binding between method call and method definition happens at compile time.</p>
+          <p class="sub">Examples: method overloading, method hiding.</p>
+
+          <h3>2. Run-time / dynamic polymorphism</h3>
+          <p>Binding between method call and method definition happens at runtime.</p>
+          <p class="sub">Example: method overriding.</p>
+
+          <h3>Method Overloading</h3>
+          <ol>
+            <li>Two or more methods with same name and different formal parameter list.</li>
+            <li>Difference in parameter list can be:</li>
+          </ol>
+          <ol>
+            <li>Number of parameters</li>
+            <li>Order of parameters</li>
+            <li>Datatype of parameters</li>
+          </ol>
+          <ol start="3">
+            <li>Possible in one class and also in multiple classes.</li>
+            <li>Inheritance is not required (but overloading can still appear in inheritance).</li>
+            <li><code>static</code>, <code>private</code>, and <code>final</code> methods can be overloaded.</li>
+          </ol>
+
+          <h3>Method Overriding</h3>
+          <ol>
+            <li>Two methods with same name and same formal parameter list in parent-child classes.</li>
+            <li>Not possible in one class; at least two classes are required.</li>
+            <li>Implemented using inheritance.</li>
+            <li><code>static</code> methods cannot be overridden (they are hidden).</li>
+            <li><code>private</code> methods cannot be overridden (not inherited).</li>
+            <li><code>final</code> methods cannot be overridden.</li>
+          </ol>
+
+          <h3>Overloading Examples</h3>
+          <pre><code>class A
+{
+  void add(int a)
+  {
+    System.out.println("welcome to java");
+  }
+  void add(float b)
+  {
+    System.out.println("welcome to python");
+  }
+  public static void main(String[] args)
+  {
+    A a1=new A();
+    a1.add(12);     // welcome to java
+    a1.add(12.6f);  // welcome to python
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void add(int a,int b)
+  {
+    System.out.println("welcome to java");
+  }
+  void add(int c)
+  {
+    System.out.println("welcome to python");
+  }
+  public static void main(String[] args)
+  {
+    A a1=new A();
+    a1.add(1,7); // welcome to java
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void add(int a,float b)
+  {
+    System.out.println("welcome to java");
+  }
+  void add(float a,int b)
+  {
+    System.out.println("welcome to python");
+  }
+  void add(int a)
+  {
+    System.out.println("welcome to c");
+  }
+  public static void main(String[] args)
+  {
+    A a1=new A();
+    a1.add(6.7f,7); // welcome to python
+  }
+}</code></pre>
+
+          <div class="warn">Same method name with same parameters in one class is invalid (compile-time error).</div>
+          <pre><code>class A
+{
+  void add()
+  {
+    System.out.println("Virat Kohli");
+  }
+  void add()
+  {
+    System.out.println("Sachin Tendulkar");
+  }
+}</code></pre>
+
+          <h3>Overriding Examples</h3>
+          <pre><code>class A
+{
+  void add()
+  {
+    System.out.println("Virat kohli");
+  }
+}
+class B extends A
+{
+  void add()
+  {
+    System.out.println("Sachin Tendulkar");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    b1.add(); // Sachin Tendulkar
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void add()
+  {
+    System.out.println("Virat kohli");
+  }
+}
+class B extends A
+{
+  void add()
+  {
+    System.out.println("Sachin Tendulkar");
+  }
+  public static void main(String[] args)
+  {
+    A a1=new A();
+    a1.add(); // Virat kohli
+  }
+}</code></pre>
+
+          <h3>Static / private / final with overriding</h3>
+          <div class="warn">
+            <strong>Cannot override:</strong> static method, private method, final method.
+          </div>
+          <pre><code>class A
+{
+  final void display()
+  {
+    System.out.println("Display in A");
+  }
+}
+class B extends A
+{
+  void display() // compile-time error
+  {
+    System.out.println("Display in B");
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  private void display()
+  {
+    System.out.println("Display in A");
+  }
+}
+class B extends A
+{
+  void display()
+  {
+    System.out.println("Display in B");
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  static void display()
+  {
+    System.out.println("Display in A");
+  }
+}
+class B extends A
+{
+  static void display()
+  {
+    System.out.println("Display in B");
+  }
+}</code></pre>
+
+          <h3>Overloading with final/private/static methods is valid</h3>
+          <pre><code>class B
+{
+  final void display(int a)
+  {
+    System.out.println("Display in virat");
+  }
+  void display()
+  {
+    System.out.println("Display in B");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    b1.display(); // Display in B
+  }
+}</code></pre>
+
+          <pre><code>class B
+{
+  private void display(int a)
+  {
+    System.out.println("Display in virat");
+  }
+  void display()
+  {
+    System.out.println("Display in B");
+  }
+}</code></pre>
+
+          <pre><code>class B
+{
+  static void display(int a)
+  {
+    System.out.println("Display in virat");
+  }
+  void display()
+  {
+    System.out.println("Display in B");
+  }
+}</code></pre>
+
+          <h3>Practice Examples</h3>
+          <pre><code>class Calculator
+{
+  void add(int a,int b){ System.out.println(a+b); }
+  void add(int a,int b,int c){ System.out.println(a+b+c); }
+  void add(int a,int b,int c,int d){ System.out.println(a+b+c+d); }
+  public static void main(String[] args)
+  {
+    Calculator c1=new Calculator();
+    c1.add(6,8,9);
+  }
+}</code></pre>
+
+          <pre><code>class Sbi
+{
+  void phonePay(int am)
+  {
+    System.out.println(am);
+  }
+}
+class PunjabBank extends Sbi
+{
+  void phonePay(int am)
+  {
+    System.out.println(am);
+  }
+  public static void main(String[] args)
+  {
+    Sbi ajay=new Sbi();
+    ajay.phonePay(500);
+    PunjabBank pari=new PunjabBank();
+    pari.phonePay(700);
+  }
+}</code></pre>
+
+          <h3>final keyword</h3>
+          <p><code>final</code> is a non-access modifier.</p>
+          <p>Purpose of <code>final</code>: modify behavior of variable, method, and class.</p>
+          <ol>
+            <li>Prevents variable modification</li>
+            <li>Prevents method overriding</li>
+            <li>Prevents class inheritance</li>
+          </ol>
+          <div class="warn">Final variables must be initialized.</div>
+
+          <h3>final variable examples</h3>
+          <pre><code>int a=6;
+a=8;
+a=12;
+System.out.println(a); // 12</code></pre>
+
+          <pre><code>final String s="pawan";
+System.out.println(s); // pawan
+
+// s="kalyan"; // compile-time error</code></pre>
+
+          <h3>final method example</h3>
+          <pre><code>class B
+{
+  final void show()
+  {
+    System.out.println("show in B");
+  }
+}
+class A extends B
+{
+  void show() // compile-time error
+  {
+    System.out.println("show in A");
+  }
+}</code></pre>
+
+          <h3>final class example</h3>
+          <pre><code>final class B
+{
+  void show()
+  {
+    System.out.println("show in B");
+  }
+}
+class A extends B // compile-time error
+{
+}</code></pre>
+
+          <h3>final local variable example</h3>
+          <pre><code>final int a;
+System.out.println(a); // compile-time error (not initialized)</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="inheritance">
+        <details>
+          <summary>24.Inheritance, this, super, Modifiers</summary>
+
+          <h3>Inheritance</h3>
+          <ol>
+            <li>Creating new class from existing class using <code>extends</code> is called inheritance.</li>
+            <li>Existing class is <strong>super class</strong>.</li>
+            <li>New class is <strong>sub class</strong>.</li>
+            <li>Super class object can access only super class members.</li>
+            <li>Sub class object can access both super and sub class members.</li>
+            <li>Purpose: feature reusability (variables and methods).</li>
+            <li>There are 6 types of inheritance.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Class support in Java</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Single</td><td>1 sub class from 1 super class</td><td>Yes</td></tr>
+              <tr><td>Multiple</td><td>1 sub class from multiple super classes</td><td>No (classes), Yes (interfaces)</td></tr>
+              <tr><td>Multilevel</td><td>Sub class from intermediate class chain</td><td>Yes</td></tr>
+              <tr><td>Hierarchical</td><td>Multiple sub classes from 1 super class</td><td>Yes</td></tr>
+              <tr><td>Multipath</td><td>Multiple paths to one sub class</td><td>No (class ambiguity)</td></tr>
+              <tr><td>Hybrid</td><td>Combination of inheritance types</td><td>No in classes if it includes multiple inheritance</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warn">Multiple inheritance in classes is not possible due to ambiguity. If same method appears in two parents, JVM cannot choose safely.</div>
+
+          <h3>Single Inheritance</h3>
+          <pre><code>class Chiranjeevi
+{
+  int chiamount=500;
+}
+class Ramcharan extends Chiranjeevi
+{
+  int ramamount=600;
+  public static void main(String[] args)
+  {
+    Ramcharan r1=new Ramcharan();
+    System.out.println(r1.ramamount); //600
+    System.out.println(r1.chiamount); //500
+
+    Chiranjeevi c1=new Chiranjeevi();
+    System.out.println(c1.chiamount); //500
+    // System.out.println(c1.ramamount); //error
+  }
+}</code></pre>
+
+          <pre><code>class Vehicle
+{
+  String s="engine";
+}
+class Car extends Vehicle
+{
+  int price=2000;
+  public static void main(String[] args)
+  {
+    Vehicle v=new Vehicle();
+    System.out.println(v.s); //engine
+    Car c=new Car();
+    System.out.println(c.price); //2000
+    System.out.println(c.s); //engine
+  }
+}</code></pre>
+
+          <h3>Multilevel Inheritance</h3>
+          <pre><code>class Vehicle
+{
+  String s="engine";
+}
+class Car extends Vehicle
+{
+  int ctyres=4;
+}
+class Nexon extends Car
+{
+  int price=100000;
+  public static void main(String[] args)
+  {
+    Vehicle v=new Vehicle();
+    System.out.println(v.s);
+    Car c1=new Car();
+    System.out.println(c1.ctyres);
+    System.out.println(c1.s);
+    Nexon n=new Nexon();
+    System.out.println(n.s);
+    System.out.println(n.ctyres);
+    System.out.println(n.price);
+  }
+}</code></pre>
+
+          <h3>Hierarchical Inheritance</h3>
+          <pre><code>class Vehicle
+{
+  String s="engine";
+}
+class Car extends Vehicle
+{
+  int ct=4;
+}
+class Bike extends Vehicle
+{
+  int bt=2;
+  public static void main(String[] args)
+  {
+    Vehicle v=new Vehicle();
+    System.out.println(v.s);
+    Car c1=new Car();
+    System.out.println(c1.ct);
+    System.out.println(c1.s);
+    Bike b1=new Bike();
+    System.out.println(b1.bt);
+    System.out.println(b1.s);
+  }
+}</code></pre>
+
+          <h3>Multiple Inheritance in classes (invalid)</h3>
+          <pre><code>class A { int a=6; }
+class C { int c=8; }
+class B extends A, C // error
+{
+  int b=7;
+}</code></pre>
+
+          <h3>this keyword</h3>
+          <ol>
+            <li><code>this</code> is an object reference variable (implicitly available).</li>
+            <li>Used when local and instance variable names are same.</li>
+            <li>Used to call current class instance methods.</li>
+            <li><code>this</code> cannot be used in static context.</li>
+          </ol>
+
+          <pre><code>class A
+{
+  int a=12; // instance
+  void display()
+  {
+    int a=16; // local
+    System.out.println(a);      //16
+    System.out.println(this.a); //12
+  }
+  public static void main(String[] args)
+  {
+    A a1=new A();
+    a1.display();
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void show()
+  {
+    System.out.println("show method");
+  }
+  void display()
+  {
+    this.show();
+    System.out.println("display method");
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  static int a=9;
+  static void show()
+  {
+    int a=6;
+    System.out.println(a);
+    // System.out.println(this.a); //error
+  }
+}</code></pre>
+
+          <h3>super keyword</h3>
+          <ol>
+            <li><code>super</code> is reference variable to parent class object.</li>
+            <li>Used when parent and child members have same names and we need parent version.</li>
+            <li>Used for parent variables and parent methods in child class.</li>
+          </ol>
+
+          <div class="tip">Static methods do not use <code>this</code> or <code>super</code>. Static variables can still be referenced through instance context, but class-name access is preferred.</div>
+
+          <pre><code>class A
+{
+  int a=6;
+}
+class B extends A
+{
+  int a=9;
+  void display()
+  {
+    System.out.println(a);       //9
+    System.out.println(super.a); //6
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void mahesh()
+  {
+    System.out.println("Mahesh in super class");
+  }
+}
+class B extends A
+{
+  void mahesh()
+  {
+    System.out.println("pawan in sub class");
+    super.mahesh();
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  static int a=7;
+}
+class B extends A
+{
+  int a=8;
+  void display()
+  {
+    System.out.println(a);       //8
+    System.out.println(super.a); //7
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  int a=7;
+}
+class B extends A
+{
+  int a=8;
+  static void display()
+  {
+    // System.out.println(super.a); //error (static context)
+  }
+}</code></pre>
+
+          <h3>Modifiers</h3>
+          <ol>
+            <li>Modifiers are keywords.</li>
+            <li>Used to control accessibility and modify behavior of variables, methods, classes.</li>
+            <li>Two types: access modifiers and non-access modifiers.</li>
+          </ol>
+
+          <h3>Access Modifiers</h3>
+          <p>Used to provide accessibility for variables, methods, classes.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Modifier</th>
+                <th>Accessibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>public</td><td>Anywhere</td></tr>
+              <tr><td>protected</td><td>Same package + subclasses in another package</td></tr>
+              <tr><td>default</td><td>Same package</td></tr>
+              <tr><td>private</td><td>Same class only</td></tr>
+            </tbody>
+          </table>
+          <div class="warn">In overriding we can increase accessibility, but we cannot decrease accessibility.</div>
+
+          <h3>Modifier examples</h3>
+          <pre><code>class A
+{
+  String s="Rajamouli";
+}
+class B extends A
+{
+  String s2="Maniratnam";
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    System.out.println(b1.s2); //Maniratnam
+    System.out.println(b1.s);  //Rajamouli
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  private String s="Rajamouli";
+}
+class B extends A
+{
+  String s2="Maniratnam";
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    System.out.println(b1.s2);
+    // System.out.println(b1.s); //error
+  }
+}</code></pre>
+
+          <pre><code>class B
+{
+  private String s2="Maniratnam";
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    System.out.println(b1.s2); // valid: same class
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  void m1()
+  {
+    System.out.println("m1 in A");
+  }
+}
+class B extends A
+{
+  void m2()
+  {
+    System.out.println("m2 in B");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    b1.m1();
+    b1.m2();
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  private void m1()
+  {
+    System.out.println("m1 in A");
+  }
+}
+class B extends A
+{
+  void m2()
+  {
+    System.out.println("m2 in B");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+    // b1.m1(); //error
+    b1.m2();
+  }
+}</code></pre>
+
+          <pre><code>// private class A // invalid top-level class
+class A
+{
+  public void m1()
+  {
+    System.out.println("m1 in A");
+  }
+}
+class B extends A
+{
+  void m2()
+  {
+    System.out.println("m2 in B");
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="upcasting-downcasting">
+        <details>
+          <summary>25.Upcasting, Downcasting, Object class and Relationships</summary>
+
+          <h3>Upcasting</h3>
+          <ol>
+            <li>Assigning sub class object/reference to super class reference is called upcasting.</li>
+            <li>Upcasting is done implicitly by JVM.</li>
+            <li>Upcasting is always valid.</li>
+          </ol>
+
+          <pre><code>class A
+{
+  void m1()
+  {
+    System.out.println("m1 in A");
+  }
+}
+class B extends A
+{
+  void m2()
+  {
+    System.out.println("m2 in B");
+  }
+}
+class C extends B
+{
+  void m3()
+  {
+    System.out.println("m3 in C");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=new B();
+    a1.m1(); // m1 in A
+    // a1.m2(); // error
+  }
+}</code></pre>
+
+          <pre><code>class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=new B();
+    a1.m1(); // m1 in A
+
+    B b1=new C();
+    b1.m1(); // m1 in A
+    b1.m2(); // m2 in B
+
+    A a2=new C();
+    a2.m1(); // m1 in A
+    // a2.m2(); // error
+  }
+}</code></pre>
+
+          <pre><code>class Vehicle
+{
+  void engine()
+  {
+    System.out.println("engine in vehicle");
+  }
+}
+class Car extends Vehicle
+{
+  void tyres()
+  {
+    System.out.println("4 tyres in car");
+  }
+}
+class Punch extends Car
+{
+  void price()
+  {
+    System.out.println("10 lakhs punch");
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Vehicle v1=new Car();
+    v1.engine(); // engine in vehicle
+    // v1.tyres(); // error
+    // v1.price(); // error
+
+    Car c1=new Punch();
+    c1.engine(); // engine in vehicle
+    c1.tyres();  // 4 tyres in car
+    // c1.price(); // error
+
+    Vehicle v2=new Punch();
+    v2.engine(); // engine in vehicle
+
+    Vehicle v3=c1;
+    v3.engine(); // engine in vehicle
+  }
+}</code></pre>
+
+          <h3>Downcasting</h3>
+          <ol>
+            <li>Assigning super class reference to sub class reference is called downcasting.</li>
+            <li>Downcasting must be done explicitly by programmer.</li>
+            <li>Downcasting generally requires valid upcasted reference.</li>
+          </ol>
+
+          <pre><code>class Vehicle
+{
+  void engine()
+  {
+    System.out.println("engine in vehicle");
+  }
+}
+class Car extends Vehicle
+{
+  void tyres()
+  {
+    System.out.println("4 tyres in car");
+  }
+}
+class Punch extends Car
+{
+  void price()
+  {
+    System.out.println("10 lakhs punch");
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Vehicle v1=new Car();
+    Car c1=(Car)v1;
+    c1.engine();
+    c1.tyres();
+
+    Car c2=new Punch();
+    Punch p1=(Punch)c2;
+    p1.engine();
+    p1.tyres();
+    p1.price();
+  }
+}</code></pre>
+
+          <h3>Object class</h3>
+          <ol>
+            <li><code>Object</code> is a predefined class.</li>
+            <li><code>Object</code> is super class for all Java classes directly or indirectly.</li>
+            <li>Present in <code>java.lang</code> package.</li>
+            <li>Object class has 11 key methods.</li>
+          </ol>
+
+          <ol>
+            <li>toString()</li>
+            <li>hashCode()</li>
+            <li>equals()</li>
+            <li>finalize()</li>
+            <li>getClass()</li>
+            <li>clone()</li>
+            <li>wait()</li>
+            <li>wait(long ms)</li>
+            <li>wait(long ms, int ns)</li>
+            <li>notify()</li>
+            <li>notifyAll()</li>
+          </ol>
+
+          <h3>toString()</h3>
+          <p>Before overriding: object prints default representation like <code>Demo@372f7a8d</code>.</p>
+          <p>After overriding: custom readable text is printed.</p>
+
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    System.out.println(d1);          // Demo@xxxx
+    System.out.println(d1.toString());// Demo@xxxx
+  }
+}</code></pre>
+
+          <pre><code>class Demo
+{
+  public String toString()
+  {
+    return "welcome to java";
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    System.out.println(d1);          // welcome to java
+    System.out.println(d1.toString());// welcome to java
+  }
+}</code></pre>
+
+          <pre><code>class Demo
+{
+  int sno;
+  String sname;
+  Demo(int sno,String sname)
+  {
+    this.sno=sno;
+    this.sname=sname;
+  }
+  public String toString()
+  {
+    return sno+" "+sname;
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo(7,"Dhoni");
+    System.out.println(d1); // 7 Dhoni
+  }
+}</code></pre>
+
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    System.out.println(d1);
+    System.out.println(d1.toString());
+    int hs=d1.hashCode();
+    System.out.println(hs);
+  }
+}</code></pre>
+
+          <h3>Relationships</h3>
+          <ol>
+            <li><strong>Is-a relationship</strong> -> Inheritance (<code>extends</code>)</li>
+            <li><strong>Has-a relationship</strong> -> Association (object reference)</li>
+          </ol>
+          <p><strong>Is-a:</strong> relation between classes, reuses all features.</p>
+          <p><strong>Has-a:</strong> relation between objects, reuses required features.</p>
+
+          <h3>Association types</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Composition</td>
+                <td>Strong association: container destroy means contained objects also destroy conceptually.</td>
+              </tr>
+              <tr>
+                <td>Aggregation</td>
+                <td>Weak association: container destroy may not destroy contained objects.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Is-a relationship example</h3>
+          <pre><code>class Person
+{
+  int hands=2;
+  int legs=2;
+}
+class Student extends Person
+{
+  int sno=12;
+  String sname="Hemanth Babu";
+  void getStudent()
+  {
+    System.out.println("sno"+sno+" "+"sname"+sname+" "+"hands"+hands+" "+"legs"+legs);
+  }
+  public static void main(String[] args)
+  {
+    Student s1=new Student();
+    s1.getStudent();
+  }
+}</code></pre>
+
+          <pre><code>class Bike
+{
+  int speed=120;
+  String color="Black";
+}
+class Duke extends Bike
+{
+  int dukeprice=1000;
+  void getDuke()
+  {
+    System.out.println(speed+" "+color+" "+dukeprice);
+  }
+  public static void main(String[] args)
+  {
+    Duke d1=new Duke();
+    d1.getDuke();
+  }
+}</code></pre>
+
+          <h3>Has-a relationship examples</h3>
+          <pre><code>class Engine
+{
+  void start(){ System.out.println("Bike started"); }
+  void stop(){ System.out.println("Bike stopped"); }
+}
+class Bike
+{
+  Engine e1=new Engine();
+  void work()
+  {
+    e1.start();
+    System.out.println("Bike is running......");
+    e1.stop();
+  }
+  public static void main(String[] args)
+  {
+    Bike b1=new Bike();
+    b1.work();
+  }
+}</code></pre>
+
+          <pre><code>class Address
+{
+  int dno=12;
+  String stname="mythrivanam";
+}
+class Emp
+{
+  Address a1=new Address();
+  String ename="Hemanth";
+  void getEmp()
+  {
+    System.out.println(ename+" "+a1.dno+" "+a1.stname);
+  }
+  public static void main(String[] args)
+  {
+    Emp e1=new Emp();
+    e1.getEmp();
+  }
+}</code></pre>
+        </details>
+      </section>
     </main>
   </div>
 
   <script>
     (function () {
+      var searchInput = document.getElementById("searchInput");
       var expandBtn = document.getElementById("expandBtn");
       var collapseBtn = document.getElementById("collapseBtn");
-      var detailsList = Array.prototype.slice.call(
-        document.querySelectorAll("main .card > details")
-      );
+      var cards = Array.prototype.slice.call(document.querySelectorAll("main .card"));
+      var detailsList = cards
+        .map(function (card) {
+          return card.querySelector("details");
+        })
+        .filter(function (item) {
+          return Boolean(item);
+        });
 
       if (expandBtn) {
         expandBtn.addEventListener("click", function () {
@@ -3945,6 +6071,19 @@ class Sample
         collapseBtn.addEventListener("click", function () {
           detailsList.forEach(function (d) {
             d.open = false;
+          });
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", function () {
+          var query = searchInput.value.trim().toLowerCase();
+
+          cards.forEach(function (card) {
+            var keywords = card.getAttribute("data-keywords") || "";
+            var text = (keywords + " " + card.textContent).toLowerCase();
+            var isMatch = query === "" || text.indexOf(query) !== -1;
+            card.style.display = isMatch ? "" : "none";
           });
         });
       }
