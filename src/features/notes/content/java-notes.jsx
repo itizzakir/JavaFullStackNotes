@@ -1275,12 +1275,82 @@ System.out.println(6+"virat"+7); //6virat7</code></pre>
             <li>The purpose of operators is to perform operations.</li>
           </ol>
 
-          <pre><code>+  =   <    &&   ++   <<   +=  ?
--      >    ||   --   >>   -=  :
-*      <=   !         ~
-/      >=             &
-%      ==             |
-       !=             ^</code></pre>
+          <table>
+            <thead>
+              <tr>
+                <th>Col 1</th>
+                <th>Col 2</th>
+                <th>Col 3</th>
+                <th>Col 4</th>
+                <th>Col 5</th>
+                <th>Col 6</th>
+                <th>Col 7</th>
+                <th>Col 8</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>+</code></td>
+                <td><code>=</code></td>
+                <td><code>&lt;</code></td>
+                <td><code>&amp;&amp;</code></td>
+                <td><code>++</code></td>
+                <td><code>&lt;&lt;</code></td>
+                <td><code>+=</code></td>
+                <td><code>?</code></td>
+              </tr>
+              <tr>
+                <td><code>-</code></td>
+                <td></td>
+                <td><code>&gt;</code></td>
+                <td><code>||</code></td>
+                <td><code>--</code></td>
+                <td><code>&gt;&gt;</code></td>
+                <td><code>-=</code></td>
+                <td><code>:</code></td>
+              </tr>
+              <tr>
+                <td><code>*</code></td>
+                <td></td>
+                <td><code>&lt;=</code></td>
+                <td><code>!</code></td>
+                <td></td>
+                <td><code>~</code></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code>/</code></td>
+                <td></td>
+                <td><code>&gt;=</code></td>
+                <td></td>
+                <td></td>
+                <td><code>&amp;</code></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><code>%</code></td>
+                <td></td>
+                <td><code>==</code></td>
+                <td></td>
+                <td></td>
+                <td><code>|</code></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td><code>!=</code></td>
+                <td></td>
+                <td></td>
+                <td><code>^</code></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
 
           <h3>1.Arithmetic operators (+,-,*,/,% )</h3>
           <p>Arithmetic operators used to perform addition, subtraction, multiplication, division.</p>
@@ -1352,9 +1422,32 @@ System.out.println(2!=2);   //false</code></pre>
 
           <h3>4.Logical operators</h3>
           <p>Logical operators are used to compare multiple conditions and returns either true or false.</p>
-          <pre><code>1. && => All the conditions must be satisfied
-2. || => atleast one condition must be satisfied
-3. !</code></pre>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Operator</th>
+                <th>Rule / Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><code>&amp;&amp;</code></td>
+                <td>All the conditions must be satisfied.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><code>||</code></td>
+                <td>At least one condition must be satisfied.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><code>!</code></td>
+                <td>Logical NOT (reverses true/false).</td>
+              </tr>
+            </tbody>
+          </table>
 
           <pre><code>System.out.println((2>1) && (6>2));               //true
 System.out.println((2>6) && (6>2));               //false
