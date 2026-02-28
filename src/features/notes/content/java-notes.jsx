@@ -2241,9 +2241,444 @@ for(int i=1;i<=5;i++)
         </details>
       </section>
 
+      <section class="card" id="arrays">
+        <details>
+          <summary>15.Arrays (1D, 2D, Jagged, Methods and Programs)</summary>
+
+          <h3>Arrays</h3>
+          <ol>
+            <li>Arrays is a predefine class (present in <code>java.util.Arrays</code>).</li>
+            <li>Array is a non primitive / reference datatype.</li>
+            <li>Purpose: store multiple values with same datatype.</li>
+            <li>Array is index based. Valid index starts from <code>0</code> to <code>length-1</code>.</li>
+            <li>Negative index is not supported: <code>ArrayIndexOutOfBoundsException</code>.</li>
+            <li>Array size is fixed.</li>
+            <li>Array is by itself an object.</li>
+          </ol>
+
+          <h3>Array Declaration and Assignment</h3>
+          <pre><code>datatype[] arrayVariableName = new datatype[size];
+arrayVariableName[0] = element1;
+arrayVariableName[1] = element2;
+...
+
+int[] arr1 = new int[4];
+arr1[0] = 2;
+arr1[1] = 3;
+arr1[2] = 6;
+arr1[3] = 4;</code></pre>
+
+          <h3>Array Initialization</h3>
+          <pre><code>datatype[] arrayVarName = {ele1, ele2, ele3, ...};
+int[] arr = {2,3,4,5};</code></pre>
+
+          <h3>Index, Printing and length</h3>
+          <pre><code>int[] arr={2,3,4,5};
+System.out.println(arr[0]);   //2
+System.out.println(arr[2]);   //4
+System.out.println(arr[-3]);  //ArrayIndexOutOfBoundsException
+
+System.out.println(arr);      //[I@372f7a8d  (memory reference)
+
+int len=arr.length;
+System.out.println(len);      //4</code></pre>
+
+          <h3>Ways to print array elements</h3>
+          <ol>
+            <li>for loop</li>
+            <li>Enhanced forloop / ForEach loop</li>
+            <li>Arrays.toString()</li>
+          </ol>
+
+          <h3>Enhanced forloop syntax</h3>
+          <pre><code>for(datatype varName : arrayVarName)
+{
+  statement;
+}</code></pre>
+
+          <h3>forloop vs enhanced forloop</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>for loop</th>
+                <th>enhanced for loop</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Initialization</td><td>Yes</td><td>No</td></tr>
+              <tr><td>Condition</td><td>Yes</td><td>No</td></tr>
+              <tr><td>Updation</td><td>Yes</td><td>No</td></tr>
+              <tr><td>Direct index access</td><td>Yes</td><td>No</td></tr>
+            </tbody>
+          </table>
+
+          <pre><code>import java.util.Arrays;
+// java -> package
+// util -> sub package
+// Arrays -> class</code></pre>
+
+          <h3>Basic Array Examples</h3>
+          <pre><code>class Rohit
+{
+  public static void main(String[] args)
+  {
+    int[] ab=new int[4];
+    ab[0]=2; ab[1]=4; ab[2]=6; ab[3]=8;
+    System.out.println(ab); //memory address style output
+  }
+}
+
+class Sample
+{
+  public static void main(String[] args)
+  {
+    int[] a={1,2,3,4};
+    for(int i=0;i<a.length;i++) System.out.println(a[i]);
+    for(int b : a) System.out.println(b);
+    System.out.println(Arrays.toString(a)); //[1, 2, 3, 4]
+  }
+}</code></pre>
+
+          <h3>Predefined Methods (java.util.Arrays)</h3>
+
+          <h3>1.sort()</h3>
+          <pre><code>// syntax
+Arrays.sort(arrayVarName);
+
+int[] a={6,3,2,1};
+Arrays.sort(a);
+System.out.println(Arrays.toString(a)); //[1, 2, 3, 6]</code></pre>
+
+          <h3>2.toString()</h3>
+          <pre><code>// syntax
+Arrays.toString(arrayVarName);
+
+int[] a={2,3,1,4};
+System.out.println(Arrays.toString(a)); //[2, 3, 1, 4]</code></pre>
+
+          <h3>3.equals()</h3>
+          <pre><code>// syntax
+boolean res=Arrays.equals(arr1,arr2);
+
+int[] a={1,2,3,4};
+int[] b={1,2,3,4};
+System.out.println(Arrays.equals(a,b)); //true</code></pre>
+
+          <h3>4.mismatch()</h3>
+          <pre><code>// syntax
+int idx=Arrays.mismatch(arr1,arr2);
+// same arrays -> -1
+// returns first mismatched index otherwise</code></pre>
+
+          <h3>5.binarySearch()</h3>
+          <pre><code>// syntax
+int idx=Arrays.binarySearch(arr,element);
+
+int[] a={1,2,3,4};
+System.out.println(Arrays.binarySearch(a,3)); //2
+System.out.println(Arrays.binarySearch(a,6)); //negative insertion result</code></pre>
+
+          <h3>6.copyOfRange()</h3>
+          <pre><code>// syntax
+datatype[] b=Arrays.copyOfRange(a,startIndex,endIndex);
+
+int[] one={2,4,7,8,9,10};
+int[] two=Arrays.copyOfRange(one,0,3);
+System.out.println(Arrays.toString(two)); //[2, 4, 7]</code></pre>
+
+          <h3>Programs on 1D Arrays</h3>
+          <ol>
+            <li>
+              <p>Print 1st, 2nd and last element.</p>
+              <pre><code>int[] a={2,1,4,5,6};
+System.out.println(a[0]);
+System.out.println(a[1]);
+System.out.println(a[a.length-1]);</code></pre>
+            </li>
+            <li>
+              <p>Add 1st and last element.</p>
+              <pre><code>int[] a={2,1,4,5,6};
+System.out.println(a[0]+a[a.length-1]);</code></pre>
+            </li>
+            <li>
+              <p>Swap 1st and last element.</p>
+              <pre><code>int[] a={2,1,4,5,6};
+int temp=a[0];
+a[0]=a[a.length-1];
+a[a.length-1]=temp;</code></pre>
+            </li>
+            <li>
+              <p>Print array elements and index values.</p>
+              <pre><code>int[] arr={1,7,6,5};
+for(int i=0;i<arr.length;i++)
+{
+  System.out.println("index="+i+", value="+arr[i]);
+}</code></pre>
+            </li>
+            <li>
+              <p>Print even/odd elements and count even numbers.</p>
+              <pre><code>int[] arr={1,7,6,5,2,4};
+int count=0;
+for(int i=0;i<arr.length;i++)
+{
+  if(arr[i]%2==0)
+  {
+    System.out.println(arr[i]);
+    count++;
+  }
+}
+System.out.println(count);</code></pre>
+            </li>
+            <li>
+              <p>Sum of all elements.</p>
+              <pre><code>int[] a={1,2,3};
+int sum=0;
+for(int i=0;i<a.length;i++) sum+=a[i];
+System.out.println(sum);</code></pre>
+            </li>
+            <li>
+              <p>Print prime numbers in array.</p>
+              <pre><code>int[] a={1,2,3,4,5,6,7};
+for(int i=0;i<a.length;i++)
+{
+  int count=0;
+  for(int j=1;j<=a[i];j++)
+  {
+    if(a[i]%j==0) count++;
+  }
+  if(count==2) System.out.println(a[i]);
+}</code></pre>
+            </li>
+            <li>
+              <p>Reverse array elements.</p>
+              <pre><code>int[] arr={2,4,3,1};
+for(int i=arr.length-1;i>=0;i--)
+{
+  System.out.println(arr[i]);
+}</code></pre>
+            </li>
+            <li>
+              <p>Duplicate elements.</p>
+              <pre><code>int[] a={1,2,3,1};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=i+1;j<a.length;j++)
+  {
+    if(a[i]==a[j]) System.out.println(a[i]);
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>Sort without predefined methods.</p>
+              <pre><code>int[] a={5,4,1,2};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=i+1;j<a.length;j++)
+  {
+    if(a[i]>a[j])
+    {
+      int temp=a[i];
+      a[i]=a[j];
+      a[j]=temp;
+    }
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>Maximum and 2nd maximum number.</p>
+              <pre><code>int[] a={2,1,3,5,6};
+int max=a[0];
+for(int i=1;i<a.length;i++) if(a[i]>max) max=a[i];
+System.out.println(max);
+
+Arrays.sort(a);
+System.out.println(a[a.length-2]);</code></pre>
+            </li>
+            <li>
+              <p>Copy one array to another.</p>
+              <pre><code>int[] a1={1,2,3,4,5};
+int[] a2=new int[a1.length];
+for(int i=0;i<a1.length;i++) a2[i]=a1[i];</code></pre>
+            </li>
+            <li>
+              <p>Even numbers left side, odd numbers right side.</p>
+              <pre><code>int[] a1={1,2,3,4,5,6,7,8,9,10};
+int[] out=new int[a1.length];
+int evenIdx=0, oddIdx=a1.length-1;
+for(int i=0;i<a1.length;i++)
+{
+  if(a1[i]%2==0) out[evenIdx++]=a1[i];
+  else out[oddIdx--]=a1[i];
+}</code></pre>
+            </li>
+            <li>
+              <p>Element found or not.</p>
+              <pre><code>int[] a={1,2,3,4,5};
+int target=5;
+boolean found=false;
+for(int i=0;i<a.length;i++) if(a[i]==target) found=true;
+System.out.println(found?"element found":"not found");</code></pre>
+            </li>
+            <li>
+              <p>Left rotate by one.</p>
+              <pre><code>int[] a={1,2,3,4,5};
+int first=a[0];
+for(int i=0;i<a.length-1;i++) a[i]=a[i+1];
+a[a.length-1]=first;</code></pre>
+            </li>
+            <li>
+              <p>Leader elements.</p>
+              <pre><code>int[] a={7,9,10,11,2};
+int max=a[a.length-1];
+System.out.println(max);
+for(int i=a.length-2;i>=0;i--)
+{
+  if(a[i]>max)
+  {
+    System.out.println(a[i]);
+    max=a[i];
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>Merge two arrays.</p>
+              <pre><code>int[] a={1,2,3};
+int[] b={4,5,6};
+int[] c=new int[a.length+b.length];
+for(int i=0;i<a.length;i++) c[i]=a[i];
+for(int j=0;j<b.length;j++) c[a.length+j]=b[j];</code></pre>
+            </li>
+            <li>
+              <p>Unique elements (mark duplicates as 0).</p>
+              <pre><code>int[] a={1,2,3,1,2,1};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=i+1;j<a.length;j++)
+  {
+    if(a[i]==a[j]) a[j]=0;
+  }
+}
+for(int i=0;i<a.length;i++) if(a[i]!=0) System.out.println(a[i]);</code></pre>
+            </li>
+            <li>
+              <p>All pairs where sum equals 10.</p>
+              <pre><code>int[] a={6,3,9,1,2,8,4,5};
+for(int i=0;i<a.length-1;i++)
+{
+  for(int j=i+1;j<a.length;j++)
+  {
+    if(a[i]+a[j]==10) System.out.println(a[i]+" "+a[j]);
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>All subarrays and subarrays with target sum.</p>
+              <pre><code>int[] a={1,2,3,4,5};
+for(int i=0;i<a.length;i++)
+{
+  int sum=0;
+  for(int j=i;j<a.length;j++)
+  {
+    sum+=a[j];
+    for(int k=i;k<=j;k++) System.out.print(a[k]);
+    System.out.println();
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>Missing number.</p>
+              <pre><code>int[] a={5,3,1,2};
+int n=a.length+1;
+int sum=n*(n+1)/2;
+int rest=0;
+for(int i=0;i<a.length;i++) rest+=a[i];
+System.out.println(sum-rest);</code></pre>
+            </li>
+          </ol>
+
+          <h3>Multidimensional Array</h3>
+          <p>Array in another array is called multidimensional array (rows and columns).</p>
+          <pre><code>int[][] v=new int[3][3];
+for(int i=0;i<3;i++)       // rows
+{
+  for(int j=0;j<3;j++)     // columns
+  {
+    System.out.print(v[i][j]); // default 0
+  }
+  System.out.println();
+}</code></pre>
+
+          <pre><code>int[][] a={{1,2,3},{4,5,6}};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=0;j<a[i].length;j++)
+  {
+    System.out.print(a[i][j]);
+  }
+  System.out.println();
+}</code></pre>
+
+          <h3>Jagged Array</h3>
+          <p>Jagged Array is a multidimensional array where row lengths are different.</p>
+          <pre><code>int[][] a={{1,2,3,7},{4,5,6}};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=0;j<a[i].length;j++)
+  {
+    System.out.print(a[i][j]);
+  }
+  System.out.println();
+}</code></pre>
+
+          <h3>Matrix Programs (2x2)</h3>
+          <h3>Addition</h3>
+          <pre><code>int[][] a={{1,2},{3,4}};
+int[][] b={{5,6},{7,8}};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=0;j<a[i].length;j++)
+  {
+    System.out.print(a[i][j]+b[i][j]+" ");
+  }
+  System.out.println();
+}</code></pre>
+
+          <h3>Subtraction</h3>
+          <pre><code>int[][] a={{5,6},{7,8}};
+int[][] b={{1,2},{2,4}};
+for(int i=0;i<a.length;i++)
+{
+  for(int j=0;j<a[i].length;j++)
+  {
+    System.out.print(a[i][j]-b[i][j]+" ");
+  }
+  System.out.println();
+}</code></pre>
+
+          <h3>Multiplication</h3>
+          <pre><code>int[][] a={{1,2},{3,4}};
+int[][] b={{1,1},{1,1}};
+int[][] c=new int[2][2];
+for(int i=0;i<2;i++)
+{
+  for(int j=0;j<2;j++)
+  {
+    c[i][j]=0;
+    for(int k=0;k<2;k++)
+    {
+      c[i][j]+=a[i][k]*b[k][j];
+    }
+    System.out.print(c[i][j]+" ");
+  }
+  System.out.println();
+}</code></pre>
+        </details>
+      </section>
+
       <section class="card" id="slip-tests">
         <details>
-          <summary>15.Slip Tests</summary>
+          <summary>16.Slip Tests</summary>
 
           <h3>Slip Test 1 on Java Introduction, Literals, Variables and Identifiers</h3>
           <h3>Fill in the blanks</h3>
