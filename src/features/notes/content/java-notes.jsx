@@ -167,6 +167,43 @@ const noteSource = `
       content: "-";
     }
 
+    .qa-group {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+    }
+
+    .qa-item {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px dashed #c6d7ee;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .qa-item > p {
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    .qa-answer {
+      margin-top: 6px;
+      border: 1px solid #dbeafe;
+      border-radius: 9px;
+      padding: 8px;
+      background: #f8fbff;
+    }
+
+    .qa-answer > summary {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      padding-right: 20px;
+    }
+
     h2 {
       margin: 0 0 8px;
       font-size: 1.2rem;
@@ -2885,6 +2922,361 @@ a+=6;
 System.out.println(a); --------------</code></pre>
             </li>
           </ol>
+        </details>
+      </section>
+
+      <section class="card" id="topic-wise-tests">
+        <details>
+          <summary>17.Topic-wise Tests with Answers (Loop, Array, String)</summary>
+          <div class="tip">Each question has a <strong>Show Answer</strong> toggle. Open only when needed.</div>
+
+          <div class="qa-group" id="loop-tests">
+            <h3>Loop Questions</h3>
+
+            <div class="qa-item">
+              <p>Q1. Write a java program to count digits of number. Input: <code>n=123</code> Output: <code>3</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=123, count=0;
+while(n>0)
+{
+  count++;
+  n=n/10;
+}
+System.out.println(count); //3</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q2. Write a java program to print sum of digits. Input: <code>n=123</code> Output: <code>6</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=123, sum=0;
+while(n>0)
+{
+  int rem=n%10;
+  sum+=rem;
+  n=n/10;
+}
+System.out.println(sum); //6</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q3. Write a java program to reverse a number. Input: <code>n=123</code> Output: <code>321</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=123, rev=0;
+while(n>0)
+{
+  int rem=n%10;
+  rev=rev*10+rem;
+  n=n/10;
+}
+System.out.println(rev); //321</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q4. Write a java program to print 5 table.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int num=5;
+for(int i=1;i<=10;i++)
+{
+  System.out.println(num+"*"+i+"="+(num*i));
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q5. Write a java program to check palindrome number.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=1221, ori=n, rev=0;
+while(n>0)
+{
+  int rem=n%10;
+  rev=rev*10+rem;
+  n=n/10;
+}
+System.out.println(ori==rev ? "palindrome" : "Not palindrome");</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q6. Write a java program to check Armstrong number.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=153, ori=n, sum=0;
+while(n>0)
+{
+  int rem=n%10;
+  sum+=rem*rem*rem;
+  n=n/10;
+}
+System.out.println(ori==sum ? "Armstrong" : "Not Armstrong");</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q7. Write a java program to print factors of a number. Input: <code>n=6</code> Output: <code>1 2 3 6</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int n=6;
+for(int i=1;i<=n;i++)
+{
+  if(n%i==0) System.out.print(i+" ");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q8. Write a java program to print Fibonacci series. Input: <code>0 1</code> Output: <code>0 1 1 2 3 5 ...</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int f=0, s=1;
+System.out.print(f+" "+s+" ");
+for(int i=1;i<=8;i++)
+{
+  int sum=f+s;
+  System.out.print(sum+" ");
+  f=s;
+  s=sum;
+}</code></pre>
+              </details>
+            </div>
+          </div>
+
+          <div class="qa-group" id="array-tests">
+            <h3>Array Questions</h3>
+
+            <div class="qa-item">
+              <p>Q1. Print array elements. Input: <code>{1,2,3,4,5}</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,4,5};
+for(int i=0;i<a.length;i++)
+{
+  System.out.print(a[i]+" ");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q2. Print array index values. Input: <code>{1,2,3,4,5}</code> Output: <code>0 1 2 3 4</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,4,5};
+for(int i=0;i<a.length;i++)
+{
+  System.out.print(i+" ");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q3. Add 1st and last element. Input: <code>{1,2,3,4,5}</code> Output: <code>6</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,4,5};
+int res=a[0]+a[a.length-1];
+System.out.println(res); //6</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q4. Print even numbers and count even numbers in array.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,4,5};
+int count=0;
+for(int i=0;i<a.length;i++)
+{
+  if(a[i]%2==0)
+  {
+    System.out.print(a[i]+" ");
+    count++;
+  }
+}
+System.out.println("\ncount="+count);</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q5. Print prime numbers in array. Input: <code>{1,2,3,4,5}</code> Output: <code>2 3 5</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,4,5};
+for(int i=0;i<a.length;i++)
+{
+  int c=0;
+  for(int j=1;j<=a[i];j++)
+  {
+    if(a[i]%j==0) c++;
+  }
+  if(c==2) System.out.print(a[i]+" ");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q6. Print duplicate and unique elements. Input: <code>{1,2,3,1,2,1}</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,3,1,2,1};
+System.out.print("Duplicates: ");
+for(int i=0;i<a.length;i++)
+{
+  for(int j=i+1;j<a.length;j++)
+  {
+    if(a[i]==a[j])
+    {
+      System.out.print(a[i]+" ");
+      break;
+    }
+  }
+}
+System.out.println();
+
+System.out.print("Unique: ");
+for(int i=0;i<a.length;i++)
+{
+  int freq=0;
+  for(int j=0;j<a.length;j++) if(a[i]==a[j]) freq++;
+  if(freq==1) System.out.print(a[i]+" ");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q7. Sort array, print max, second max and min.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,4,2,5};
+Arrays.sort(a);
+System.out.println(Arrays.toString(a)); // [1, 2, 4, 5]
+System.out.println("max="+a[a.length-1]);      //5
+System.out.println("second max="+a[a.length-2]); //4
+System.out.println("min="+a[0]);               //1</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q8. Missing number. Input: <code>{1,2,4,5}</code> Output: <code>3</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>int[] a={1,2,4,5};
+int n=a.length+1;
+int total=n*(n+1)/2;
+int sum=0;
+for(int i=0;i<a.length;i++) sum+=a[i];
+System.out.println(total-sum); //3</code></pre>
+              </details>
+            </div>
+          </div>
+
+          <div class="qa-group" id="string-tests">
+            <h3>String Questions</h3>
+
+            <div class="qa-item">
+              <p>Q1. How many classes in String Handling? What are they?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>4 classes: <code>String</code>, <code>StringBuffer</code>, <code>StringBuilder</code>, <code>StringTokenizer</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q2. Check 1st character is vowel or consonant. Input: <code>"virat"</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>String s="virat";
+char ch=s.charAt(0);
+if("aeiouAEIOU".indexOf(ch)>=0)
+{
+  System.out.println("vowel");
+}
+else
+{
+  System.out.println("consonant");
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q3. Reverse a String. Input: <code>"java"</code> Output: <code>"avaj"</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>String s="java";
+String rev="";
+for(int i=s.length()-1;i>=0;i--)
+{
+  rev+=s.charAt(i);
+}
+System.out.println(rev);</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q4. Check String palindrome or not. Input: <code>"level"</code></p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>String s="level";
+String rev="";
+for(int i=s.length()-1;i>=0;i--) rev+=s.charAt(i);
+System.out.println(s.equals(rev) ? "palindrome" : "not palindrome");</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q5. Count vowels in a String.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <pre><code>String s="excelr java";
+int count=0;
+for(int i=0;i<s.length();i++)
+{
+  char ch=s.charAt(i);
+  if("aeiouAEIOU".indexOf(ch)>=0) count++;
+}
+System.out.println(count);</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q6. Difference between String, StringBuffer, StringBuilder.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Class</th>
+                      <th>Mutable?</th>
+                      <th>Thread-safe?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>String</td>
+                      <td>No (immutable)</td>
+                      <td>Yes (immutable behavior)</td>
+                    </tr>
+                    <tr>
+                      <td>StringBuffer</td>
+                      <td>Yes</td>
+                      <td>Yes (synchronized)</td>
+                    </tr>
+                    <tr>
+                      <td>StringBuilder</td>
+                      <td>Yes</td>
+                      <td>No (faster in single-thread)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+          </div>
         </details>
       </section>
     </main>
