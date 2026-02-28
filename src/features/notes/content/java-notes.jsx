@@ -3279,6 +3279,299 @@ System.out.println(count);</code></pre>
           </div>
         </details>
       </section>
+
+      <section class="card" id="string-handling">
+        <details>
+          <summary>18.String Handling (String, StringBuffer, StringBuilder, StringTokenizer)</summary>
+
+          <h3>String Handling</h3>
+          <ol>
+            <li>String</li>
+            <li>StringBuffer</li>
+            <li>StringBuilder</li>
+            <li>StringTokenizer</li>
+          </ol>
+          <div class="tip">Note: String, StringBuffer and StringBuilder are in <code>java.lang</code> package (by default).</div>
+
+          <h3>1.String</h3>
+          <ol>
+            <li>String is a predefined class.</li>
+            <li>String stores multiple characters enclosed with double quotes.</li>
+            <li>String values can be stored in 2 ways: literal and <code>new</code> keyword.</li>
+            <li>String is immutable, synchronized and thread-safe.</li>
+          </ol>
+
+          <h3>Literal vs new keyword</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Way</th>
+                <th>Storage Area</th>
+                <th>Same Data Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Literal</td>
+                <td>String Constant Pool (SCP)</td>
+                <td>Reuses same object for same value</td>
+              </tr>
+              <tr>
+                <td>new String()</td>
+                <td>Heap</td>
+                <td>Creates new object each time</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <pre><code>String s1="pawan";
+String s2="pawan";
+System.out.println(System.identityHashCode(s1));
+System.out.println(System.identityHashCode(s2)); //same hash in many runs
+
+String s3=new String("pawan");
+String s4=new String("pawan");
+System.out.println(System.identityHashCode(s3));
+System.out.println(System.identityHashCode(s4)); //different hash</code></pre>
+
+          <h3>equals() vs ==</h3>
+          <p><code>equals()</code> compares string data. <code>==</code> compares reference/address.</p>
+          <pre><code>String s1="pawan";
+String s2="pawan";
+System.out.println(s1.equals(s2)); //true
+System.out.println(s1==s2);        //true
+
+String s3=new String("pawan");
+String s4=new String("pawan");
+System.out.println(s3.equals(s4)); //true
+System.out.println(s3==s4);        //false</code></pre>
+
+          <h3>Mutable vs Immutable</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Meaning</th>
+                <th>Example Classes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mutable</td>
+                <td>Data can be changed</td>
+                <td>StringBuffer, StringBuilder</td>
+              </tr>
+              <tr>
+                <td>Immutable</td>
+                <td>Data cannot be changed (new object created)</td>
+                <td>String</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Common String Methods</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>charAt(i)</code></td><td>Get char at index</td></tr>
+              <tr><td><code>indexOf(ch)</code></td><td>First occurrence index</td></tr>
+              <tr><td><code>lastIndexOf(ch)</code></td><td>Last occurrence index</td></tr>
+              <tr><td><code>substring(a,b)</code></td><td>Part of string</td></tr>
+              <tr><td><code>length()</code></td><td>Total characters</td></tr>
+              <tr><td><code>split(delimiter)</code></td><td>Split into array</td></tr>
+              <tr><td><code>toCharArray()</code></td><td>Convert to char array</td></tr>
+              <tr><td><code>equals()</code></td><td>Case-sensitive compare</td></tr>
+              <tr><td><code>equalsIgnoreCase()</code></td><td>Case-insensitive compare</td></tr>
+              <tr><td><code>concat()</code></td><td>Join strings</td></tr>
+              <tr><td><code>startsWith()</code></td><td>Check prefix</td></tr>
+              <tr><td><code>endsWith()</code></td><td>Check suffix</td></tr>
+              <tr><td><code>replace()</code></td><td>Replace char(s)</td></tr>
+              <tr><td><code>replaceAll()</code></td><td>Replace pattern sequence</td></tr>
+              <tr><td><code>toUpperCase()</code></td><td>Uppercase conversion</td></tr>
+              <tr><td><code>toLowerCase()</code></td><td>Lowercase conversion</td></tr>
+              <tr><td><code>hashCode()</code></td><td>Hash based on content</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Type Conversion Methods</h3>
+          <pre><code>// String -> int
+String s="123";
+int a=Integer.parseInt(s);
+System.out.println(a+5); //128
+
+// int -> String
+int n=123;
+String txt=String.valueOf(n);
+System.out.println(txt);</code></pre>
+
+          <h3>2.StringBuffer</h3>
+          <ol>
+            <li>Predefined class.</li>
+            <li>Mutable, synchronized, thread-safe.</li>
+            <li>Created using <code>new</code> keyword only.</li>
+          </ol>
+          <pre><code>StringBuffer sb=new StringBuffer("pawan");
+sb.append("kalyan");
+sb.insert(1,'a');
+sb.delete(1,4);
+sb.reverse();
+System.out.println(sb);</code></pre>
+
+          <h3>3.StringBuilder</h3>
+          <ol>
+            <li>Predefined class.</li>
+            <li>Mutable, not synchronized, not thread-safe.</li>
+            <li>Faster than StringBuffer in single-thread operations.</li>
+          </ol>
+          <pre><code>StringBuilder sb=new StringBuilder("virat");
+sb.append(" kohli");
+System.out.println(sb);</code></pre>
+
+          <h3>4.StringTokenizer</h3>
+          <ol>
+            <li>Predefined class in <code>java.util</code>.</li>
+            <li>Used to split string into tokens based on delimiter.</li>
+            <li>Main methods: <code>hasMoreElements()</code>, <code>nextElement()</code>.</li>
+          </ol>
+          <pre><code>import java.util.*;
+StringTokenizer st=new StringTokenizer("vi_ra_ta","_");
+System.out.println(st.countTokens());
+while(st.hasMoreElements())
+{
+  System.out.println(st.nextElement());
+}</code></pre>
+
+          <h3>Program Bank on Strings</h3>
+          <pre><code>// 1) 1st char vowel or consonant
+String s="virat";
+char ch=s.charAt(0);
+System.out.println("aeiouAEIOU".indexOf(ch)>=0?"vowel":"consonant");
+
+// 2) each character vowel/consonant
+for(int i=0;i<s.length();i++)
+{
+  char c=s.charAt(i);
+  System.out.println("aeiouAEIOU".indexOf(c)>=0?"vowel":"consonant");
+}
+
+// 3) copy s1 to s2
+String s1="virat", s2="";
+for(int i=0;i<s1.length();i++) s2=s2+s1.charAt(i);
+
+// 4) reverse string
+String rev="";
+for(int i=s1.length()-1;i>=0;i--) rev=rev+s1.charAt(i);
+
+// 5) first char uppercase (ASCII way)
+char f=s1.charAt(0);
+char up=(char)(f-32);
+
+// 6) palindrome
+String p="madam", r="";
+for(int i=p.length()-1;i>=0;i--) r+=p.charAt(i);
+System.out.println(p.equals(r)?"palindrome":"Not palindrome");
+
+// 7) anagram
+String a1="bhav", a2="vhab";
+char[] c1=a1.toCharArray();
+char[] c2=a2.toCharArray();
+Arrays.sort(c1); Arrays.sort(c2);
+System.out.println(Arrays.equals(c1,c2)?"Anagram":"Not Anagram");
+
+// 8) count alphabets, digits, symbols
+String z="virat19@a";
+int alpha=0,digit=0,symbol=0;
+for(int i=0;i<z.length();i++)
+{
+  char x=z.charAt(i);
+  if((x>='a'&&x<='z')||(x>='A'&&x<='Z')) alpha++;
+  else if(x>='0'&&x<='9') digit++;
+  else symbol++;
+}
+
+// 9) ASCII values
+String t="Bhavi";
+for(int i=0;i<t.length();i++) System.out.println(t.charAt(i)+":"+(int)t.charAt(i));
+
+// 10) uppercase to lowercase
+String mix="BhavI", out="";
+for(int i=0;i<mix.length();i++)
+{
+  char x=mix.charAt(i);
+  if(x>='A'&&x<='Z') out+=(char)(x+32);
+  else out+=x;
+}
+
+// 11) length of each word
+String[] words={"virat","is","a","champ"};
+for(int i=0;i<words.length;i++) System.out.println(words[i].length());
+
+// 12) reverse each word
+for(int i=0;i<words.length;i++)
+{
+  for(int j=words[i].length()-1;j>=0;j--) System.out.print(words[i].charAt(j));
+  System.out.println();
+}
+
+// 13) longest word
+String[] w={"viratkohli","is","a","champ"};
+int idx=0;
+for(int i=1;i<w.length;i++) if(w[i].length()>w[idx].length()) idx=i;
+System.out.println(w[idx]);
+
+// 14) remove spaces
+String m="virat is a king";
+System.out.println(m.replaceAll(" ",""));
+
+// 15) remove spaces without predefined
+String n="virat is a king", noSpace="";
+for(int i=0;i<n.length();i++) if(n.charAt(i)!=' ') noSpace+=n.charAt(i);
+
+// 16) character frequency
+String freq="aabbabcc";
+int[] cnt=new int[256];
+for(int i=0;i<freq.length();i++) cnt[freq.charAt(i)]++;
+for(int i=0;i<cnt.length;i++) if(cnt[i]!=0) System.out.println((char)i+" : "+cnt[i]);
+
+// 17) duplicate chars
+String d="ababac";
+for(char k='a';k<='z';k++)
+{
+  int c=0;
+  for(int i=0;i<d.length();i++) if(d.charAt(i)==k) c++;
+  if(c>1) System.out.println(k+":"+c);
+}
+
+// 18) unique chars
+for(char k='a';k<='z';k++)
+{
+  int c=0;
+  for(int i=0;i<d.length();i++) if(d.charAt(i)==k) c++;
+  if(c==1) System.out.println(k+":"+c);
+}
+
+// 19) alphabet position
+String ap="bhavi";
+for(int i=0;i<ap.length();i++) System.out.println(ap.charAt(i)+":"+(ap.charAt(i)-96));
+
+// 20) all permutations (simple approach)
+String per="abc";
+for(char x='a';x<='c';x++)
+for(char y='a';y<='c';y++)
+for(char z='a';z<='c';z++)
+if(x!=y && y!=z && z!=x) System.out.println(x+" "+y+" "+z);
+
+// 21) rotation check
+String os="aradhya", ks="radhyaa";
+String ns=os.concat(os);
+System.out.println(ns.contains(ks)?"Rotational string":"Not Rotational string");</code></pre>
+        </details>
+      </section>
     </main>
   </div>
 
