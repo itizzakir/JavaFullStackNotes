@@ -3572,6 +3572,175 @@ String ns=os.concat(os);
 System.out.println(ns.contains(ks)?"Rotational string":"Not Rotational string");</code></pre>
         </details>
       </section>
+
+      <section class="card" id="java-features">
+        <details>
+          <summary>19.Java Features</summary>
+
+          <h3>Java features</h3>
+          <p>Java features are services or facilities.</p>
+          <ol>
+            <li>Simple programming language</li>
+            <li>Platform independent programming language</li>
+            <li>Statically typed programming language</li>
+            <li>High level programming language</li>
+            <li>Integrated programming language</li>
+            <li>Robust programming language</li>
+            <li>Both functional and object oriented programming language</li>
+            <li>Portable programming language</li>
+            <li>Multithread programming language</li>
+            <li>Dynamic programming language</li>
+          </ol>
+
+          <h3>1. Simple programming language</h3>
+          <ol>
+            <li>Java is simple because it contains predefined methods.</li>
+            <li>Java removed complicated topics like pointers.</li>
+            <li>Java syntax is simple and easy to understand.</li>
+          </ol>
+
+          <h3>Predefined methods</h3>
+          <p>Methods already present in JDK and developed by Java developers.</p>
+          <p class="sub">Examples: <code>sqrt()</code>, <code>add()</code>, <code>max()</code>, <code>min()</code></p>
+
+          <h3>User defined methods</h3>
+          <p>Methods created by Java programmers.</p>
+          <p class="sub">Examples: <code>bhavadeesh()</code>, <code>virat()</code>, <code>dhoni()</code>, <code>pawan()</code></p>
+
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    System.out.println(Math.sqrt(49)); //7.0
+    System.out.println(Math.sqrt(81)); //9.0
+    System.out.println(Math.pow(2,3)); //8.0
+  }
+}</code></pre>
+
+          <h3>2. Platform independent programming language</h3>
+          <p>A language where we can write program on one platform and execute on any platform.</p>
+          <p class="sub">Examples: Java, Python</p>
+
+          <h3>Platform dependent programming language</h3>
+          <p>A language where we write and execute in the same platform type.</p>
+          <p class="sub">Examples: C, C++</p>
+
+          <h3>3. Statically typed programming language</h3>
+          <p>Datatype must be specified before variable.</p>
+          <pre><code>int a=10;
+String c="20";</code></pre>
+
+          <h3>Dynamically typed programming language</h3>
+          <p>No need to specify datatype explicitly.</p>
+          <pre><code>// Python example
+a=10
+c="20"</code></pre>
+
+          <h3>4. High level programming language</h3>
+          <p>Machine-understandable representation is transformed to human-understandable output.</p>
+          <pre><code>int a=0b1010;      // machine style binary
+System.out.println(a); //10 (human readable)</code></pre>
+
+          <h3>5. Integrated programming language</h3>
+          <p>Java uses both compilation and execution stages.</p>
+
+          <h3>Compiler vs Interpreter</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Compiler</td>
+                <td>Converts source code to bytecode at once</td>
+              </tr>
+              <tr>
+                <td>Interpreter</td>
+                <td>Executes bytecode line by line (in JVM)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>JDK, JRE, JVM</h3>
+          <ol>
+            <li><strong>JDK</strong>: Java Development Kit (develop + run), contains JRE and JVM.</li>
+            <li><strong>JRE</strong>: Java Runtime Environment (run only), contains JVM.</li>
+            <li><strong>JVM</strong>: Java Virtual Machine, contains interpreter for bytecode execution.</li>
+          </ol>
+
+          <h3>6. Robust programming language</h3>
+          <p>Robust means strong. Java is robust because of:</p>
+          <ol>
+            <li>Strong typing</li>
+            <li>Garbage collector</li>
+            <li>Exception handling</li>
+          </ol>
+
+          <pre><code>// Strong typing example
+int a="virat kohli"; // compile-time error</code></pre>
+
+          <p><strong>Garbage Collector</strong>: removes unwanted memory and improves performance.</p>
+          <p><strong>Exception Handling</strong>: converts abnormal termination into normal termination.</p>
+
+          <h3>7. Both functional/procedural and object oriented</h3>
+          <p>Java supports fundamentals and OOP principles (Inheritance, Polymorphism, Abstraction, Encapsulation).</p>
+          <p class="sub">Procedural only example: C</p>
+
+          <h3>8. Portable programming language</h3>
+          <p>Java bytecode can be migrated from one platform to another without changes.</p>
+
+          <h3>9. Multithread programming language</h3>
+          <ol>
+            <li>Java provides APIs like <code>Thread</code> and <code>Runnable</code>.</li>
+            <li>Multiple threads can run simultaneously and improve application performance.</li>
+          </ol>
+
+          <h3>10. Dynamic programming language</h3>
+          <p>In Java, all <code>.class</code> files are not loaded initially. Required classes are loaded when needed.</p>
+          <p>Main advantage: application gets latest required class at runtime.</p>
+
+          <pre><code>class Student
+{
+  static
+  {
+    System.out.println("student class loaded");
+  }
+}
+
+class Test
+{
+  static
+  {
+    System.out.println("Test class loaded");
+  }
+
+  public static void main(String[] args)
+  {
+    System.out.println("Hello");
+    // Student s1=new Student(); // uncomment to load Student class
+  }
+}</code></pre>
+
+          <h3>Literals (recap)</h3>
+          <p>Literals are input values stored in variables.</p>
+          <ol>
+            <li>Integer Literals</li>
+            <li>Floating Point Literals</li>
+            <li>Character Literals</li>
+            <li>Boolean Literals</li>
+            <li>String Literals</li>
+            <li>Object Literals (<code>null</code>)</li>
+          </ol>
+
+          <pre><code>int a=12;
+// int -> datatype
+// a   -> variable
+// 12  -> value (literal)</code></pre>
+        </details>
+      </section>
     </main>
   </div>
 
