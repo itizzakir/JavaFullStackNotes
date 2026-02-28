@@ -1113,6 +1113,50 @@ System.out.println(ch); //z</code></pre>
       <section class="card" id="operations">
         <details>
           <summary>11.Operations</summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Left Side Datatypes</th>
+              <th>Operator</th>
+              <th>Right Side Datatype</th>
+              <th>Result Datatype</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>byte, short, int, char</td>
+              <td>+</td>
+              <td>byte, short, int, char</td>
+              <td>int</td>
+            </tr>
+            <tr>
+              <td>byte, short, int, char</td>
+              <td>+</td>
+              <td>long</td>
+              <td>long</td>
+            </tr>
+            <tr>
+              <td>byte, short, int, long, char</td>
+              <td>+</td>
+              <td>float</td>
+              <td>float</td>
+            </tr>
+            <tr>
+              <td>byte, short, int, long, float, char</td>
+              <td>+</td>
+              <td>double</td>
+              <td>double</td>
+            </tr>
+            <tr>
+              <td>Any datatype</td>
+              <td>+</td>
+              <td>String</td>
+              <td>String</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Type promotion (code text format)</h3>
         <pre><code>byte,short,int,char             +  byte,short,int,char  => int
 byte,short,int,char             +  long                 => long
 byte,short,int,long,char        +  float                => float
