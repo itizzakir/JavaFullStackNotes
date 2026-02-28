@@ -554,6 +554,7 @@ const noteSource = `
         <a href="#inheritance">Inheritance</a>
         <a href="#upcasting-downcasting">Up/Down Casting</a>
         <a href="#encapsulation-enum-annotations">Encap + Enum + Annotations</a>
+        <a href="#constructors">Constructors</a>
         <a href="#slip-tests">Slip Tests</a>
       </nav>
       <div class="tag-row">
@@ -565,7 +566,7 @@ const noteSource = `
     </header>
 
     <section class="toolbar">
-      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting, encapsulation, enum, annotations..." />
+      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting, encapsulation, enum, annotations, constructors..." />
       <button id="expandBtn" type="button">Expand All</button>
       <button id="collapseBtn" type="button" class="secondary">Collapse All</button>
     </section>
@@ -6397,6 +6398,354 @@ class Test
     Bank b1=(Bank)a2;
     System.out.println(b1.bno());
     System.out.println(b1.bname());
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="constructors">
+        <details>
+          <summary>27.Constructors</summary>
+
+          <h3>Constructors</h3>
+          <ol>
+            <li>Constructor is a special method type.</li>
+            <li>Constructor name and class name must be same and no return type (including <code>void</code>).</li>
+            <li>Constructor executes whenever object is created.</li>
+            <li>Purpose: initialize instance variables.</li>
+            <li>Types of constructors:</li>
+          </ol>
+          <ol>
+            <li>Default / Non-parameterized constructor</li>
+            <li>Parameterized constructor</li>
+            <li>Copy constructor</li>
+          </ol>
+
+          <h3>Constructor Types</h3>
+          <p><strong>Default/Non-parameterized:</strong> constructor with zero formal parameters.</p>
+          <p><strong>Parameterized:</strong> constructor with parameters.</p>
+          <p><strong>Copy constructor:</strong> copy values from one object reference into another object.</p>
+
+          <h3>Important Points</h3>
+          <ol>
+            <li>If no constructor is written, JVM provides one default constructor.</li>
+            <li>Constructor overloading: multiple constructors with same name and different parameter lists.</li>
+            <li>Constructor overriding is not possible.</li>
+            <li>Constructor chaining: calling one constructor from another using <code>this()</code> or <code>super()</code>.</li>
+            <li><code>this()</code> and <code>super()</code> must be first statement in constructor.</li>
+            <li><code>super()</code> is implicit in constructors (if not written explicitly).</li>
+          </ol>
+
+          <h3>this() and super()</h3>
+          <ul>
+            <li><code>this()</code> calls default constructor in current class.</li>
+            <li><code>this(int x)</code> calls parameterized constructor in current class.</li>
+            <li><code>super()</code> calls default constructor in parent class.</li>
+            <li><code>super(int x)</code> calls parameterized constructor in parent class.</li>
+          </ul>
+
+          <h3>Methods vs Constructors</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Methods</th>
+                <th>Constructors</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Perform task / reusability</td><td>Initialize instance variables</td></tr>
+              <tr><td>Have return type</td><td>No return type</td></tr>
+              <tr><td>Name can be different from class</td><td>Name must be same as class</td></tr>
+              <tr><td>Execute when called</td><td>Execute when object is created</td></tr>
+              <tr><td>Arguments passed in method call</td><td>Arguments passed in object creation</td></tr>
+              <tr><td>Overriding possible</td><td>Overriding not possible</td></tr>
+              <tr><td>Inheritance applies</td><td>Constructors are not inherited</td></tr>
+              <tr><td><code>this()</code>/<code>super()</code> not used as method call operators</td><td><code>this()</code> and <code>super()</code> are used for chaining</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Default constructor example</h3>
+          <pre><code>class Demo
+{
+  Demo()
+  {
+    System.out.println("welcome to constructors");
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+  }
+}</code></pre>
+
+          <h3>Parameterized constructor examples</h3>
+          <pre><code>class Demo
+{
+  Demo(int a)
+  {
+    System.out.println(a+" parameterized constructors");
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo(6);
+  }
+}</code></pre>
+
+          <pre><code>class Demo
+{
+  Demo(int a,int b)
+  {
+    System.out.println("parameterized constructors");
+    System.out.println(a+" "+b);
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo(6,8);
+  }
+}</code></pre>
+
+          <h3>Copy constructor example</h3>
+          <pre><code>class Demo
+{
+  int a;
+  int b;
+  Demo()
+  {
+    a=6;
+    b=7;
+    System.out.println(a+" "+b);
+  }
+  Demo(Demo ref)
+  {
+    a=ref.a;
+    b=ref.b;
+    System.out.println(a+" "+b);
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    Demo d2=new Demo(d1);
+  }
+}</code></pre>
+
+          <pre><code>class Student
+{
+  int sno;
+  String sname;
+  Student()
+  {
+    sno=123;
+    sname="Hemanth";
+    System.out.println(sno+" "+sname);
+  }
+  Student(Student s3)
+  {
+    sno=s3.sno;
+    sname=s3.sname;
+    System.out.println(sno+" "+sname);
+  }
+}</code></pre>
+
+          <h3>Initialization with constructor</h3>
+          <pre><code>class Emp
+{
+  int eno;
+  String ename;
+  Emp(int empno,String empname)
+  {
+    eno=empno;
+    ename=empname;
+  }
+  void display()
+  {
+    System.out.println(eno+" "+ename);
+  }
+  public static void main(String[] args)
+  {
+    Emp e1=new Emp(12,"Mohan");
+    e1.display();
+  }
+}</code></pre>
+
+          <pre><code>class Institute
+{
+  int ino;
+  String iname;
+  Institute(int ino,String iname)
+  {
+    this.ino=ino;
+    this.iname=iname;
+  }
+  void show()
+  {
+    System.out.println(ino+" "+iname);
+  }
+  public static void main(String[] args)
+  {
+    Institute i1=new Institute(567,"Durga");
+    i1.show();
+  }
+}</code></pre>
+
+          <h3>No output constructor examples</h3>
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+  }
+}</code></pre>
+          <pre><code>class Demo
+{
+  Demo()
+  {
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+  }
+}</code></pre>
+
+          <h3>Constructor overloading example</h3>
+          <pre><code>class Demo
+{
+  Demo()
+  {
+    System.out.println("default con");
+  }
+  Demo(int x)
+  {
+    System.out.println("parameterized con");
+  }
+  Demo(int x,String y)
+  {
+    System.out.println(x+" "+y);
+  }
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo(8);         // parameterized con
+    Demo d2=new Demo(8,"virat"); // 8 virat
+  }
+}</code></pre>
+
+          <h3>Constructor chaining with this()</h3>
+          <pre><code>class B
+{
+  B()
+  {
+    System.out.println("default con");
+  }
+  B(int x)
+  {
+    this();
+    System.out.println("parameterized con");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B(7);
+  }
+}</code></pre>
+
+          <pre><code>class B
+{
+  B()
+  {
+    this(5);
+    System.out.println("default con");
+  }
+  B(int x)
+  {
+    System.out.println("parameterized con");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+  }
+}</code></pre>
+          <div class="warn"><code>this()</code> must be first statement. If written later in constructor body, compile-time error.</div>
+
+          <h3>Constructor chaining with super()</h3>
+          <pre><code>class A
+{
+  A()
+  {
+    System.out.println("default con in super class");
+  }
+}
+class B extends A
+{
+  B(int x)
+  {
+    super();
+    System.out.println("parameterized con in sub class");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B(6);
+  }
+}</code></pre>
+
+          <pre><code>class A
+{
+  A(int x)
+  {
+    System.out.println("param con in super class");
+  }
+}
+class B extends A
+{
+  B()
+  {
+    super(6);
+    System.out.println("default con in sub class");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B();
+  }
+}</code></pre>
+
+          <h3>Implicit super() example</h3>
+          <pre><code>class A
+{
+  A()
+  {
+    System.out.println("default con in super class");
+  }
+}
+class B extends A
+{
+  B(int x)
+  {
+    System.out.println("parameterized con in sub class");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B(7);
+  }
+}</code></pre>
+
+          <h3>this() + super() flow</h3>
+          <pre><code>class A
+{
+  A()
+  {
+    System.out.println("default con in super class");
+  }
+}
+class B extends A
+{
+  B(int x)
+  {
+    this();
+    System.out.println("parameterized con in sub class");
+  }
+  B()
+  {
+    System.out.println("default con in sub class");
+  }
+  public static void main(String[] args)
+  {
+    B b1=new B(7);
   }
 }</code></pre>
         </details>
