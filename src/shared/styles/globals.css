@@ -392,7 +392,8 @@ body {
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow-lg);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 
 .note-document-content {
@@ -504,6 +505,15 @@ body {
 }
 
 @media (max-width: 640px) {
+  .note-document-surface {
+    border-radius: 10px;
+  }
+
+  .note-document-content .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
   .app-shell {
     padding: 14px 10px 26px;
   }

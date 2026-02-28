@@ -35,10 +35,20 @@ const noteSource = `
       font-family: "Segoe UI", Tahoma, Arial, sans-serif;
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
       background:
         radial-gradient(1200px 500px at -10% -20%, #dff5ff 0%, transparent 50%),
         radial-gradient(900px 400px at 120% -20%, #dbf7f0 0%, transparent 45%),
         var(--bg);
+    }
+
+    img,
+    svg,
+    video,
+    canvas,
+    iframe {
+      max-width: 100%;
+      height: auto;
     }
 
     .global-nav {
@@ -67,6 +77,9 @@ const noteSource = `
       padding: 6px 10px;
       font-weight: 700;
       font-size: 0.85rem;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      min-width: 0;
     }
 
     .global-nav a.active {
@@ -116,6 +129,9 @@ const noteSource = `
       border: 1px solid rgba(255, 255, 255, 0.55);
       background: rgba(255, 255, 255, 0.08);
       font-size: 0.85rem;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      min-width: 0;
     }
 
     .topic-nav a:hover {
@@ -151,6 +167,11 @@ const noteSource = `
       padding: 10px 12px;
       font-size: 0.95rem;
       background: #fff;
+    }
+
+    .toolbar input {
+      width: 100%;
+      min-width: 0;
     }
 
     .toolbar button {
@@ -260,6 +281,7 @@ const noteSource = `
 
     p {
       margin: 8px 0;
+      overflow-wrap: anywhere;
     }
 
     ol,
@@ -270,6 +292,7 @@ const noteSource = `
 
     li {
       margin: 2px 0;
+      overflow-wrap: anywhere;
     }
 
     .sub {
@@ -326,6 +349,8 @@ const noteSource = `
       padding: 8px 10px;
       text-align: left;
       vertical-align: top;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
 
     th {
@@ -476,9 +501,83 @@ const noteSource = `
       border-top: 1px solid #e4ecf5;
     }
 
+    .global-nav,
+    .container,
+    .hero,
+    .toolbar,
+    .card,
+    .topic-nav,
+    .grid {
+      min-width: 0;
+    }
+
     @media (max-width: 1100px) {
       .keyword-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .container {
+        width: 95%;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topic-nav a {
+        text-align: center;
+      }
+
+      .datatype-map {
+        min-width: 0;
+        width: 100%;
+        padding: 8px;
+      }
+
+      .map-head {
+        width: 100%;
+        max-width: 260px;
+        margin-bottom: 14px;
+      }
+
+      .map-branches {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .map-branches::before {
+        display: none;
+      }
+
+      .map-node {
+        width: 100%;
+      }
+
+      .map-card {
+        font-size: 0.95rem;
+        min-height: 54px;
+      }
+
+      .map-predefine,
+      .map-userdefine,
+      .connector {
+        margin-left: 0;
+        max-width: none;
+      }
+
+      .primitive-oval {
+        width: 100%;
+        min-height: 0;
+        border-radius: 16px;
+        padding: 12px 16px;
       }
     }
 
@@ -486,7 +585,7 @@ const noteSource = `
       .global-nav {
         position: static;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
       }
 
       .global-nav a {
@@ -511,15 +610,85 @@ const noteSource = `
 
       .topic-nav {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
       }
 
       .topic-nav a {
         text-align: center;
+        font-size: 0.82rem;
       }
 
       .keyword-grid {
         grid-template-columns: 1fr;
+      }
+
+      .tag-row {
+        gap: 6px;
+      }
+
+      .tag {
+        font-size: 0.8rem;
+      }
+
+      summary {
+        font-size: 1rem;
+      }
+
+      pre {
+        font-size: 0.78rem;
+      }
+
+      table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .diagram-wrap {
+        padding: 10px;
+      }
+
+      .keyword-box,
+      .keyword-box.long {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 98%;
+      }
+
+      .hero {
+        padding: 14px;
+      }
+
+      .hero h1 {
+        font-size: 1.24rem;
+      }
+
+      .card {
+        padding: 12px;
+      }
+
+      .toolbar input,
+      .toolbar button {
+        font-size: 0.9rem;
+        padding: 9px 10px;
+      }
+
+      summary {
+        font-size: 0.95rem;
+      }
+
+      pre {
+        font-size: 0.74rem;
+      }
+
+      th,
+      td {
+        padding: 7px 8px;
       }
     }
   </style>
