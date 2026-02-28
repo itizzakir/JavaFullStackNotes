@@ -3741,6 +3741,187 @@ class Test
 // 12  -> value (literal)</code></pre>
         </details>
       </section>
+
+      <section class="card" id="methods">
+        <details>
+          <summary>20.Methods</summary>
+
+          <h3>Methods</h3>
+          <ol>
+            <li>Method is collection of group of statements.</li>
+            <li>Purpose of method is to perform task and produce code reusability.</li>
+          </ol>
+
+          <h3>Methods contains 3 parts</h3>
+          <ol>
+            <li>Method heading</li>
+            <li>Method body</li>
+            <li>Method calling</li>
+          </ol>
+
+          <h3>Method heading</h3>
+          <p>Method heading is a collection of return type, method name and formal parameters.</p>
+
+          <h3>Method body</h3>
+          <p>Method body is a collection of statements.</p>
+
+          <h3>Formal parameters</h3>
+          <p>Formal parameters take values (actual arguments) from method call.</p>
+
+          <h3>Actual arguments</h3>
+          <p>Actual arguments send values to formal parameters in method heading.</p>
+
+          <h3>void</h3>
+          <p><code>void</code> is a return type and returns empty.</p>
+
+          <h3>Method Syntax</h3>
+          <pre><code>returnType methodName(formalParameters)
+{
+  statements
+}</code></pre>
+
+          <pre><code>class Sample
+{
+  void suresh(int a)
+  {
+    System.out.println(a); //8
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    s1.suresh(8);
+  }
+}</code></pre>
+
+          <h3>Methods can define 4 ways</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>with formal parameters and without return statement</td></tr>
+              <tr><td>2</td><td>without formal parameters and without return statement</td></tr>
+              <tr><td>3</td><td>with formal parameters and with return statement</td></tr>
+              <tr><td>4</td><td>without formal parameters and with return statement</td></tr>
+            </tbody>
+          </table>
+
+          <div class="tip"><code>void</code> -> typically with <code>System.out.println()</code><br />
+          Datatype return -> use <code>return</code> statement.</div>
+
+          <h3>1. with formal parameters and without return statement</h3>
+          <pre><code>class Demo
+{
+  void parithosh(String s)
+  {
+    System.out.println(s);
+  }
+
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    d1.parithosh("virat");
+  }
+}</code></pre>
+
+          <h3>2. without formal parameters and without return statement</h3>
+          <pre><code>class Demo
+{
+  void parithosh()
+  {
+    System.out.println("method topic started");
+  }
+
+  public static void main(String[] args)
+  {
+    Demo d1=new Demo();
+    d1.parithosh();
+  }
+}</code></pre>
+
+          <pre><code>class Sample
+{
+  void add(int a,int b)
+  {
+    System.out.println(a+b);
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    s1.add(6,5);
+  }
+}</code></pre>
+
+          <h3>3. with formal parameters and with return statement</h3>
+          <pre><code>class Sample
+{
+  int venky(int a)
+  {
+    return a;
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    int res=s1.venky(16);
+    System.out.println(res);
+  }
+}</code></pre>
+
+          <pre><code>class Sample
+{
+  float venky(float a)
+  {
+    return a;
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    float res=s1.venky(16.6f);
+    System.out.println(res);
+  }
+}</code></pre>
+
+          <h3>4. without formal parameters and with return statement</h3>
+          <pre><code>class Sample
+{
+  String hemanth()
+  {
+    return "virat is a champ";
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    String s=s1.hemanth();
+    System.out.println(s);
+  }
+}</code></pre>
+
+          <h3>Passing array to method</h3>
+          <pre><code>import java.util.*;
+class Sample
+{
+  void add(int[] a)
+  {
+    System.out.println(Arrays.toString(a));
+  }
+
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    int[] b={1,2,3,4};
+    s1.add(b);
+  }
+}</code></pre>
+        </details>
+      </section>
     </main>
   </div>
 
