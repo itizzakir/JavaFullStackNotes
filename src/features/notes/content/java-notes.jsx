@@ -529,9 +529,89 @@ welcome to java</code></pre>
         </details>
       </section>
 
+      <section class="card" id="variables-identifiers">
+        <details>
+          <summary>2.Variables and Identifiers</summary>
+
+          <h3>Variables</h3>
+          <ol>
+            <li>A variable is a container.</li>
+            <li>The purpose of variable is to store operand(value,variable,expression).</li>
+            <li>variable declaration</li>
+          </ol>
+          <pre><code>datatype varname;==========>variable declaration
+varname=value==============>assigning
+
+int a;
+a=5;</code></pre>
+
+          <ol start="4">
+            <li>variable Initialization</li>
+          </ol>
+          <pre><code>datatype varname=value;
+int a=2;</code></pre>
+
+          <pre><code>int a=5=======>value
+int b=a========>variable
+int c=6+3======>expression</code></pre>
+
+          <h3>Rules</h3>
+          <ol>
+            <li>A variable must be a alphabet (lowercase)(a-z),UpperCase(A-Z), Digit(0-9) and special symbols (_,$).</li>
+            <li>A variable 1st letter must not starts with digit(0-9).</li>
+            <li>A variable does not allow special symbols except(_ $).</li>
+            <li>Keywords must not use as variables.</li>
+            <li>Variable size is unlimited but according to industry standards donot use variable size more than 16 digits.</li>
+            <li>Variable is case sensitive.</li>
+            <li>true and false are not keywords but donot use as variables.</li>
+          </ol>
+
+          <h3>Examples</h3>
+          <pre><code>1.int  abcB12_$=10;=====>valid
+2.int  1ba=10;==========>invalid
+3.int   a*5=10;=========>invalid
+4.int  a@b=9;===========>invalid
+5.int  _ab=10;=========>valid</code></pre>
+
+          <h3>Identifiers</h3>
+          <ol>
+            <li>Identifier is a one type of variable.</li>
+            <li>The purpose of identifier is to identify package,subpackge,class,interface,method.....</li>
+          </ol>
+
+          <h3>package</h3>
+          <ol>
+            <li>package must be written in lowercase.</li>
+            <li>A package before there is no dot(.) then that is called package.</li>
+            <li>A package before there is dot(.) then that is called subpackage.</li>
+          </ol>
+
+          <h3>class</h3>
+          <p>A class 1st letter must starts with capital from each word onwards.</p>
+
+          <h3>interface</h3>
+          <p>A interface 1st letter must starts with capital from each word onwards.</p>
+
+          <h3>Method</h3>
+          <p>A method 1st letter must starts with capital from second word onwards and ends with().</p>
+
+          <h3>Examples</h3>
+          <pre><code>1.java.lang=====>java(package)  lang(sub package)
+2.java.io=======>java(package)  io(sub package)
+3.java.util.Arrays==>java(package) util(subpackage) Arrays(class)
+4.LinkedList======>class
+5.lastIndexOf()===>method
+6.List============>interface
+7.Set=============>interface
+8.Map=============>interface
+9.Comparator======>interface
+10.Comparable=====>interface</code></pre>
+        </details>
+      </section>
+
       <section class="card" id="keywords">
         <details>
-          <summary>2.Keywords</summary>
+          <summary>3.Keywords</summary>
         <ol>
           <li>Keywords are set of reserved words.</li>
           <li>Reserved words will have particular functionality.</li>
@@ -554,7 +634,7 @@ welcome to java</code></pre>
 
       <section class="card" id="keyword-groups">
         <details>
-          <summary>3.Keyword Groups (visual layout)</summary>
+          <summary>4.Keyword Groups (visual layout)</summary>
         <div class="diagram-wrap">
           <div class="keyword-grid">
             <div>
@@ -634,7 +714,7 @@ welcome to java</code></pre>
 
       <section class="card" id="datatypes">
         <details>
-          <summary>4.Datatypes</summary>
+          <summary>5.Datatypes</summary>
         <p>Datatype determines what type of value we can store.</p>
         <p>Datatypes are divided into 2 types. They are:</p>
         <ol>
@@ -663,7 +743,7 @@ welcome to java</code></pre>
 
       <section class="card" id="datatype-map">
         <details>
-          <summary>5.Datatypes Diagram (same idea as your reference)</summary>
+          <summary>6.Datatypes Diagram (same idea as your reference)</summary>
         <div class="diagram-wrap">
           <div class="datatype-map">
             <div class="map-head">Datatypes</div>
@@ -708,7 +788,7 @@ welcome to java</code></pre>
 
       <section class="card" id="byte-short-int-long">
         <details>
-          <summary>6.Integer Primitive Datatypes</summary>
+          <summary>7.Integer Primitive Datatypes</summary>
 
         <h3>1. byte</h3>
         <p>byte datatype will store both positive and negative values without decimals.</p>
@@ -805,7 +885,7 @@ System.out.println(Byte.MAX_VALUE);</code></pre>
 
       <section class="card" id="int-literals">
         <details>
-          <summary>7.int datatype stores number format data</summary>
+          <summary>8.int datatype stores number format data</summary>
         <table>
           <thead>
             <tr>
@@ -883,7 +963,7 @@ System.out.println(b); //a</code></pre>
 
       <section class="card" id="floating-values">
         <details>
-          <summary>8.Floating point values</summary>
+          <summary>9.Floating point values</summary>
         <ol>
           <li>Floating point values stores both positive and negative values with decimal and without decimal.</li>
           <li>Floating are divided into 2 types: float and double.</li>
@@ -955,7 +1035,7 @@ System.out.println(ab); //1.0</code></pre>
 
       <section class="card" id="char-boolean">
         <details>
-          <summary>9.char and boolean</summary>
+          <summary>10.char and boolean</summary>
         <ol>
           <li>char datatype store single character and enclosed with single quotes ('').</li>
           <li>If we store ascii value in char datatype we need not to enclose with single quotes ('').</li>
@@ -1033,7 +1113,7 @@ System.out.println(b); //error</code></pre>
 
       <section class="card" id="type-conversions">
         <details>
-          <summary>10.Type conversions</summary>
+          <summary>11.Type conversions</summary>
         <ol>
           <li>The process of converting one datatype into another datatype is called type conversion.</li>
           <li>At present total 56 type conversions in Java.</li>
@@ -1112,7 +1192,7 @@ System.out.println(ch); //z</code></pre>
 
       <section class="card" id="operations">
         <details>
-          <summary>11.Operations</summary>
+          <summary>12.Operations</summary>
         <table>
           <thead>
             <tr>
@@ -1183,6 +1263,507 @@ System.out.println(6+"virat"+7); //6virat7</code></pre>
 
         <div class="tip">Java notes content has been replaced with the provided notes and arranged in the same visual style used by the HTML notes page.</div>
               </details>
+      </section>
+
+      <section class="card" id="operators">
+        <details>
+          <summary>13.Operators</summary>
+
+          <h3>Operators</h3>
+          <ol>
+            <li>operator is a symbol.</li>
+            <li>The purpose of operators is to perform operations.</li>
+          </ol>
+
+          <pre><code>+  =   <    &&   ++   <<   +=  ?
+-      >    ||   --   >>   -=  :
+*      <=   !         ~
+/      >=             &
+%      ==             |
+       !=             ^</code></pre>
+
+          <h3>1.Arithmetic operators (+,-,*,/,% )</h3>
+          <p>Arithmetic operators used to perform addition, subtraction, multiplication, division.</p>
+          <h3>Examples</h3>
+          <pre><code>System.out.println(1+2);   //3
+System.out.println(3-2);   //1
+System.out.println(6*2);   //12
+System.out.println(6/2);   //3 (quotient)
+System.out.println(6%2);   //0 (remainder)</code></pre>
+
+          <h3>Order of precedence</h3>
+          <pre><code>1. ()
+2. /,%,*
+3. +,-</code></pre>
+
+          <pre><code>class First
+{
+  public static void main(String[] args)
+  {
+    int a=5;
+    int b=6;
+    int c=3;
+    System.out.println(a+b+(b+c)); //20
+  }
+}
+
+int a=5;
+int b=6;
+int c=3;
+int d=7;
+System.out.println(a*b+b-d-a+c); //27</code></pre>
+
+          <h3>2.Assignment operators (=)</h3>
+          <p>Assignment operator is used to transfer rhs operands to the lhs variable.</p>
+          <h3>operands</h3>
+          <p>operand can be variable, value, expression.</p>
+
+          <h3>Examples</h3>
+          <pre><code>int a=5;
+
+Here int is datatype
+a is variable
+= is Assignment operator
+5 value
+
+int a=5;   //value
+int b=a;   //variable
+int c=5+6; //expression</code></pre>
+
+          <h3>3.Relational operators (&lt;,&gt;,&lt;=,&gt;=,==,!=)</h3>
+          <p>Relational operators are used to compare 2 values and returns either true or false.</p>
+          <h3>Examples</h3>
+          <pre><code>System.out.println(5>3);    //true
+System.out.println(5>11);   //false
+System.out.println(5>11<2); //error
+System.out.println(5<2);    //false
+System.out.println(5<21);   //true
+System.out.println(5<=6);   //true
+System.out.println(6<6);    //false
+System.out.println(6<=6);   //true
+System.out.println(2>=2);   //true
+System.out.println(2==2);   //true
+System.out.println(2==3);   //false
+System.out.println(2!=3);   //true
+System.out.println(2!=2);   //false</code></pre>
+
+          <div class="tip">Difference b/w <code>=</code> and <code>==</code>:<br />
+          <code>=</code> is to assign operand to variable, <code>==</code> is to compare 2 operands.</div>
+
+          <h3>4.Logical operators</h3>
+          <p>Logical operators are used to compare multiple conditions and returns either true or false.</p>
+          <pre><code>1. && => All the conditions must be satisfied
+2. || => atleast one condition must be satisfied
+3. !</code></pre>
+
+          <pre><code>System.out.println((2>1) && (6>2));               //true
+System.out.println((2>6) && (6>2));               //false
+System.out.println((2>1) && (6>2) && (7>5));      //true
+System.out.println((2>1) && (6>2) && (7>11));     //false
+System.out.println((2>1) || (6>2) || (7>2));      //true
+System.out.println((2>1) || (6>12) || (7>2));     //true
+System.out.println((2>1) || (6>12) || (7>12));    //true
+System.out.println((2>11) || (6>12) || (7>12));   //false
+System.out.println(!(6>2));                       //false
+System.out.println(!(6>12));                      //true</code></pre>
+
+          <h3>Increment/Decrement operators</h3>
+          <h3>1.Increment operator (++var or var++)</h3>
+          <p>Increment operator is used to increment 1 value.</p>
+          <ol>
+            <li>pre increment (++var)</li>
+            <li>post increment (var++)</li>
+          </ol>
+          <p>In pre increment, incrementation is applied to current operation.</p>
+          <p>In post increment, incrementation is applied to next operation.</p>
+
+          <h3>Examples</h3>
+          <pre><code>int a=5;
+++a;
+System.out.println(a); //6
+
+int a=5;
+a++;
+System.out.println(a); //6
+
+int a=5;
+System.out.println(++a); //6
+
+int a=5;
+System.out.println(a++); //5
+
+int a=5;
+System.out.println(++a + ++a); //13
+
+int a=5;
+System.out.println(a++ + ++a);
+
+int a=5;
+System.out.println(a++ + a++); //11
+
+int a=5;
+System.out.println(a++ + ++a + a++); //19</code></pre>
+
+          <h3>2.Decrement operator (--var or var--)</h3>
+          <p>Decrement operator is used to decrement 1 value.</p>
+          <ol>
+            <li>pre decrement (--var)</li>
+            <li>post decrement (var--)</li>
+          </ol>
+          <p>In pre decrement, decrementation is applied to current operation.</p>
+          <p>In post decrement, decrementation is applied to next operation.</p>
+
+          <h3>Examples</h3>
+          <pre><code>int a=5;
+System.out.println(a++ + --a + a++); //15
+
+int a=5;
+System.out.println(a-- + --a + a++); //11</code></pre>
+
+          <h3>Bitwise Operators</h3>
+          <p>Bitwise operators work on binary data and returns integer value.</p>
+          <ol>
+            <li>Bitwise LeftShift (&lt;&lt;)</li>
+            <li>Bitwise RightShift (&gt;&gt;)</li>
+            <li>Bitwise Complementary (~)</li>
+            <li>Bitwise AND (&amp;)</li>
+            <li>Bitwise OR (|)</li>
+            <li>Bitwise XOR (^)</li>
+          </ol>
+
+          <h3>1.Bitwise LeftShift (&lt;&lt;)</h3>
+          <pre><code>FORMULA: a * 2^b
+
+int a=12;
+int b=3;
+System.out.println(a<<b); //96</code></pre>
+
+          <h3>2.Bitwise RightShift (&gt;&gt;)</h3>
+          <pre><code>FORMULA: a / 2^b
+
+int a=12;
+int b=3;
+System.out.println(a>>b); //1</code></pre>
+
+          <h3>3.Bitwise Complementary (~)</h3>
+          <pre><code>Formula: ~n = -(n+1)
+
+int a=12;
+System.out.println(~a); //-13</code></pre>
+
+          <h3>4.Bitwise AND (&amp;) (multiply)</h3>
+          <pre><code>int a=9;
+int b=7;
+System.out.println(a&b); //1</code></pre>
+
+          <h3>5.Bitwise OR (|) (addition)</h3>
+          <pre><code>int a=9;
+int b=7;
+System.out.println(a|b); //15
+
+a(9) => 1001
+b(7) => 0111
+        1111 => 15</code></pre>
+
+          <h3>6.Bitwise XOR (^)</h3>
+          <p>If same values are there, take 0. If different values are there, take 1.</p>
+          <pre><code>int a=9;
+int b=7;
+System.out.println(a^b); //14
+
+a(9) => 1001
+b(7) => 0111
+        1110</code></pre>
+
+          <h3>7.Conditional operator</h3>
+          <p>Conditional operator is a ternary operator.</p>
+          <p>Conditional operator is used to check condition and returns either true expression or false expression.</p>
+          <pre><code>Syntax:
+condition ? true expression : false expression
+
+5>2 ? 2 : 3  //2
+5>12 ? 2 : 3 //3
+
+System.out.println(5>2?2:3); //2
+System.out.println(5>12?2:3); //3
+System.out.println(5>12?"Excelr institute":"tcs"); //tcs
+
+int a=5;
+int b=2;
+float res=5>2?1.2f:1.6f;
+System.out.println(res);
+
+int a=5;
+int b=12;
+String res=(a>b)?"super":(b>a)?"Excellent":"Bad";
+System.out.println(res); //Excellent</code></pre>
+
+          <h3>8.Compound operator</h3>
+          <p>Compound operator is a combination of multiple operators (Assignment and Arithmetic operators).</p>
+          <pre><code>int a=-5;
+int b=-a;
+System.out.println(b); //5
+
+int a=5;
+int b=2;
+a=a+b;
+System.out.println(a); //7
+
+int a=5;
+int b=2;
+a+=b; //a=a+b
+System.out.println(a); //7
+
+int a=5;
+int b=2;
+a-=b; //a=a-b
+System.out.println(a); //3
+
+int a=5;
+int b=2;
+a*=b;
+System.out.println(a); //10
+
+int a=5;
+int b=2;
+a/=b;
+System.out.println(a); //2
+
+int a=5;
+int b=2;
+a%=b;
+System.out.println(a); //1</code></pre>
+
+          <h3>Unary operator</h3>
+          <p>The operator which will work on 1 operand.</p>
+          <p>operand can be a variable, value, expression.</p>
+          <pre><code>++a
+a++
+++5</code></pre>
+
+          <h3>Binary operator</h3>
+          <p>The operator which will work on 2 operands.</p>
+          <pre><code>a+b
+2+3</code></pre>
+
+          <h3>Ternary operator</h3>
+          <p>The operator which will work on 3 operands.</p>
+          <pre><code>cond ? trueexp : false
+(a>b) ? a : b
+(5>2) ? 5 : 2</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="slip-tests">
+        <details>
+          <summary>14.Slip Tests</summary>
+
+          <h3>Slip Test 1 on Java Introduction, Literals, Variables and Identifiers</h3>
+          <h3>Fill in the blanks</h3>
+          <ol>
+            <li>Father of java ---------</li>
+            <li>Java current version --------</li>
+            <li>Technically java was divided into how many types -------</li>
+            <li>j2se,j2ee,j2me stands for -----------------</li>
+            <li>What we will learn in j2se,j2ee,j2me -------------</li>
+            <li>What we will develop by using j2se,j2ee,j2me --------</li>
+            <li>syntax of basic java program -------------</li>
+            <li>Write a java program to print hello java -----------</li>
+            <li>What are literals ----------</li>
+            <li>Literals are divided into how many types -----------</li>
+          </ol>
+
+          <h3>Choose the correct answers</h3>
+          <ol>
+            <li>
+              <pre><code>int a12=12;
+System.out.println(a12);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int 1ab=12;
+System.out.println(1ab);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int a@b=12;
+System.out.println(a@b);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int a#b_=12;
+System.out.println(a#b);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int _ab$=12;
+System.out.println(_a$);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int true=12;
+System.out.println(true);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <pre><code>int for=12;
+System.out.println(for);</code></pre>
+              <p class="sub">a) 12    b) error    c) No output    d) None</p>
+            </li>
+            <li>
+              <p>Identify class</p>
+              <p class="sub">a) String    b) get()    c) java    d) toString()</p>
+            </li>
+            <li>
+              <p>Identify subpackage</p>
+              <p class="sub">a) String    b) get()    c) java.lang    d) toString()</p>
+            </li>
+            <li>
+              <p>Identify Methods</p>
+              <p class="sub">a) String    b) get()    c) java    d) toString()</p>
+            </li>
+          </ol>
+
+          <hr class="topic-sep" />
+
+          <h3>Slip Test 2 on Keywords, Datatypes, Type Conversions and Operations</h3>
+          <h3>Fill in the blanks</h3>
+          <ol>
+            <li>What are keywords ----------</li>
+            <li>How many keywords in java --------</li>
+            <li>Keywords must be written in ----------</li>
+            <li>Name some keywords in java ------------</li>
+            <li>What is the purpose of datatypes -------</li>
+            <li>Difference between primitive and non primitive datatypes ----------</li>
+            <li>Give some exemples on primitive and non primitive datatypes ----------</li>
+            <li>what is meant by type conversions ----------</li>
+            <li>Type conversions are divided into how many types and what are they ----------</li>
+            <li>Total how many types conversions, how many not possible -----------</li>
+          </ol>
+
+          <h3>Choose the correct answers</h3>
+          <ol>
+            <li>
+              <p>Find the keywords</p>
+              <p class="sub">a) true   b) for   c) If   d) None</p>
+            </li>
+            <li>
+              <p>Find the keywords</p>
+              <p class="sub">a) While   b) public   c) Static   d) None</p>
+            </li>
+            <li>
+              <pre><code>int a=0b1010;</code></pre>
+              <p class="sub">a) 10   b) 0b1010   c) error   d) 12</p>
+            </li>
+            <li>
+              <pre><code>float b=12f;</code></pre>
+              <p class="sub">a) 12.0   b) 12   c) 12f   d) error</p>
+            </li>
+            <li>
+              <pre><code>double d=34;</code></pre>
+              <p class="sub">a) 34   b) error   c) 34.0   d) 34.0f</p>
+            </li>
+            <li>
+              <pre><code>char ch='5';</code></pre>
+              <p class="sub">a) 5   b) error   c) a   d) b</p>
+            </li>
+            <li>
+              <pre><code>char ch=97;</code></pre>
+              <p class="sub">a) 97   b) error   c) a   d) A</p>
+            </li>
+            <li>
+              <pre><code>int a=122;
+char ch=(char)a;</code></pre>
+              <p class="sub">a) z   b) 122   c) error   d) Z</p>
+            </li>
+            <li>
+              <pre><code>char ch='A';
+int a=ch;</code></pre>
+              <p class="sub">a) A   b) 65   c) 90   d) error</p>
+            </li>
+            <li>
+              <pre><code>5+"virat"+(5+5)+"dhoni"</code></pre>
+              <p class="sub">a) 5virat10dhoni   b) 5virat55dhoni   c) 15viratdhoni   d) error</p>
+            </li>
+          </ol>
+
+          <hr class="topic-sep" />
+
+          <h3>Slip Test 3 on Operations, Operators</h3>
+          <h3>Choose the correct answers</h3>
+          <ol>
+            <li>
+              <pre><code>int a=5;
+char b='a';
+System.out.println(a+b);</code></pre>
+              <p class="sub">a) 102   b) error   c) b   d) 5</p>
+            </li>
+            <li>
+              <pre><code>char ch1='a';
+char ch2='a';
+System.out.println(ch1+ch2);</code></pre>
+              <p class="sub">a) 194   b) a   c) error   d) aa</p>
+            </li>
+            <li>
+              <pre><code>int a=5;
+float b=1.5f;
+System.out.println(a+b);</code></pre>
+              <p class="sub">a) 5   b) 6.5   c) 6   d) error</p>
+            </li>
+            <li>
+              <pre><code>String a="virat";
+int b=5;
+int c=5;
+System.out.println(a+b+c);</code></pre>
+              <p class="sub">a) virat55   b) virat10   c) error   d) None</p>
+            </li>
+            <li>
+              <pre><code>String a="virat";
+int b=5;
+int c=5;
+System.out.println(a+(b+c));</code></pre>
+              <p class="sub">a) virat55   b) virat10   c) error   d) None</p>
+            </li>
+          </ol>
+
+          <h3>Write output / complete</h3>
+          <ol start="6">
+            <li><pre><code>5+6(6+2)+2*4+10/2-4 ---------</code></pre></li>
+            <li>
+              <pre><code>int a=5;
+System.out.println(++a + a++ + ++a - a++);</code></pre>
+            </li>
+            <li>
+              <pre><code>int a=5;
+System.out.println(a++ + a + ++a - a++);</code></pre>
+            </li>
+            <li>
+              <pre><code>int a=10;
+int b=10;
+if(a>=b) ----------</code></pre>
+            </li>
+            <li>
+              <pre><code>int a=10;
+int b=11;
+if(a>=b) ----------</code></pre>
+            </li>
+            <li><pre><code>(5>2)&&(6>7)&&(9>2) -----------------</code></pre></li>
+            <li><pre><code>(5>2)||(6>7)||(9>2) -----------------</code></pre></li>
+            <li>
+              <pre><code>int a=7;
+int b=6;
+System.out.println(a&b); --------------
+System.out.println(a|b); --------------
+System.out.println(a^b); --------------</code></pre>
+            </li>
+            <li><pre><code>System.out.println((5>10)?"virat":(6>2)?"Sachin":"dhoni"); ------------</code></pre></li>
+            <li>
+              <pre><code>int a=5;
+a+=6;
+System.out.println(a); --------------</code></pre>
+            </li>
+          </ol>
+        </details>
       </section>
     </main>
   </div>
