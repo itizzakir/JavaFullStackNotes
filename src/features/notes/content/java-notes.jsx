@@ -553,6 +553,7 @@ const noteSource = `
         <a href="#polymorphism">Polymorphism</a>
         <a href="#inheritance">Inheritance</a>
         <a href="#upcasting-downcasting">Up/Down Casting</a>
+        <a href="#encapsulation-enum-annotations">Encap + Enum + Annotations</a>
         <a href="#slip-tests">Slip Tests</a>
       </nav>
       <div class="tag-row">
@@ -564,7 +565,7 @@ const noteSource = `
     </header>
 
     <section class="toolbar">
-      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting..." />
+      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting, encapsulation, enum, annotations..." />
       <button id="expandBtn" type="button">Expand All</button>
       <button id="collapseBtn" type="button" class="secondary">Collapse All</button>
     </section>
@@ -6038,6 +6039,364 @@ class Emp
   {
     Emp e1=new Emp();
     e1.getEmp();
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="encapsulation-enum-annotations">
+        <details>
+          <summary>26.Encapsulation, Adapter Class, Enum, Annotations</summary>
+
+          <h3>Encapsulation</h3>
+          <ol>
+            <li>Binding/grouping variables and methods into single class is called encapsulation.</li>
+            <li>Purpose: hide data and provide controlled access through methods.</li>
+            <li>Purpose can also be validation using getter and setter methods.</li>
+            <li>Getter methods are used to get values.</li>
+            <li>Setter methods are used to set values.</li>
+          </ol>
+          <div class="tip">Best practice: declare variables as <code>private</code> and methods as <code>public</code>.</div>
+
+          <h3>Without encapsulation</h3>
+          <pre><code>class Student
+{
+  int sno;
+  String sname;
+  String dname;
+}
+class Teacher
+{
+  public static void main(String[] args)
+  {
+    Student s1=new Student();
+    s1.sno=123;
+    s1.sname="Mohan";
+    s1.dname="ECE";
+    System.out.println(s1.sno);
+    System.out.println(s1.sname);
+    System.out.println(s1.dname);
+  }
+}</code></pre>
+
+          <h3>Private fields block direct access</h3>
+          <pre><code>class Student
+{
+  private int sno;
+  private String sname;
+  private String dname;
+}
+class Teacher
+{
+  public static void main(String[] args)
+  {
+    Student s1=new Student();
+    // s1.sno=123; // error
+    // s1.sname="Mohan"; // error
+    // s1.dname="ECE"; // error
+  }
+}</code></pre>
+
+          <h3>Using setters and getters</h3>
+          <pre><code>class Student
+{
+  private int sno;
+  private String sname;
+  private String dname;
+
+  public void setSno(int sno){ this.sno=sno; }
+  public void setSname(String sname){ this.sname=sname; }
+  public void setDname(String dname){ this.dname=dname; }
+
+  public void getSno(){ System.out.println(sno); }
+  public void getSname(){ System.out.println(sname); }
+  public void getDname(){ System.out.println(dname); }
+}
+class Teacher
+{
+  public static void main(String[] args)
+  {
+    Student s1=new Student();
+    s1.setSno(334);
+    s1.setSname("AjayKumar");
+    s1.setDname("ECE");
+    s1.getSno();
+    s1.getSname();
+    s1.getDname();
+  }
+}</code></pre>
+
+          <h3>Validation example</h3>
+          <pre><code>class Student
+{
+  private int sno;
+  private String sname;
+  private String dname;
+
+  public void setSno(int sno){ this.sno=sno; }
+  public void setSname(String sname){ this.sname=sname; }
+  public void setDname(String dname){ this.dname=dname; }
+
+  public void getSno()
+  {
+    if(sno>0) System.out.println("valid "+sno);
+    else System.out.println("Invalid donot use ultra pro knowledge");
+  }
+  public void getSname(){ System.out.println(sname); }
+  public void getDname(){ System.out.println(dname); }
+}</code></pre>
+
+          <h3>Adapter class</h3>
+          <p>Adapter class is an implementation/helper class that provides empty concrete method bodies.</p>
+          <p>It allows child class to override only required methods instead of all interface methods.</p>
+
+          <pre><code>interface A
+{
+  void m1();
+  void m2();
+  void m3();
+  void m4();
+  void m5();
+}
+class B implements A
+{
+  public void m1(){}
+  public void m2(){}
+  public void m3(){}
+  public void m4(){}
+  public void m5(){}
+}
+class Test extends B
+{
+  public void m2()
+  {
+    System.out.println("m2 in Test class");
+  }
+  public static void main(String[] args)
+  {
+    Test t1=new Test();
+    t1.m2();
+  }
+}</code></pre>
+
+          <pre><code>interface Student
+{
+  void getMarks();
+  void getDetails();
+  void getAddress();
+  void getDept();
+}
+class StudentDetails implements Student
+{
+  public void getMarks(){}
+  public void getDetails(){}
+  public void getAddress(){}
+  public void getDept(){}
+}
+class Test extends StudentDetails
+{
+  public void getMarks()
+  {
+    System.out.println("Telugu =92");
+    System.out.println("Hindi =94");
+    System.out.println("English =92");
+    System.out.println("Maths =99");
+    System.out.println("Physics =93");
+    System.out.println("Chemistry =94");
+  }
+}</code></pre>
+
+          <h3>enum (Enumeration)</h3>
+          <ol>
+            <li>Enum is user-defined datatype for constants.</li>
+            <li>Internally enum behaves like class.</li>
+            <li>By default enum constants are <code>public static final</code>.</li>
+            <li>Enum can be declared inside or outside class.</li>
+            <li><code>values()</code> lists constants, <code>ordinal()</code> gives index (0..n-1).</li>
+            <li>Enum allows variables, methods, and constructors.</li>
+          </ol>
+
+          <pre><code>enum Week
+{
+  Sun,Mon,Tue,Wed,Thu,Fri,Sat
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    Week w1=Week.Sun;
+    System.out.println(w1);
+  }
+}</code></pre>
+
+          <pre><code>enum Directions
+{
+  East,West,North,South;
+  public static void main(String[] args)
+  {
+    Directions[] d1=Directions.values();
+    for(Directions d2:d1)
+    {
+      System.out.println(d2+"......"+d2.ordinal());
+    }
+  }
+}</code></pre>
+
+          <pre><code>enum Directions
+{
+  East,West,North,South;
+  Directions()
+  {
+    System.out.println("constructor");
+  }
+}</code></pre>
+
+          <pre><code>enum Beer
+{
+  kf(100),Bw(70),Ko(85),BB;
+  int getPrice;
+  Beer(int getPrice){ this.getPrice=getPrice; }
+  Beer(){ getPrice=200; }
+  int getRates(){ return getPrice; }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    Beer[] b1=Beer.values();
+    for(Beer b2:b1)
+    {
+      System.out.println(b2+"....."+b2.getRates());
+    }
+  }
+}</code></pre>
+
+          <h3>Annotations</h3>
+          <ol>
+            <li>Annotations provide compile-time information/errors/warnings.</li>
+            <li>Annotations start with <code>@</code> symbol.</li>
+            <li>Applied on variables, methods, constructors, classes, interfaces, etc.</li>
+            <li>Two types: predefined (standard) and user-defined (custom).</li>
+          </ol>
+
+          <h3>Predefined annotations</h3>
+          <p>General purpose (in <code>java.lang</code>): <code>@Override</code>, <code>@Deprecated</code>, <code>@FunctionalInterface</code>, <code>@SuppressWarnings</code>.</p>
+          <p>Meta annotations (in <code>java.lang.annotation</code>): <code>@Target</code>, <code>@Retention</code>, <code>@Inherited</code>, <code>@Documented</code>.</p>
+
+          <h3>@Target and @Retention</h3>
+          <pre><code>@Target(ElementType.TYPE)    // class
+@Target(ElementType.METHOD)  // method
+@Target(ElementType.FIELD)   // variable
+
+@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)</code></pre>
+
+          <h3>User-defined annotations</h3>
+          <p><strong>Marker annotation</strong> (no members):</p>
+          <pre><code>@interface Bank
+{
+}</code></pre>
+          <p><strong>Single-value annotation</strong> (one member):</p>
+          <pre><code>@interface Bank
+{
+  int bno();
+}</code></pre>
+          <p><strong>Multi-value annotation</strong> (multiple members):</p>
+          <pre><code>@interface Bank
+{
+  int bno();
+  String bname();
+}</code></pre>
+
+          <h3>@Override example</h3>
+          <pre><code>class Sbi
+{
+  void sendMoneyToCustome()
+  {
+    System.out.println("sending money from sbi");
+  }
+}
+class Axis extends Sbi
+{
+  @Override
+  void sendMoneyToCustomer() // compile-time error (name mismatch)
+  {
+    System.out.println("sending money from Axis");
+  }
+}</code></pre>
+
+          <h3>@Deprecated example</h3>
+          <pre><code>class Tcs
+{
+  @Deprecated
+  void getSalary(int basic,int hra)
+  {
+    System.out.println("Before ycp govt");
+  }
+  void getSalary(int basic,int hra,int jtax)
+  {
+    System.out.println("After ycp govt");
+  }
+}</code></pre>
+
+          <h3>@FunctionalInterface example</h3>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1();
+  // void m2(); // if added, compile-time error
+}</code></pre>
+
+          <h3>@SuppressWarnings example</h3>
+          <pre><code>import java.util.*;
+class Test
+{
+  @SuppressWarnings("unchecked")
+  public static void main(String[] args)
+  {
+    ArrayList al=new ArrayList();
+    al.add(1);
+    al.add(1.2);
+    al.add("venky");
+    System.out.println(al);
+  }
+}</code></pre>
+
+          <h3>Custom annotation with reflection</h3>
+          <pre><code>import java.lang.annotation.*;
+@Inherited
+@Documented
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@interface Bank
+{
+  int bno();
+  String bname();
+}
+
+@Bank(bno=4567,bname="HDFC")
+class Account
+{
+  int acno;
+  String aname;
+  Account(int acno,String aname)
+  {
+    this.acno=acno;
+    this.aname=aname;
+  }
+}
+class Test
+{
+  @SuppressWarnings("unchecked")
+  public static void main(String[] args)
+  {
+    Account a1=new Account(23,"parithosh");
+    Class c1=a1.getClass();
+    Annotation a2=c1.getAnnotation(Bank.class);
+    Bank b1=(Bank)a2;
+    System.out.println(b1.bno());
+    System.out.println(b1.bname());
   }
 }</code></pre>
         </details>
