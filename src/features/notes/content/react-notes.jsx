@@ -1003,47 +1003,57 @@ any value -> Reset -> 0</div>
     <section class="card" id="hooks">
       <details class="topic-details">
         <summary class="topic-summary">12) Functional State + Hooks (useState)</summary>
+        <p><strong>Hook</strong> means a React function that lets functional components use React features like state and lifecycle behavior.</p>
         <ul>
           <li>Before React 16.8, function components were mostly stateless.</li>
-          <li>Hooks were introduced in React 16.8.</li>
-          <li><code>useState()</code> makes function components stateful.</li>
+          <li>After hooks, functional components became stateful.</li>
+          <li><code>useState()</code> returns a pair: current value and updater function.</li>
         </ul>
 
-        <pre><code>const [state, setState] = useState(initialValue);
+        <h3>Core Syntax</h3>
+        <pre><code>import { useState } from "react";
+
+const [state, setState] = useState(initialValue);
 const [company, setCompany] = useState("ExcelR");</code></pre>
 
-        <h3>Functional State Example</h3>
+        <h3>Rules of Hooks (Very Important)</h3>
+        <ul>
+          <li>Call hooks at top level (not inside if/loop/nested function).</li>
+          <li>Call hooks only inside React functional components or custom hooks.</li>
+        </ul>
+
+        <h3>Example 1: Update String State</h3>
         <pre><code>import React, { useState } from "react";
 
 const FBCStateEx = () =&gt; {
   const [company, setCompany] = useState("ExcelR");
 
-  let changeName = () =&gt; {
+  const changeName = () =&gt; {
     setCompany("ExcelR ed-tech company");
   };
 
   return (
     &lt;div&gt;
       &lt;h1&gt;{company}&lt;/h1&gt;
-      &lt;button onClick={changeName}&gt;update company&lt;/button&gt;
+      &lt;button onClick={changeName}&gt;Update Company&lt;/button&gt;
     &lt;/div&gt;
   );
 };
 
 export default FBCStateEx;</code></pre>
-        <div class="output">Expected Output:
-Initial: ExcelR
-After click: ExcelR ed-tech company</div>
+        <div class="output">Output Flow:
+Initial render: ExcelR
+Click "Update Company": ExcelR ed-tech company</div>
 
-        <h3>Functional Counter Example</h3>
+        <h3>Example 2: Counter (Best Pattern with Previous State)</h3>
         <pre><code>import React, { useState } from "react";
 
 const FBCStateEx = () =&gt; {
   const [count, setCount] = useState(0);
 
-  let increment = () =&gt; setCount(count + 1);
-  let decrement = () =&gt; setCount(count - 1);
-  let reset = () =&gt; setCount(0);
+  const increment = () =&gt; setCount((prev) =&gt; prev + 1);
+  const decrement = () =&gt; setCount((prev) =&gt; prev - 1);
+  const reset = () =&gt; setCount(0);
 
   return (
     &lt;div&gt;
@@ -1056,47 +1066,155 @@ const FBCStateEx = () =&gt; {
 };
 
 export default FBCStateEx;</code></pre>
-        <div class="note"><strong>Hook purpose:</strong> use class features (state/lifecycle behavior) in functional components.</div>
+        <div class="output">Output Flow:
+0 -> Increment -> 1
+1 -> Increment -> 2
+2 -> Decrement -> 1
+1 -> Reset -> 0</div>
+
+        <h3>Example 3: Object State Update</h3>
+        <pre><code>import React, { useState } from "react";
+
+const UserCard = () =&gt; {
+  const [user, setUser] = useState({
+    name: "Sandeep",
+    age: 22,
+    city: "Hyd"
+  });
+
+  const updateCity = () =&gt; {
+    setUser((prev) =&gt; ({
+      ...prev,
+      city: "Bengaluru"
+    }));
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{user.name}&lt;/h2&gt;
+      &lt;p&gt;Age: {user.age}&lt;/p&gt;
+      &lt;p&gt;City: {user.city}&lt;/p&gt;
+      &lt;button onClick={updateCity}&gt;Change City&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+        <div class="warning">For object/array state, create a new value while updating. Do not mutate original state directly.</div>
       </details>
     </section>
 
     <section class="card" id="list-keys">
       <details class="topic-details">
         <summary class="topic-summary">13) List & Keys</summary>
+        <p><strong>List rendering</strong> means repeating UI from array data using <code>map()</code>.</p>
         <ul>
-          <li>List means iterating data and showing it in UI.</li>
-          <li><code>key</code> prop gives unique identity to each rendered item.</li>
-          <li>Keys help React track updates efficiently.</li>
+          <li><code>key</code> is required for each list item in React.</li>
+          <li>Key should be stable and unique (for example database id).</li>
+          <li>React uses key to track insert/update/delete efficiently.</li>
         </ul>
-        <pre><code>const users = ["A", "B", "C"];
+
+        <h3>Example 1: Simple String List</h3>
+        <pre><code>const skills = ["HTML", "CSS", "JavaScript", "React"];
 
 return (
   &lt;ul&gt;
-    {users.map((user, index) =&gt; {
-      return &lt;li key={index}&gt;{user}&lt;/li&gt;;
+    {skills.map((skill, index) =&gt; {
+      return &lt;li key={index}&gt;{skill}&lt;/li&gt;;
     })}
   &lt;/ul&gt;
 );</code></pre>
-        <div class="warning">Prefer stable unique id as key (for example <code>user.id</code>) instead of array index when possible.</div>
+        <div class="output">Expected UI:
+HTML
+CSS
+JavaScript
+React</div>
+
+        <h3>Example 2: Object List with Proper Key</h3>
+        <pre><code>const users = [
+  { id: 101, name: "Akhil", role: "Developer" },
+  { id: 102, name: "Navya", role: "Tester" },
+  { id: 103, name: "Hussain", role: "Lead" }
+];
+
+return (
+  &lt;div&gt;
+    {users.map((user) =&gt; {
+      return (
+        &lt;div key={user.id}&gt;
+          &lt;h4&gt;{user.name}&lt;/h4&gt;
+          &lt;p&gt;{user.role}&lt;/p&gt;
+        &lt;/div&gt;
+      );
+    })}
+  &lt;/div&gt;
+);</code></pre>
+
+        <h3>Example 3: Filter + List Render</h3>
+        <pre><code>const products = [
+  { id: 1, name: "Laptop", inStock: true },
+  { id: 2, name: "Mouse", inStock: false },
+  { id: 3, name: "Keyboard", inStock: true }
+];
+
+const inStockItems = products.filter((item) =&gt; item.inStock);
+
+return (
+  &lt;ul&gt;
+    {inStockItems.map((item) =&gt; (
+      &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+);</code></pre>
+        <div class="output">Expected UI:
+Laptop
+Keyboard</div>
+
+        <div class="warning">Use index as key only for static lists where order never changes.</div>
       </details>
     </section>
 
     <section class="card" id="conditional">
       <details class="topic-details">
         <summary class="topic-summary">14) Conditional Rendering</summary>
-        <p>Render different UI based on condition.</p>
+        <p>Conditional rendering means showing different UI based on state/props values.</p>
+
+        <h3>Method 1: if/else before return</h3>
+        <pre><code>function Status({ isAdmin }) {
+  if (isAdmin) {
+    return &lt;h2&gt;Admin Panel&lt;/h2&gt;;
+  }
+  return &lt;h2&gt;User Panel&lt;/h2&gt;;
+}</code></pre>
+
+        <h3>Method 2: Ternary Operator (Most Common)</h3>
         <pre><code>{isMarried ? &lt;h1&gt;Yes Married&lt;/h1&gt; : &lt;h1&gt;No not married&lt;/h1&gt;}</code></pre>
+
+        <h3>Method 3: Logical AND (Render only when true)</h3>
         <pre><code>{isLoggedIn &amp;&amp; &lt;h2&gt;Welcome back&lt;/h2&gt;}</code></pre>
+
+        <h3>Method 4: Loading / Success / Error Pattern</h3>
+        <pre><code>if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+if (error) return &lt;p&gt;Something went wrong&lt;/p&gt;;
+return &lt;p&gt;Data loaded&lt;/p&gt;;</code></pre>
+
         <div class="output">Expected:
-When condition true -> first UI block
-When condition false -> second UI block or nothing (with &&)</div>
+Condition true -> related block visible
+Condition false -> fallback block / nothing
+Very useful for auth, API loading states, empty states</div>
       </details>
     </section>
 
     <section class="card" id="fragments">
       <details class="topic-details">
         <summary class="topic-summary">15) Fragments</summary>
-        <p>Fragments let you group multiple elements without adding extra DOM node.</p>
+        <p>Fragments group multiple JSX elements without creating an extra wrapper in real DOM.</p>
+        <h3>Why Fragment?</h3>
+        <ul>
+          <li>Cleaner DOM structure.</li>
+          <li>Avoid unnecessary nested <code>&lt;div&gt;</code> wrappers.</li>
+          <li>Useful inside tables/lists/layout structures.</li>
+        </ul>
+
+        <h3>Example 1: Standard Fragment</h3>
         <pre><code>import React from "react";
 
 function Demo() {
@@ -1107,13 +1225,35 @@ function Demo() {
     &lt;/React.Fragment&gt;
   );
 }</code></pre>
-        <pre><code>// short syntax
-function Demo() {
+
+        <h3>Example 2: Short Syntax</h3>
+        <pre><code>function Demo() {
   return (
     &lt;&gt;
       &lt;h1&gt;Title&lt;/h1&gt;
       &lt;p&gt;Paragraph&lt;/p&gt;
     &lt;/&gt;
+  );
+}</code></pre>
+
+        <h3>Example 3: Keyed Fragment while Mapping</h3>
+        <pre><code>import React from "react";
+
+const users = [
+  { id: 1, name: "Sam", role: "Dev" },
+  { id: 2, name: "Ram", role: "QA" }
+];
+
+function UserList() {
+  return (
+    &lt;div&gt;
+      {users.map((u) =&gt; (
+        &lt;React.Fragment key={u.id}&gt;
+          &lt;h4&gt;{u.name}&lt;/h4&gt;
+          &lt;p&gt;{u.role}&lt;/p&gt;
+        &lt;/React.Fragment&gt;
+      ))}
+    &lt;/div&gt;
   );
 }</code></pre>
       </details>
@@ -1122,7 +1262,12 @@ function Demo() {
     <section class="card" id="lifecycle">
       <details class="topic-details">
         <summary class="topic-summary">16) Lifecycle (Class Component)</summary>
-        <p>Class lifecycle is split into mounting, updating, and unmounting phases.</p>
+        <p>Lifecycle means the journey of a component from creation to removal.</p>
+        <ul>
+          <li>Mounting: component is created and added to DOM.</li>
+          <li>Updating: state/props change and component updates.</li>
+          <li>Unmounting: component is removed from DOM.</li>
+        </ul>
         <div class="table-wrap">
           <table>
             <thead>
@@ -1147,30 +1292,115 @@ function Demo() {
             </tbody>
           </table>
         </div>
-        <div class="note">In functional components, lifecycle behavior is usually handled with <code>useEffect</code>.</div>
+
+        <h3>Lifecycle Demo Code</h3>
+        <pre><code>import React, { Component } from "react";
+
+class LifeCycleDemo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+    console.log("constructor");
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
+
+  increment = () =&gt; {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    console.log("render");
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;{this.state.count}&lt;/h1&gt;
+        &lt;button onClick={this.increment}&gt;Increment&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default LifeCycleDemo;</code></pre>
+        <div class="output">Console Order:
+Initial load -> constructor -> render -> componentDidMount
+On button click -> render -> componentDidUpdate
+When component removed -> componentWillUnmount</div>
+
+        <div class="note">Functional equivalent: <code>useEffect(() =&gt; { ...; return cleanup; }, [deps])</code></div>
       </details>
     </section>
 
     <section class="card" id="styling">
       <details class="topic-details">
         <summary class="topic-summary">17) Styling in React</summary>
-        <h3>1. External CSS (Common)</h3>
-        <pre><code>import "./global.css";
+        <p>React supports multiple styling approaches. Choose based on project size and reuse needs.</p>
 
-return &lt;h1 className="title"&gt;Hello&lt;/h1&gt;;</code></pre>
+        <h3>1) External CSS (Most Common for beginners)</h3>
+        <pre><code>// App.jsx
+import "./global.css";
 
-        <h3>2. Inline Style</h3>
-        <pre><code>return &lt;h1 style={{ color: "red", fontSize: "24px" }}&gt;Hello&lt;/h1&gt;;</code></pre>
+function App() {
+  return &lt;h1 className="title"&gt;Hello React&lt;/h1&gt;;
+}
 
-        <h3>3. CSS Modules (Scoped)</h3>
-        <pre><code>import styles from "./App.module.css";
-return &lt;h1 className={styles.title}&gt;Hello&lt;/h1&gt;;</code></pre>
+// global.css
+.title {
+  color: teal;
+  font-size: 32px;
+}</code></pre>
+        <div class="output">Output:
+Heading shown in teal color with bigger size</div>
+
+        <h3>2) Inline Style (Dynamic style in JS object)</h3>
+        <pre><code>function App() {
+  const isError = true;
+  return (
+    &lt;h1 style={{ color: isError ? "red" : "green", fontSize: "24px" }}&gt;
+      Status Message
+    &lt;/h1&gt;
+  );
+}</code></pre>
+
+        <h3>3) CSS Modules (Scoped classes)</h3>
+        <pre><code>// App.jsx
+import styles from "./App.module.css";
+
+function App() {
+  return &lt;h1 className={styles.title}&gt;Scoped Style&lt;/h1&gt;;
+}
+
+// App.module.css
+.title {
+  color: #2563eb;
+}</code></pre>
+
+        <h3>4) Conditional Class Names</h3>
+        <pre><code>function App() {
+  const active = true;
+  return (
+    &lt;button className={active ? "btn active" : "btn"}&gt;
+      Save
+    &lt;/button&gt;
+  );
+}</code></pre>
       </details>
     </section>
 
     <section class="card">
       <details class="topic-details">
         <summary class="topic-summary">18) API Fetching with State (Your Example)</summary>
+        <p>This topic combines hooks + async call + list rendering.</p>
+        <h3>Your Shared Example</h3>
         <pre><code>import React, { useState } from "react";
 
 const FBCStateEx = () =&gt; {
@@ -1205,20 +1435,94 @@ export default FBCStateEx;</code></pre>
         <div class="output">Expected Output:
 Initial: only button is visible
 After click: GitHub user avatar images are rendered in list format</div>
+
+        <h3>Improved Beginner-Friendly Version (Loading + Error + Proper Key)</h3>
+        <pre><code>import React, { useState } from "react";
+
+const GithubUsers = () =&gt; {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const fetchUsers = async () =&gt; {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch("https://api.github.com/users");
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+
+      const data = await response.json();
+      setUsers(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={fetchUsers}&gt;Fetch Users from GitHub&lt;/button&gt;
+
+      {loading &amp;&amp; &lt;p&gt;Loading users...&lt;/p&gt;}
+      {error &amp;&amp; &lt;p style={{ color: "red" }}&gt;{error}&lt;/p&gt;}
+
+      &lt;div&gt;
+        {users.map((user) =&gt; (
+          &lt;img
+            key={user.id}
+            width="120"
+            height="120"
+            src={user.avatar_url}
+            alt={user.login}
+          /&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default GithubUsers;</code></pre>
+        <div class="output">Output States:
+Before click -> button only
+On click -> "Loading users..."
+On success -> avatar list rendered
+On failure -> red error message</div>
       </details>
     </section>
 
     <section class="card">
       <details class="topic-details">
         <summary class="topic-summary">19) Destructuring (Used in React Hooks)</summary>
-        <h3>Array Destructuring</h3>
+        <p>Destructuring extracts values from arrays/objects into variables in a shorter way.</p>
+
+        <h3>Array Destructuring (Basic)</h3>
         <pre><code>let arr = [1, 2, 3, 4, 5];
 let [a, b, c, d, e] = arr;
 console.log(a, b, c, d, e);</code></pre>
         <div class="output">Output:
 1 2 3 4 5</div>
 
-        <h3>Object Destructuring</h3>
+        <h3>Array Destructuring (Skip + Default + Rest)</h3>
+        <pre><code>let marks = [90, 80];
+let [m1, m2, m3 = 70] = marks;
+console.log(m1, m2, m3);
+
+let nums = [10, 20, 30, 40, 50];
+let [first, second, ...remaining] = nums;
+console.log(first);
+console.log(second);
+console.log(remaining);</code></pre>
+        <div class="output">Output:
+90 80 70
+10
+20
+[30, 40, 50]</div>
+
+        <h3>Object Destructuring (Basic)</h3>
         <pre><code>let obj = {
   name: "Sandeep",
   age: 22
@@ -1227,7 +1531,40 @@ console.log(a, b, c, d, e);</code></pre>
 let { name, age } = obj;
 console.log(name);
 console.log(age);</code></pre>
-        <div class="note">Hook syntax uses array destructuring: <code>const [count, setCount] = useState(0)</code>.</div>
+        <div class="output">Output:
+Sandeep
+22</div>
+
+        <h3>Object Destructuring (Rename + Default + Rest)</h3>
+        <pre><code>let employee = {
+  empName: "Lokesh",
+  city: "Hyderabad",
+  salary: 50000
+};
+
+let { empName: fullName, city, dept = "Engineering", ...otherInfo } = employee;
+console.log(fullName);
+console.log(city);
+console.log(dept);
+console.log(otherInfo);</code></pre>
+        <div class="output">Output:
+Lokesh
+Hyderabad
+Engineering
+{ salary: 50000 }</div>
+
+        <h3>Destructuring in Function Parameters</h3>
+        <pre><code>function printUser({ name, age }) {
+  console.log(name + " - " + age);
+}
+
+printUser({ name: "Navya", age: 23 });</code></pre>
+        <div class="output">Output:
+Navya - 23</div>
+
+        <h3>How React Hooks use Destructuring</h3>
+        <pre><code>const [count, setCount] = useState(0);</code></pre>
+        <div class="note">Here <code>count</code> is current state value and <code>setCount</code> is updater function.</div>
       </details>
     </section>
 
