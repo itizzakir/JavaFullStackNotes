@@ -1647,9 +1647,603 @@ a++
         </details>
       </section>
 
+      <section class="card" id="statements">
+        <details>
+          <summary>14.Statements, Conditional, Looping and Jumping</summary>
+
+          <h3>Statements</h3>
+          <p>Statements are divided into 4 types:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Type</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Simple Statements</td>
+                <td>Take input and print output (single-line operations).</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Conditional Statements</td>
+                <td>Execute block based on condition true/false.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Looping Statements</td>
+                <td>Repeat statements until condition becomes false.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Jumping Statements</td>
+                <td>Break or skip iterations inside loops.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>1.Simple Statements</h3>
+          <p>Simple statements are one-line statements.</p>
+          <p>Simple statements are divided into 2 types: input statement and output statement.</p>
+          <pre><code>int a=5; //input statement
+// no output
+
+class Demo
+{
+  public static void main(String[] args)
+  {
+    int a=5; //input
+    System.out.println(a); //output -> 5
+  }
+}</code></pre>
+
+          <h3>2.Conditional Statements</h3>
+          <p>Conditional statements check conditions and execute blocks accordingly.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Type</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Simple if</td><td>Check single condition (true block only).</td></tr>
+              <tr><td>2</td><td>if else</td><td>Check single condition in two blocks.</td></tr>
+              <tr><td>3</td><td>if else if else</td><td>Check multiple conditions.</td></tr>
+              <tr><td>4</td><td>Multiple if</td><td>Each if checked independently.</td></tr>
+              <tr><td>5</td><td>Nested if</td><td>if inside another if.</td></tr>
+              <tr><td>6</td><td>switch</td><td>Fixed universal multiple cases.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Simple if - syntax</h3>
+          <pre><code>if(cond)
+{
+  statements
+}</code></pre>
+          <pre><code>int a=5;
+if(a>2)
+{
+  System.out.println("positive num"); //positive num
+}
+
+int a=5;
+if(a>12)
+{
+  System.out.println("positive num"); //No output
+}</code></pre>
+
+          <h3>if else - syntax</h3>
+          <pre><code>if(cond)
+{
+}
+else
+{
+}</code></pre>
+          <pre><code>int a=5;
+int b=2;
+if(a>b)
+{
+  System.out.println(a+" is big num");
+}
+else
+{
+  System.out.println(a+" is not big num");
+}
+// output: 5 is big num</code></pre>
+
+          <h3>if else if else - syntax</h3>
+          <pre><code>if(cond)
+{
+}
+else if(cond)
+{
+}
+else if(cond)
+{
+}
+else
+{
+}</code></pre>
+          <pre><code>int marks=90;
+if(marks>90)
+{
+  System.out.println("A grade");
+}
+else if((marks>80) && (marks<90))
+{
+  System.out.println("B grade");
+}
+else if((marks>70) && (marks<80))
+{
+  System.out.println("C grade");
+}
+else
+{
+  System.out.println("Fail");
+}</code></pre>
+
+          <h3>Multiple if</h3>
+          <pre><code>int marks=87;
+if(marks>90)
+{
+  System.out.println("A grade");
+}
+if((marks>80) && (marks<90))
+{
+  System.out.println("B grade");
+}
+if((marks>70) && (marks<80))
+{
+  System.out.println("C grade");
+}
+else
+{
+  System.out.println("Fail");
+}
+// output:
+// B grade
+// Fail</code></pre>
+          <div class="tip">
+            In <code>if else if</code>, first true block executes.<br />
+            In <code>multiple if</code>, all true blocks execute.
+          </div>
+
+          <h3>Nested if</h3>
+          <pre><code>if(cond)
+{
+  if(cond)
+  {
+    statements
+  }
+}</code></pre>
+          <pre><code>if(15>2)
+{
+  if(6>1)
+  {
+    System.out.println("Nested if");
+  }
+}
+// output: Nested if</code></pre>
+
+          <h3>switch</h3>
+          <p>switch is used to check fixed universal multiple conditions in cases.</p>
+          <pre><code>int day = 3;
+switch(day)
+{
+  case 1: System.out.println("Monday"); break;
+  case 2: System.out.println("Tuesday"); break;
+  case 3: System.out.println("Wednesday"); break;
+  case 4: System.out.println("Thursday"); break;
+  case 5: System.out.println("Friday"); break;
+  case 6: System.out.println("Saturday"); break;
+  case 7: System.out.println("Sunday"); break;
+  default: System.out.println("Invalid day");
+}</code></pre>
+
+          <h3>Programs on Conditional statements</h3>
+          <ol>
+            <li>
+              <p>Check number is even or odd.</p>
+              <pre><code>int num=12;
+if(num%2==0)
+{
+  System.out.println("num is even "+num);
+}
+else
+{
+  System.out.println("num is odd "+num);
+}</code></pre>
+            </li>
+            <li>
+              <p>Big number between 2 numbers.</p>
+              <pre><code>int first=12;
+int second=16;
+if(first>second)
+{
+  System.out.println(first+" is a big num");
+}
+else
+{
+  System.out.println(second+" is a big num");
+}</code></pre>
+            </li>
+            <li>
+              <p>Big number among 3 numbers.</p>
+              <pre><code>int first=12;
+int second=16;
+int third=11;
+if((first>second) && (first>third))
+{
+  System.out.println(first+" is a big num");
+}
+else if((second>first) && (second>third))
+{
+  System.out.println(second+" is a big num");
+}
+else
+{
+  System.out.println(third+" is a big num");
+}</code></pre>
+            </li>
+            <li>
+              <p>Big number among 4 numbers.</p>
+              <pre><code>int first=12, second=16, third=11, four=17;
+if((first>second) && (first>third) && (first>four))
+{
+  System.out.println(first+" is a big num");
+}
+else if((second>first) && (second>third) && (second>four))
+{
+  System.out.println(second+" is a big num");
+}
+else if((third>first) && (third>second) && (third>four))
+{
+  System.out.println(third+" is a big num");
+}
+else
+{
+  System.out.println(four+" is a big num");
+}</code></pre>
+            </li>
+            <li>
+              <p>Character lowercase / uppercase / digit / special symbol.</p>
+              <pre><code>char ch='*';
+if((ch>='a') && (ch<='z'))
+{
+  System.out.println(ch+" is a lowercase");
+}
+else if((ch>='A') && (ch<='Z'))
+{
+  System.out.println(ch+" is a uppercase");
+}
+else if((ch>='0') && (ch<='9'))
+{
+  System.out.println(ch+" is a digit");
+}
+else
+{
+  System.out.println(ch+" is a special symbol");
+}</code></pre>
+            </li>
+            <li>
+              <p>Vowel or consonant.</p>
+              <pre><code>char ch='E';
+if((ch=='a') ||(ch=='e')||(ch=='i')||(ch=='o')||(ch=='u')||
+   (ch=='A') ||(ch=='E')||(ch=='I')||(ch=='O')||(ch=='U'))
+{
+  System.out.println("vowel");
+}
+else
+{
+  System.out.println("consonant");
+}</code></pre>
+            </li>
+            <li>
+              <p>Convert lowercase to uppercase / uppercase to lowercase.</p>
+              <pre><code>char ch='b';
+int upperVal=ch-32;
+char upper=(char)upperVal;
+System.out.println(upper);
+
+char ch2='B';
+int lowerVal=ch2+32;
+char lower=(char)lowerVal;
+System.out.println(lower);</code></pre>
+            </li>
+            <li>
+              <p>Swap two numbers with and without third variable.</p>
+              <pre><code>// with 3rd variable
+int first=10, second=20;
+int temp=first;
+first=second;
+second=temp;
+
+// without 3rd variable (addition)
+first=first+second;
+second=first-second;
+first=first-second;</code></pre>
+            </li>
+            <li>
+              <p>Check leap year.</p>
+              <pre><code>int year=1996;
+if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0))
+{
+  System.out.println("leap year");
+}
+else
+{
+  System.out.println("not a leap year");
+}</code></pre>
+            </li>
+          </ol>
+
+          <h3>3.Looping Statements</h3>
+          <p>Looping statements execute repeatedly until condition becomes false.</p>
+
+          <h3>For loop</h3>
+          <pre><code>for(initialization;condition;inc/dec)
+{
+  statements
+}</code></pre>
+          <pre><code>for(int i=1;i<=10;i++)
+{
+  System.out.println(i);
+}</code></pre>
+
+          <h3>While loop</h3>
+          <pre><code>initialization;
+while(cond)
+{
+  statements;
+  inc/dec;
+}</code></pre>
+          <pre><code>int i=0;
+while(i<11)
+{
+  System.out.println(i);
+  i++;
+}</code></pre>
+
+          <h3>Do while loop</h3>
+          <pre><code>initialization;
+do
+{
+  statements;
+  inc/dec;
+}
+while(cond);</code></pre>
+          <pre><code>int i=5;
+do
+{
+  System.out.println(i);
+  i++;
+}
+while(i<=10);</code></pre>
+
+          <h3>Nested loops</h3>
+          <pre><code>for(int j=1;j<=2;j++) // outer
+{
+  for(int i=1;i<=3;i++) // inner
+  {
+    System.out.println(i);
+  }
+}</code></pre>
+
+          <h3>Programs on while loop</h3>
+          <ol>
+            <li>
+              <p>Count number of digits (123 -> 3).</p>
+              <pre><code>int num=123;
+int cd=0;
+while(num>0)
+{
+  cd=cd+1;
+  num=num/10;
+}
+System.out.println(cd);</code></pre>
+            </li>
+            <li>
+              <p>Sum of digits (123 -> 6).</p>
+              <pre><code>int num=123, sum=0;
+while(num>0)
+{
+  int rem=num%10;
+  sum=sum+rem;
+  num=num/10;
+}
+System.out.println(sum);</code></pre>
+            </li>
+            <li>
+              <p>Reverse number (123 -> 321).</p>
+              <pre><code>int num=123, rev=0;
+while(num>0)
+{
+  int rem=num%10;
+  rev=(rev*10)+rem;
+  num=num/10;
+}
+System.out.println(rev);</code></pre>
+            </li>
+            <li>
+              <p>Palindrome number.</p>
+              <pre><code>int num=1221, ori=num, rev=0;
+while(num>0)
+{
+  int rem=num%10;
+  rev=rev*10+rem;
+  num=num/10;
+}
+System.out.println(ori==rev ? "palindrome" : "Not palindrome");</code></pre>
+            </li>
+            <li>
+              <p>Armstrong number (example 153).</p>
+              <pre><code>int num=153, ori=num, sum=0;
+while(num>0)
+{
+  int rem=num%10;
+  sum=sum+(rem*rem*rem);
+  num=num/10;
+}
+System.out.println(ori==sum ? "Armstrong" : "Not Armstrong");</code></pre>
+            </li>
+            <li>
+              <p>Strong number (example 145).</p>
+              <pre><code>int n=145, sum=0, ori=n;
+while(ori>0)
+{
+  int rem=ori%10;
+  int f=1;
+  for(int i=1;i<=rem;i++)
+  {
+    f=f*i;
+  }
+  sum=sum+f;
+  ori=ori/10;
+}
+System.out.println(n==sum ? "Strong" : "Not Strong");</code></pre>
+            </li>
+          </ol>
+
+          <h3>Programs on for loop</h3>
+          <ol>
+            <li>
+              <p>Factors of a number.</p>
+              <pre><code>int n=6;
+for(int i=1;i<=n;i++)
+{
+  if(n%i==0)
+  {
+    System.out.println(i);
+  }
+}</code></pre>
+            </li>
+            <li>
+              <p>Factorial of a number.</p>
+              <pre><code>int n=7, factorial=1;
+for(int i=1;i<=n;i++)
+{
+  factorial=factorial*i;
+}
+System.out.println(factorial);</code></pre>
+            </li>
+            <li>
+              <p>Prime number check.</p>
+              <pre><code>int n=9, count=0;
+for(int i=1;i<=n;i++)
+{
+  if(n%i==0) count++;
+}
+System.out.println(count==2 ? "prime" : "Not prime");</code></pre>
+            </li>
+            <li>
+              <p>Perfect number check.</p>
+              <pre><code>int n=6, sum=0;
+for(int i=1;i<n;i++)
+{
+  if(n%i==0) sum=sum+i;
+}
+System.out.println(sum==n ? "perfect" : "Not perfect");</code></pre>
+            </li>
+            <li>
+              <p>Fibonacci series.</p>
+              <pre><code>int first=0, second=1;
+System.out.println(first);
+System.out.println(second);
+for(int i=2;i<=10;i++)
+{
+  int sum=first+second;
+  System.out.println(sum);
+  first=second;
+  second=sum;
+}</code></pre>
+            </li>
+          </ol>
+
+          <h3>Pattern programs (organized examples)</h3>
+          <pre><code>// Square pattern
+for(int i=1;i<=5;i++)
+{
+  for(int j=1;j<=5;j++) System.out.print("*");
+  System.out.println();
+}
+
+// Increasing triangle
+for(int i=1;i<=5;i++)
+{
+  for(int j=1;j<=i;j++) System.out.print("*");
+  System.out.println();
+}
+
+// Decreasing triangle
+for(int i=1;i<=5;i++)
+{
+  for(int j=i;j<=5;j++) System.out.print("*");
+  System.out.println();
+}
+
+// Pyramid
+for(int i=1;i<=5;i++)
+{
+  for(int j=i;j<=5;j++) System.out.print(" ");
+  for(int k=1;k<i;k++) System.out.print("*");
+  for(int r=1;r<=i;r++) System.out.print("*");
+  System.out.println();
+}
+
+// Diamond
+for(int i=1;i<=5;i++)
+{
+  for(int j=i;j<=5;j++) System.out.print(" ");
+  for(int k=1;k<=i;k++) System.out.print("*");
+  System.out.println();
+}
+for(int i=1;i<=5;i++)
+{
+  for(int j=1;j<=i;j++) System.out.print(" ");
+  for(int k=i;k<=5;k++) System.out.print("*");
+  System.out.println();
+}</code></pre>
+
+          <h3>4.Jumping statements</h3>
+          <p>Jumping statements are used to terminate loop or skip particular iteration.</p>
+          <p>Types: <code>break</code> and <code>continue</code>.</p>
+
+          <h3>break</h3>
+          <pre><code>for(int i=1;i<=10;i++)
+{
+  if(i==6)
+  {
+    break;
+  }
+  else
+  {
+    System.out.println(i);
+  }
+}</code></pre>
+
+          <h3>continue</h3>
+          <pre><code>for(int i=1;i<=10;i++)
+{
+  if(i==6)
+  {
+    continue;
+  }
+  else
+  {
+    System.out.println(i);
+  }
+}</code></pre>
+        </details>
+      </section>
+
       <section class="card" id="slip-tests">
         <details>
-          <summary>14.Slip Tests</summary>
+          <summary>15.Slip Tests</summary>
 
           <h3>Slip Test 1 on Java Introduction, Literals, Variables and Identifiers</h3>
           <h3>Fill in the blanks</h3>
