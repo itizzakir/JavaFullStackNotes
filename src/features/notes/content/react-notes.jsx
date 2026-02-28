@@ -260,6 +260,13 @@ const noteSource = `
         <a href="#props">Props</a>
         <a href="#children">Props Children</a>
         <a href="#drilling">Props Drilling</a>
+        <a href="#state">State</a>
+        <a href="#hooks">Hooks</a>
+        <a href="#list-keys">List & Keys</a>
+        <a href="#conditional">Conditional</a>
+        <a href="#fragments">Fragments</a>
+        <a href="#lifecycle">Lifecycle</a>
+        <a href="#styling">Styling</a>
       </nav>
     </section>
 
@@ -896,9 +903,337 @@ ExcelR</div>
       </details>
     </section>
 
+    <section class="card" id="state">
+      <details class="topic-details">
+        <summary class="topic-summary">10) State in React</summary>
+        <ul>
+          <li>State is an object in React used to store component-specific data.</li>
+          <li>State is mutable through React update methods only.</li>
+          <li>When state changes, component re-renders.</li>
+        </ul>
+        <div class="note">State is internal data for a component. Props are external data from parent.</div>
+
+        <h3>Class Component State</h3>
+        <ul>
+          <li>Class components are called stateful because they have built-in state support.</li>
+          <li>Initialize in constructor or class field.</li>
+          <li>Use <code>this.setState()</code> to update values.</li>
+        </ul>
+        <pre><code>// constructor style
+constructor() {
+  super();
+  this.state = { company: "ExcelR" };
+}
+
+// class field style
+state = {
+  company: "ExcelR"
+};</code></pre>
+      </details>
+    </section>
+
     <section class="card">
       <details class="topic-details">
-        <summary class="topic-summary">10) React Comment Syntax</summary>
+        <summary class="topic-summary">11) Class State Example (CBCStateEx + Counter)</summary>
+        <h3>Update Single State Value</h3>
+        <pre><code>import React, { Component } from "react";
+
+class CBCStateEx extends Component {
+  state = {
+    company: "ExcelR"
+  };
+
+  changeName = () =&gt; {
+    this.setState({ company: "ExcelR Ed-Tect Pvt Ltd" });
+  };
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;{this.state.company}&lt;/h1&gt;
+        &lt;button onClick={this.changeName}&gt;Change name&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default CBCStateEx;</code></pre>
+        <div class="output">Expected Output:
+Initial: ExcelR
+After button click: ExcelR Ed-Tect Pvt Ltd</div>
+
+        <h3>Class Counter Example</h3>
+        <pre><code>import React, { Component } from "react";
+
+export default class CBCStateEx extends Component {
+  state = {
+    count: 0
+  };
+
+  increment = () =&gt; {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  decrement = () =&gt; {
+    this.setState({ count: this.state.count - 1 });
+  };
+
+  reset = () =&gt; {
+    this.setState({ count: 0 });
+  };
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;{this.state.count}&lt;/h1&gt;
+        &lt;button onClick={this.increment}&gt;Increment&lt;/button&gt;
+        &lt;button onClick={this.decrement}&gt;Decrement&lt;/button&gt;
+        &lt;button onClick={this.reset}&gt;Reset&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+        <div class="output">Expected Counter Flow:
+0 -> Increment -> 1
+1 -> Decrement -> 0
+any value -> Reset -> 0</div>
+      </details>
+    </section>
+
+    <section class="card" id="hooks">
+      <details class="topic-details">
+        <summary class="topic-summary">12) Functional State + Hooks (useState)</summary>
+        <ul>
+          <li>Before React 16.8, function components were mostly stateless.</li>
+          <li>Hooks were introduced in React 16.8.</li>
+          <li><code>useState()</code> makes function components stateful.</li>
+        </ul>
+
+        <pre><code>const [state, setState] = useState(initialValue);
+const [company, setCompany] = useState("ExcelR");</code></pre>
+
+        <h3>Functional State Example</h3>
+        <pre><code>import React, { useState } from "react";
+
+const FBCStateEx = () =&gt; {
+  const [company, setCompany] = useState("ExcelR");
+
+  let changeName = () =&gt; {
+    setCompany("ExcelR ed-tech company");
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{company}&lt;/h1&gt;
+      &lt;button onClick={changeName}&gt;update company&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default FBCStateEx;</code></pre>
+        <div class="output">Expected Output:
+Initial: ExcelR
+After click: ExcelR ed-tech company</div>
+
+        <h3>Functional Counter Example</h3>
+        <pre><code>import React, { useState } from "react";
+
+const FBCStateEx = () =&gt; {
+  const [count, setCount] = useState(0);
+
+  let increment = () =&gt; setCount(count + 1);
+  let decrement = () =&gt; setCount(count - 1);
+  let reset = () =&gt; setCount(0);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{count}&lt;/h1&gt;
+      &lt;button onClick={increment}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={decrement}&gt;Decrement&lt;/button&gt;
+      &lt;button onClick={reset}&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default FBCStateEx;</code></pre>
+        <div class="note"><strong>Hook purpose:</strong> use class features (state/lifecycle behavior) in functional components.</div>
+      </details>
+    </section>
+
+    <section class="card" id="list-keys">
+      <details class="topic-details">
+        <summary class="topic-summary">13) List & Keys</summary>
+        <ul>
+          <li>List means iterating data and showing it in UI.</li>
+          <li><code>key</code> prop gives unique identity to each rendered item.</li>
+          <li>Keys help React track updates efficiently.</li>
+        </ul>
+        <pre><code>const users = ["A", "B", "C"];
+
+return (
+  &lt;ul&gt;
+    {users.map((user, index) =&gt; {
+      return &lt;li key={index}&gt;{user}&lt;/li&gt;;
+    })}
+  &lt;/ul&gt;
+);</code></pre>
+        <div class="warning">Prefer stable unique id as key (for example <code>user.id</code>) instead of array index when possible.</div>
+      </details>
+    </section>
+
+    <section class="card" id="conditional">
+      <details class="topic-details">
+        <summary class="topic-summary">14) Conditional Rendering</summary>
+        <p>Render different UI based on condition.</p>
+        <pre><code>{isMarried ? &lt;h1&gt;Yes Married&lt;/h1&gt; : &lt;h1&gt;No not married&lt;/h1&gt;}</code></pre>
+        <pre><code>{isLoggedIn &amp;&amp; &lt;h2&gt;Welcome back&lt;/h2&gt;}</code></pre>
+        <div class="output">Expected:
+When condition true -> first UI block
+When condition false -> second UI block or nothing (with &&)</div>
+      </details>
+    </section>
+
+    <section class="card" id="fragments">
+      <details class="topic-details">
+        <summary class="topic-summary">15) Fragments</summary>
+        <p>Fragments let you group multiple elements without adding extra DOM node.</p>
+        <pre><code>import React from "react";
+
+function Demo() {
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h1&gt;Title&lt;/h1&gt;
+      &lt;p&gt;Paragraph&lt;/p&gt;
+    &lt;/React.Fragment&gt;
+  );
+}</code></pre>
+        <pre><code>// short syntax
+function Demo() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Title&lt;/h1&gt;
+      &lt;p&gt;Paragraph&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+      </details>
+    </section>
+
+    <section class="card" id="lifecycle">
+      <details class="topic-details">
+        <summary class="topic-summary">16) Lifecycle (Class Component)</summary>
+        <p>Class lifecycle is split into mounting, updating, and unmounting phases.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Common Methods</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mounting</td>
+                <td><code>constructor</code>, <code>render</code>, <code>componentDidMount</code></td>
+              </tr>
+              <tr>
+                <td>Updating</td>
+                <td><code>render</code>, <code>componentDidUpdate</code></td>
+              </tr>
+              <tr>
+                <td>Unmounting</td>
+                <td><code>componentWillUnmount</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">In functional components, lifecycle behavior is usually handled with <code>useEffect</code>.</div>
+      </details>
+    </section>
+
+    <section class="card" id="styling">
+      <details class="topic-details">
+        <summary class="topic-summary">17) Styling in React</summary>
+        <h3>1. External CSS (Common)</h3>
+        <pre><code>import "./global.css";
+
+return &lt;h1 className="title"&gt;Hello&lt;/h1&gt;;</code></pre>
+
+        <h3>2. Inline Style</h3>
+        <pre><code>return &lt;h1 style={{ color: "red", fontSize: "24px" }}&gt;Hello&lt;/h1&gt;;</code></pre>
+
+        <h3>3. CSS Modules (Scoped)</h3>
+        <pre><code>import styles from "./App.module.css";
+return &lt;h1 className={styles.title}&gt;Hello&lt;/h1&gt;;</code></pre>
+      </details>
+    </section>
+
+    <section class="card">
+      <details class="topic-details">
+        <summary class="topic-summary">18) API Fetching with State (Your Example)</summary>
+        <pre><code>import React, { useState } from "react";
+
+const FBCStateEx = () =&gt; {
+  const [users, setUsers] = useState([]);
+
+  let fetchUsers = async () =&gt; {
+    let result = await fetch("https://api.github.com/users");
+    let data = await result.json();
+    setUsers(data);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={fetchUsers}&gt;Fetch Users from Github&lt;/button&gt;
+
+      {users.map((user, index) =&gt; {
+        return (
+          &lt;img
+            key={index}
+            width="300"
+            height="300"
+            src={user.avatar_url}
+            alt={user.login}
+          /&gt;
+        );
+      })}
+    &lt;/div&gt;
+  );
+};
+
+export default FBCStateEx;</code></pre>
+        <div class="output">Expected Output:
+Initial: only button is visible
+After click: GitHub user avatar images are rendered in list format</div>
+      </details>
+    </section>
+
+    <section class="card">
+      <details class="topic-details">
+        <summary class="topic-summary">19) Destructuring (Used in React Hooks)</summary>
+        <h3>Array Destructuring</h3>
+        <pre><code>let arr = [1, 2, 3, 4, 5];
+let [a, b, c, d, e] = arr;
+console.log(a, b, c, d, e);</code></pre>
+        <div class="output">Output:
+1 2 3 4 5</div>
+
+        <h3>Object Destructuring</h3>
+        <pre><code>let obj = {
+  name: "Sandeep",
+  age: 22
+};
+
+let { name, age } = obj;
+console.log(name);
+console.log(age);</code></pre>
+        <div class="note">Hook syntax uses array destructuring: <code>const [count, setCount] = useState(0)</code>.</div>
+      </details>
+    </section>
+
+    <section class="card">
+      <details class="topic-details">
+        <summary class="topic-summary">20) React Comment Syntax</summary>
         <pre><code>// JavaScript single-line comment (outside JSX)
 
 {/* JSX multiline comment */}</code></pre>
