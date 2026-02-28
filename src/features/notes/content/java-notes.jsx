@@ -555,6 +555,14 @@ const noteSource = `
         <a href="#upcasting-downcasting">Up/Down Casting</a>
         <a href="#encapsulation-enum-annotations">Encap + Enum + Annotations</a>
         <a href="#constructors">Constructors</a>
+        <a href="#abstraction">Abstraction</a>
+        <a href="#interface-inner-main">Interface + Inner</a>
+        <a href="#io-streams">IO Streams</a>
+        <a href="#packages-import">Packages</a>
+        <a href="#multithreading">Multithreading</a>
+        <a href="#exception-handling">Exception Handling</a>
+        <a href="#wrapper-classes">Wrapper</a>
+        <a href="#collections-framework">Collections</a>
         <a href="#slip-tests">Slip Tests</a>
       </nav>
       <div class="tag-row">
@@ -566,7 +574,7 @@ const noteSource = `
     </header>
 
     <section class="toolbar">
-      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting, encapsulation, enum, annotations, constructors..." />
+      <input id="searchInput" type="text" placeholder="Filter topic: keyword, datatype, arrays, string, methods, oops, polymorphism, inheritance, casting, encapsulation, enum, annotations, constructors, abstraction, interface, inner class, main, io streams, serialization, package, import, thread, synchronization, daemon, deadlock, exception, throw, throws, wrapper, collections, list, set, map, queue, comparator..." />
       <button id="expandBtn" type="button">Expand All</button>
       <button id="collapseBtn" type="button" class="secondary">Collapse All</button>
     </section>
@@ -6746,6 +6754,2423 @@ class B extends A
   public static void main(String[] args)
   {
     B b1=new B(7);
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="abstraction">
+        <details>
+          <summary>28.Abstraction</summary>
+
+          <h3>Abstraction</h3>
+          <ol>
+            <li>Hiding unnecessary details and showing necessary details is called abstraction.</li>
+            <li>Hides implementation code and shows only functionality to user.</li>
+            <li>Abstraction can be achieved by:</li>
+          </ol>
+          <ol>
+            <li>Abstract class</li>
+            <li>Interfaces</li>
+          </ol>
+
+          <h3>Abstract class</h3>
+          <ol>
+            <li>Class defined with <code>abstract</code> keyword is called abstract class.</li>
+            <li>Abstract class can contain both concrete and abstract methods.</li>
+          </ol>
+          <pre><code>abstract class A
+{
+}</code></pre>
+
+          <h3>Concrete methods</h3>
+          <ol>
+            <li>Methods with body are concrete methods.</li>
+            <li>Purpose: provide common functionality to implementation classes.</li>
+          </ol>
+          <pre><code>void m1()
+{
+}
+static void m2()
+{
+}</code></pre>
+
+          <h3>Abstract methods</h3>
+          <ol>
+            <li>Method declared with <code>abstract</code> keyword and without body.</li>
+            <li>Purpose: force different implementation in child classes.</li>
+            <li>Abstract methods can exist only in abstract classes (or interfaces).</li>
+          </ol>
+          <pre><code>abstract void m1();</code></pre>
+
+          <h3>Important points on Abstraction</h3>
+          <ol>
+            <li>Abstract class cannot be instantiated.</li>
+            <li>To perform abstraction with classes, inheritance is required.</li>
+            <li>Abstract methods must be overridden in concrete child class.</li>
+            <li>Abstract methods cannot be <code>private</code>, <code>static</code>, or <code>final</code>.</li>
+            <li>Abstract class cannot be <code>final</code>.</li>
+            <li>Concrete methods in abstract class can be static.</li>
+            <li>Abstract class can have main method.</li>
+            <li>Abstract class can have constructors.</li>
+          </ol>
+
+          <h3>Instantiation error example</h3>
+          <pre><code>abstract class A
+{
+  void m1()
+  {
+    System.out.println("welcome to concrete");
+  }
+  abstract void m2();
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    // A a1=new A(); // error: A is abstract; cannot be instantiated
+  }
+}</code></pre>
+
+          <h3>Must override abstract method</h3>
+          <pre><code>abstract class A
+{
+  void m1()
+  {
+    System.out.println("welcome to concrete");
+  }
+  abstract void m2();
+}
+class Test extends A
+{
+  // if m2() not implemented => compile-time error
+  void m2()
+  {
+    System.out.println("m2 is overridden in implementation Test class");
+  }
+  public static void main(String[] args)
+  {
+    Test t1=new Test();
+    t1.m1();
+    t1.m2();
+  }
+}</code></pre>
+
+          <h3>Real-world style example</h3>
+          <pre><code>abstract class RealMe
+{
+  void playYoutube()
+  {
+    System.out.println("Youtube is playing in Realme");
+  }
+  abstract void sendSms();
+}
+class Airtel extends RealMe
+{
+  void sendSms()
+  {
+    System.out.println("sending sms from Airtel");
+  }
+}
+class Jio extends RealMe
+{
+  void sendSms()
+  {
+    System.out.println("sending sms from Jio");
+  }
+}
+class User
+{
+  public static void main(String[] args)
+  {
+    RealMe b1=new Airtel();
+    b1.playYoutube();
+    b1.sendSms();
+
+    RealMe b2=new Jio();
+    b2.playYoutube();
+    b2.sendSms();
+  }
+}</code></pre>
+
+          <h3>Invalid combinations</h3>
+          <pre><code>abstract class A
+{
+  // abstract private void m2(); // error
+  // abstract final void m2();   // error
+}
+// final abstract class A {}      // error</code></pre>
+
+          <h3>Static concrete method in abstract class (valid)</h3>
+          <pre><code>abstract class A
+{
+  static void m1()
+  {
+    System.out.println("m1 in A");
+  }
+  abstract void m2();
+}
+class B extends A
+{
+  void m2()
+  {
+    System.out.println("m2 in B");
+  }
+  public static void main(String[] args)
+  {
+    A a1=new B();
+    a1.m2();
+    A.m1();
+  }
+}</code></pre>
+
+          <h3>Main method in abstract class (valid)</h3>
+          <pre><code>abstract class A
+{
+  public static void main(String[] args)
+  {
+    System.out.println("welcome to abstract class");
+  }
+}</code></pre>
+
+          <h3>Constructor in abstract class (valid)</h3>
+          <pre><code>abstract class Demo
+{
+  Demo()
+  {
+    System.out.println("constructors in abstract class");
+  }
+  void m1()
+  {
+    System.out.println("concrete without static in abstract class");
+  }
+  static void m2()
+  {
+    System.out.println("concrete with static in abstract class");
+  }
+  abstract void m3();
+}
+class B extends Demo
+{
+  void m3()
+  {
+    System.out.println("abstract method in implementation class");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    Demo d1=new B();
+    d1.m1();
+    Demo.m2();
+    d1.m3();
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="interface-inner-main">
+        <details>
+          <summary>29.Interface, Inner Classes, and public static void main</summary>
+
+          <h3>Interface</h3>
+          <ol>
+            <li>Interface is a collection of <code>public static final</code> variables and <code>public abstract</code> methods.</li>
+            <li>For interface variables, <code>public static final</code> is implicit.</li>
+            <li>For interface methods, <code>public abstract</code> is implicit (for abstract methods).</li>
+            <li>To perform abstraction using interfaces, inheritance/implementation is required.</li>
+            <li>One class can extend one class; one class can implement multiple interfaces; one interface can extend multiple interfaces.</li>
+            <li>Interface cannot be instantiated.</li>
+            <li>Interface abstract methods must be overridden with <code>public</code> access in implementation class.</li>
+            <li>Interface abstract methods cannot be <code>static</code>, <code>private</code>, or <code>final</code>.</li>
+            <li>Interface cannot be <code>final</code>.</li>
+            <li>Constructors are not possible in interfaces.</li>
+            <li>Interfaces support multiple inheritance (through type inheritance).</li>
+          </ol>
+
+          <h3>Abstract class vs Interface</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Abstract class</th>
+                <th>Interface</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Contains concrete + abstract methods</td><td>Contains abstract methods (core model)</td></tr>
+              <tr><td>Methods are not implicitly public abstract</td><td>Methods are implicitly public abstract</td></tr>
+              <tr><td>Multiple inheritance not supported with classes</td><td>Multiple inheritance is supported</td></tr>
+              <tr><td>Constructors allowed</td><td>Constructors not allowed</td></tr>
+              <tr><td>Main method possible</td><td>Main method not regular pattern in interface notes context</td></tr>
+              <tr><td>Class can extend only one abstract class</td><td>Class can implement multiple interfaces</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Implicit modifiers example</h3>
+          <pre><code>interface Demo
+{
+  int a=12;      // public static final
+  void m1();     // public abstract
+}</code></pre>
+
+          <h3>Instantiation not allowed</h3>
+          <pre><code>interface Demo
+{
+  int a=12;
+  void m1();
+}
+class B implements Demo
+{
+  public void m1()
+  {
+    System.out.println(a);
+    System.out.println("welcome to interfaces");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    // Demo d1=new Demo(); // error
+  }
+}</code></pre>
+
+          <h3>Override must be public</h3>
+          <pre><code>interface Demo
+{
+  int a=12;
+  void m1();
+}
+class B implements Demo
+{
+  public void m1()
+  {
+    System.out.println(a);
+    System.out.println("welcome to interfaces");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    Demo d1=new B();
+    d1.m1();
+  }
+}</code></pre>
+
+          <h3>Single interface, multiple implementations</h3>
+          <pre><code>interface Loan
+{
+  int itr=2;
+  void getLoan();
+}
+class HomeLoan implements Loan
+{
+  public void getLoan()
+  {
+    System.out.println(itr+" ruppes interest for HomeLoan");
+  }
+}
+class EducationLoan implements Loan
+{
+  public void getLoan()
+  {
+    System.out.println(itr+" ruppes interest for EducationLoan");
+  }
+}
+class GoldLoan implements Loan
+{
+  public void getLoan()
+  {
+    System.out.println(itr+" ruppes interest for GoldLoan");
+  }
+}</code></pre>
+
+          <h3>Class implements multiple interfaces</h3>
+          <pre><code>interface Physics
+{
+  void getpyMarks();
+}
+interface Chemistry
+{
+  void getchMarks();
+}
+class Student implements Physics,Chemistry
+{
+  public void getpyMarks()
+  {
+    System.out.println("67 marks in physics");
+  }
+  public void getchMarks()
+  {
+    System.out.println("87 marks in chemistry");
+  }
+}
+class User
+{
+  public static void main(String[] args)
+  {
+    Student p1=new Student();
+    p1.getpyMarks();
+    p1.getchMarks();
+    Physics p2=new Student();
+    p2.getpyMarks();
+    Chemistry p3=new Student();
+    p3.getchMarks();
+  }
+}</code></pre>
+
+          <h3>Interface extends multiple interfaces</h3>
+          <pre><code>interface A
+{
+  void m1();
+}
+interface B
+{
+  void m2();
+}
+interface C extends A,B
+{
+  void m3();
+}
+class D implements C
+{
+  public void m1(){ System.out.println("m1 in D"); }
+  public void m2(){ System.out.println("m2 in D"); }
+  public void m3(){ System.out.println("m3 in D"); }
+}</code></pre>
+
+          <h3>Inner classes</h3>
+          <ol>
+            <li>Defining one class inside another class is called inner class.</li>
+            <li>Purpose: readable and maintainable grouping.</li>
+            <li>Outer class private features can be accessed by inner class.</li>
+            <li>Types:</li>
+          </ol>
+          <ol>
+            <li>Instance inner class</li>
+            <li>Static nested class</li>
+            <li>Local class</li>
+            <li>Anonymous class</li>
+          </ol>
+
+          <h3>1. Instance inner class</h3>
+          <p>Defined as non-static class inside outer class.</p>
+          <pre><code>class Outer
+{
+  void m2()
+  {
+    System.out.println("m2 in outer");
+  }
+  class Inner
+  {
+    void m1()
+    {
+      System.out.println("m1 in Inner");
+    }
+  }
+  public static void main(String[] args)
+  {
+    Outer o1=new Outer();
+    Outer.Inner i1=o1.new Inner();
+    i1.m1();
+    new Outer().new Inner().m1();
+  }
+}</code></pre>
+
+          <pre><code>class Outer
+{
+  private int x=5;
+  static int z=5;
+  void m2()
+  {
+    System.out.println("m2 in outer");
+  }
+  class Inner
+  {
+    int y=7;
+    void m1()
+    {
+      System.out.println(y);
+      System.out.println(x);
+      System.out.println(z);
+      m2();
+    }
+  }
+}</code></pre>
+
+          <div class="warn">According to these notes style, main method is considered for outer class, not instance inner class.</div>
+
+          <h3>2. Static nested class</h3>
+          <p>Inner class defined with <code>static</code> keyword.</p>
+          <p>Can access only static outer members directly.</p>
+          <pre><code>class Outer
+{
+  static int y=9;
+  static int z=17;
+  static private int u=8;
+  static class Inner
+  {
+    int x=7;
+    void m2()
+    {
+      System.out.println(y);
+      System.out.println(z);
+      System.out.println(u);
+      System.out.println(x);
+      System.out.println("m2 in Inner");
+    }
+  }
+  public static void main(String[] args)
+  {
+    new Outer.Inner().m2();
+  }
+}</code></pre>
+
+          <h3>3. Local class</h3>
+          <p>Class defined inside a method.</p>
+          <pre><code>class Outer
+{
+  public static void main(String[] args)
+  {
+    class Inner
+    {
+      void m1()
+      {
+        System.out.println("m1 in Inner");
+      }
+    }
+    Inner i1=new Inner();
+    i1.m1();
+  }
+}</code></pre>
+
+          <h3>4. Anonymous class</h3>
+          <ol>
+            <li>Anonymous class is local class without name.</li>
+            <li>Often used with abstract class or interface implementations.</li>
+            <li>Reduces extra implementation-class boilerplate.</li>
+          </ol>
+          <pre><code>abstract class A
+{
+  abstract void m1();
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    A a1=new A()
+    {
+      void m1()
+      {
+        System.out.println("m1 in anon class");
+      }
+    };
+    a1.m1();
+  }
+}</code></pre>
+
+          <pre><code>interface A
+{
+  void m1();
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    A a1=new A()
+    {
+      public void m1()
+      {
+        System.out.println("m1 in imple class");
+      }
+    };
+    a1.m1();
+  }
+}</code></pre>
+
+          <h3>Modifier note for inner/local/anonymous classes</h3>
+          <ul>
+            <li><code>private</code>, <code>protected</code>, <code>static</code> not allowed for top-level outer class.</li>
+            <li><code>static</code>, <code>public</code>, <code>protected</code>, <code>private</code> are not regular modifiers for local/anonymous classes.</li>
+            <li>All access modifiers are allowed in instance/static nested class members.</li>
+          </ul>
+
+          <h3>Explain <code>public static void main(String[] args)</code></h3>
+
+          <h3>public</h3>
+          <p><code>public</code> is access modifier; JVM can access main method from anywhere.</p>
+
+          <h3>static</h3>
+          <p><code>static</code> is non-access modifier; JVM can call main without object.</p>
+
+          <h3>void</h3>
+          <p>Main method returns nothing to JVM.</p>
+
+          <h3>main</h3>
+          <p>Method name configured as entry point by JVM.</p>
+
+          <h3>String[] args</h3>
+          <p>Formal parameter array to receive command-line arguments as strings by index.</p>
+
+          <h3>Signature notes</h3>
+          <ol>
+            <li>Valid array declarations: <code>String[] args</code>, <code>String args[]</code>, <code>String... args</code>.</li>
+            <li>Modifier order is flexible: <code>static public</code> or <code>public static</code>.</li>
+            <li>Mandatory modifiers: <code>public static</code>.</li>
+            <li>Optional modifiers: <code>final</code>, <code>synchronized</code>, <code>strictfp</code>.</li>
+            <li>Main can be overloaded, but JVM looks for <code>main(String[] args)</code> signature.</li>
+            <li>Main cannot be overridden because it is static.</li>
+            <li>Var-args are allowed in main method.</li>
+          </ol>
+
+          <h3>Command-line argument example</h3>
+          <pre><code>class Demo
+{
+  public static void main(String venky[])
+  {
+    String s=venky[0];
+    System.out.println(s);
+  }
+}
+
+// javac Demo.java
+// java Demo Dhoni
+// Output: Dhoni</code></pre>
+
+          <h3>Main overloading example</h3>
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    System.out.println("string data");
+  }
+  public static void main(int[] args)
+  {
+    System.out.println("int data");
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="io-streams">
+        <details>
+          <summary>30.IO Streams, Dynamic Input, Serialization</summary>
+
+          <h3>IO Streams</h3>
+          <ol>
+            <li>Stream is a medium or channel.</li>
+            <li>Purpose: carry data between input devices, Java application, and output devices.</li>
+            <li>Streams are present in <code>java.io</code> package.</li>
+            <li>Streams are divided into 2 types: Byte Streams and Character Streams.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Works with</th>
+                <th>Main base classes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Byte Streams</td>
+                <td>Binary data (text, audio, video, images, files)</td>
+                <td><code>InputStream</code>, <code>OutputStream</code></td>
+              </tr>
+              <tr>
+                <td>Character Streams</td>
+                <td>Character/text data</td>
+                <td><code>Reader</code>, <code>Writer</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>1.Byte Streams</h3>
+          <p>Byte streams work with raw bytes.</p>
+
+          <h3>InputStream</h3>
+          <p>Used to read bytes into Java program.</p>
+          <p>Examples: <code>FileInputStream</code>, <code>ObjectInputStream</code>, <code>DataInputStream</code>.</p>
+
+          <h3>OutputStream</h3>
+          <p>Used to write bytes from Java program.</p>
+          <p>Examples: <code>FileOutputStream</code>, <code>ObjectOutputStream</code>, <code>DataOutputStream</code>.</p>
+
+          <h3>2.Character Streams</h3>
+          <p>Character streams work with characters (text).</p>
+
+          <h3>Reader</h3>
+          <p>Reads character data into Java application.</p>
+          <p>Examples: <code>FileReader</code>, <code>BufferedReader</code>.</p>
+
+          <h3>Writer</h3>
+          <p>Writes character data from Java application.</p>
+          <p>Examples: <code>FileWriter</code>, <code>BufferedWriter</code>, <code>PrintWriter</code>.</p>
+
+          <h3>PrintWriter</h3>
+          <ol>
+            <li><code>PrintWriter</code> is predefined class.</li>
+            <li>Converts primitive data into text format.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>print()</code></td><td>Writes data in same line</td></tr>
+              <tr><td><code>println()</code></td><td>Writes data in new line</td></tr>
+              <tr><td><code>printf()</code></td><td>Writes formatted output</td></tr>
+            </tbody>
+          </table>
+
+          <h3>FileOutputStream write example</h3>
+          <pre><code>import java.io.*;
+class FileOutput
+{
+  public static void main(String[] args) throws Exception
+  {
+    FileOutputStream fos=new FileOutputStream("xyz.txt");
+    String s1="virat";
+    byte[] b=s1.getBytes();
+    fos.write(b);
+    fos.close();
+  }
+}</code></pre>
+
+          <h3>Append mode in FileOutputStream</h3>
+          <pre><code>FileOutputStream fos=new FileOutputStream("xyz.txt",true);
+String s1="kohli";
+byte[] b=s1.getBytes();
+fos.write(b);
+fos.close();</code></pre>
+
+          <h3>FileInputStream read example</h3>
+          <pre><code>import java.io.*;
+class FileInput
+{
+  public static void main(String[] args) throws Exception
+  {
+    FileInputStream fis=new FileInputStream("xyz.txt");
+    int size=fis.available();
+    byte[] b=new byte[size];
+    fis.read(b);
+    String s=new String(b);
+    System.out.println(s);
+    fis.close();
+  }
+}</code></pre>
+
+          <h3>FileWriter and FileReader examples</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    FileWriter fw=new FileWriter("pqr.txt");
+    String data="Hello everyone";
+    fw.write(data);
+    fw.close();
+  }
+}</code></pre>
+
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    FileReader fr=new FileReader("pqr.txt");
+    String data="";
+    int av=fr.read();
+    while(av!=-1)
+    {
+      data=data+(char)av;
+      av=fr.read();
+    }
+    System.out.println(data);
+    fr.close();
+  }
+}</code></pre>
+
+          <h3>Copy image using byte streams</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    FileInputStream fis=new FileInputStream("virat.jpg");
+    int size=fis.available();
+    byte[] b=new byte[size];
+    fis.read(b);
+    fis.close();
+
+    FileOutputStream fos=new FileOutputStream("c:/fs/dhonifriend.jpg");
+    fos.write(b);
+    fos.close();
+    System.out.println("Image is copied from virat.jpg to dhonifriend.jpg");
+  }
+}</code></pre>
+
+          <h3>PrintWriter example</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    PrintWriter pw=new PrintWriter("mno.txt");
+    pw.print("virat");
+    pw.print("kohli");
+    pw.println("is champ");
+    pw.println("in the world");
+
+    int a=5;
+    pw.printf("value of a is %d",a);
+    pw.close();
+  }
+}</code></pre>
+
+          <h3>Dynamic Input Approaches</h3>
+          <p>Dynamic input means providing input at runtime through command prompt/console.</p>
+          <p>Three common approaches: <code>BufferedReader</code>, <code>Scanner</code>, <code>Console</code>.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Approach</th>
+                <th>Important methods</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BufferedReader</td>
+                <td><code>readLine()</code>, <code>read()</code></td>
+                <td>Usually reads string data; parse manually for numeric types</td>
+              </tr>
+              <tr>
+                <td>Scanner</td>
+                <td><code>nextInt()</code>, <code>nextFloat()</code>, <code>next()</code>, <code>nextLine()</code> etc.</td>
+                <td>Easy for mixed types; not ideal for hidden password input</td>
+              </tr>
+              <tr>
+                <td>Console</td>
+                <td><code>readLine()</code>, <code>readPassword()</code></td>
+                <td>Good for secure password input (hidden)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>BufferedReader example</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    System.out.println("enter a value:");
+    String a=br.readLine();
+    System.out.println("enter b value:");
+    String b=br.readLine();
+    System.out.println(a+b);
+    int fn=Integer.parseInt(a);
+    int sn=Integer.parseInt(b);
+    System.out.println(fn+sn);
+  }
+}</code></pre>
+
+          <h3>Scanner example</h3>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    Scanner sc=new Scanner(System.in);
+    System.out.println("enter username:");
+    String uname=sc.nextLine();
+    System.out.println("enter password:");
+    String pd=sc.next();
+    System.out.println(uname);
+    System.out.println(pd);
+  }
+}</code></pre>
+
+          <h3>Console example</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    Console c=System.console();
+    System.out.println("enter username:");
+    String uname=c.readLine();
+    System.out.println("enter password:");
+    char[] pwd=c.readPassword();
+    String pd=new String(pwd);
+    System.out.println(uname);
+    System.out.println(pd);
+  }
+}</code></pre>
+
+          <h3>Serialization and Deserialization</h3>
+          <h3>Serialization</h3>
+          <ol>
+            <li>Converting an object into a series of bits.</li>
+            <li>Class must implement <code>Serializable</code> interface.</li>
+            <li>Used for file/network object transfer.</li>
+          </ol>
+
+          <h3>Deserialization</h3>
+          <p>Converting series of bits back into an object.</p>
+
+          <h3>Serializable</h3>
+          <p><code>Serializable</code> is marker interface (no methods). It gives object serialization info to JVM.</p>
+
+          <h3>Serialization + Deserialization example</h3>
+          <pre><code>import java.io.*;
+class Emp implements Serializable
+{
+  int eno;
+  String ename;
+}
+class SerEx
+{
+  public static void main(String[] args) throws Exception
+  {
+    Emp e1=new Emp();
+    e1.eno=101;
+    e1.ename="Virat";
+
+    FileOutputStream fs=new FileOutputStream("pqr.txt");
+    ObjectOutputStream oos=new ObjectOutputStream(fs);
+    oos.writeObject(e1);
+    oos.close();
+    fs.close();
+
+    FileInputStream fis=new FileInputStream("pqr.txt");
+    ObjectInputStream ois=new ObjectInputStream(fis);
+    Emp e2=(Emp)ois.readObject();
+    System.out.println(e2.eno+" "+e2.ename);
+    ois.close();
+    fis.close();
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="packages-import">
+        <details>
+          <summary>31.Packages and Import</summary>
+
+          <h3>Packages</h3>
+          <ol>
+            <li>Package is a folder structure.</li>
+            <li>Package is a collection of classes, interfaces, enums, annotations, errors, and exceptions.</li>
+            <li>Packages are divided into 2 types:</li>
+          </ol>
+          <ol>
+            <li>predefine packages</li>
+            <li>userdefine packages</li>
+          </ol>
+
+          <h3>1.predefine packages</h3>
+          <p>Packages already present in Java software (JDK), developed by Java developers.</p>
+          <p><code>java.lang</code> is bydefault package in Java.</p>
+          <p>Examples: <code>java.lang</code>, <code>java.util</code>, <code>java.io</code> ...</p>
+
+          <h3>2.userdefine packages</h3>
+          <p>Packages created by Java programmers (not pre-existing in JDK).</p>
+
+          <h3>Package conventions (reverse domain)</h3>
+          <pre><code>www.tcs.com            => domain name
+com.tcs                => reverse domain
+com.tcs.bank.withdraw
+
+com.tcs     => domain
+bank        => project
+withdraw    => module
+
+com.tcs.bank.withdraw  module1
+com.tcs.bank.account   module2
+com.tcs.bank.transfer  module3
+com.tcs.bank.loans     module4</code></pre>
+
+          <h3>Syntax</h3>
+          <pre><code>package packagename;
+class ClassName
+{
+}
+interface InterfaceName
+{
+}
+enum EnumName
+{
+}</code></pre>
+
+          <h3>Advantages of packages</h3>
+          <ol>
+            <li>Parallel project development is possible.</li>
+            <li>Code reusability across folders.</li>
+            <li>Removes naming conflicts.</li>
+            <li>Maintenance and readability are improved.</li>
+          </ol>
+
+          <h3>Basic package example</h3>
+          <pre><code>package com.tcs.bank.account;
+class Sample
+{
+  public static void main(String[] args)
+  {
+    System.out.println("welcome to packages");
+  }
+}
+interface I1
+{
+}</code></pre>
+
+          <h3>Compilation of package classes</h3>
+          <pre><code>javac -d . Sample.java
+
+Here:
+-d  => directory option
+.   => current directory</code></pre>
+
+          <h3>Generated structure</h3>
+          <pre><code>com
+  |--tcs
+      |--bank
+          |--account
+              |--I1.class
+              |--Sample.class</code></pre>
+
+          <h3>Execution of packages</h3>
+          <pre><code>java fully.qualified.ClassName
+java com.tcs.bank.account.Sample</code></pre>
+
+          <h3>Another package example</h3>
+          <pre><code>package com.tcs.bank.withdraw;
+class Sample
+{
+  public static void main(String[] args)
+  {
+    System.out.println("packages easy");
+  }
+}
+
+// javac -d . Sample.java
+// java com.tcs.bank.withdraw.Sample</code></pre>
+
+          <h3>Import</h3>
+          <ol>
+            <li><code>import</code> is a keyword in Java.</li>
+            <li>Purpose: use classes from one package in another package.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Access Modifier</th>
+                <th>Accessibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>public</code></td><td>Anywhere</td></tr>
+              <tr><td><code>protected</code></td><td>Package and subclass in another package</td></tr>
+              <tr><td>default</td><td>Package only</td></tr>
+              <tr><td><code>private</code></td><td>Class only</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Using import statement</h3>
+          <pre><code>package com.state.info;
+public class Info
+{
+  public void apInfo()
+  {
+    System.out.println("jai ap");
+  }
+  public void tsInfo()
+  {
+    System.out.println("jai ts");
+  }
+}</code></pre>
+
+          <pre><code>package com.state.requiredinfo;
+import com.state.info.Info;
+
+class Client
+{
+  public static void main(String[] args)
+  {
+    Info i1=new Info();
+    i1.apInfo();
+    i1.tsInfo();
+  }
+}</code></pre>
+
+          <pre><code>// javac -d . Info.java
+// javac -d . Client.java
+// java com.state.requiredinfo.Client
+// Output:
+// jai ap
+// jai ts</code></pre>
+
+          <h3>Without import statement (fully qualified name)</h3>
+          <pre><code>package com.state.requiredinfo;
+class Client
+{
+  public static void main(String[] args)
+  {
+    com.state.info.Info i1=new com.state.info.Info();
+    i1.apInfo();
+    i1.tsInfo();
+  }
+}</code></pre>
+
+          <p>So, without <code>import</code> also possible by using fully qualified class name.</p>
+        </details>
+      </section>
+
+      <section class="card" id="multithreading">
+        <details>
+          <summary>32.Multitasking and Multithreading</summary>
+
+          <h3>Topics covered</h3>
+          <ol>
+            <li>Multitasking Introduction</li>
+            <li>Types of Multitasking</li>
+            <li>Thread class and Runnable interface</li>
+            <li>Getting and setting names for threads</li>
+            <li>Priorities of Thread</li>
+            <li><code>join()</code>, <code>yield()</code>, <code>sleep()</code></li>
+            <li>Synchronization and Asynchronization</li>
+            <li>Daemon Threads</li>
+            <li>InterThread communication</li>
+            <li>Deadlock and Starvation</li>
+          </ol>
+
+          <h3>Multitasking</h3>
+          <ol>
+            <li>Executing multiple tasks simultaneously/parallelly/concurrently.</li>
+            <li>Multitasking is divided into 2 types: process-based and thread-based.</li>
+          </ol>
+
+          <h3>Types of multitasking</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Meaning</th>
+                <th>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Process based tasking</td>
+                <td>Each task is a separate process/program</td>
+                <td>OS level, heavy weight, separate memory, expensive context switch</td>
+              </tr>
+              <tr>
+                <td>Thread based tasking (Multithreading)</td>
+                <td>Each task is a separate thread in same program</td>
+                <td>Programmatic level, light weight, easy communication, cheaper switch</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>Purpose of multithreading:</strong> concurrent execution and faster overall execution.</p>
+
+          <h3>Realtime applications</h3>
+          <ol>
+            <li>Video games</li>
+            <li>Animation applications</li>
+            <li>Multimedia/graphics applications</li>
+          </ol>
+
+          <h3>Thread basics</h3>
+          <ol>
+            <li>Thread is flow of control (piece of code).</li>
+            <li>Predefined thread example: Main thread.</li>
+            <li>User-defined threads are created by programmer.</li>
+            <li>Java thread creation in 2 ways:</li>
+          </ol>
+          <ol>
+            <li>Extending <code>Thread</code> class</li>
+            <li>Implementing <code>Runnable</code> interface</li>
+          </ol>
+
+          <h3>Thread class and Runnable interface</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Contains</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Thread</code> class</td><td><code>start()</code>, <code>run()</code></td><td>No multiple class inheritance</td></tr>
+              <tr><td><code>Runnable</code> interface</td><td><code>run()</code></td><td>Supports interface-based multiple inheritance pattern</td></tr>
+            </tbody>
+          </table>
+
+          <h3><code>start()</code> vs <code>run()</code></h3>
+          <ul>
+            <li><code>start()</code> starts new thread. Thread is born and scheduler decides execution.</li>
+            <li><code>run()</code> contains user logic. Direct call behaves like normal method (no new thread).</li>
+          </ul>
+
+          <h3>Example: extending Thread</h3>
+          <pre><code>class AjayThread extends Thread
+{
+  public void run()
+  {
+    for(int i=1;i<=10;i++)
+    {
+      System.out.println("Userdefine Thread");
+    }
+  }
+  public static void main(String[] args)
+  {
+    AjayThread a=new AjayThread();
+    a.start();
+
+    for(int i=1;i<=10;i++)
+    {
+      System.out.println("Predefine Thread");
+    }
+  }
+}</code></pre>
+
+          <h3>Example: implementing Runnable</h3>
+          <pre><code>class UserDefineThread implements Runnable
+{
+  public void run()
+  {
+    System.out.println("userdefine thread");
+  }
+  public static void main(String[] args)
+  {
+    UserDefineThread u=new UserDefineThread();
+    Thread t1=new Thread(u);
+    t1.start();
+  }
+}</code></pre>
+
+          <h3>Getting and setting thread names</h3>
+          <p><code>getName()</code>, <code>setName()</code>, and static method <code>Thread.currentThread()</code>.</p>
+          <pre><code>class VenkyThread extends Thread
+{
+  public void run()
+  {
+    System.out.println(Thread.currentThread().getName());
+    Thread.currentThread().setName("ManjuThread");
+    System.out.println(Thread.currentThread().getName());
+  }
+  public static void main(String[] args)
+  {
+    System.out.println(Thread.currentThread().getName());
+    Thread.currentThread().setName("AjayThread");
+    System.out.println(Thread.currentThread().getName());
+    VenkyThread v=new VenkyThread();
+    v.start();
+  }
+}</code></pre>
+
+          <h3>Thread priorities</h3>
+          <ol>
+            <li>Range is <code>1</code> to <code>10</code>; default is <code>5</code>.</li>
+            <li>Invalid values throw <code>IllegalArgumentException</code>.</li>
+            <li>Use <code>getPriority()</code> and <code>setPriority()</code>.</li>
+            <li>If main priority changes before child creation, child gets inherited priority.</li>
+          </ol>
+
+          <pre><code>class VenkyThread extends Thread
+{
+  public void run()
+  {
+    System.out.println(Thread.currentThread().getName());
+    System.out.println(Thread.currentThread().getPriority());
+  }
+  public static void main(String[] args)
+  {
+    System.out.println(Thread.currentThread().getPriority()); // 5
+    Thread.currentThread().setPriority(7);
+    VenkyThread v=new VenkyThread();
+    v.start(); // child gets 7
+  }
+}</code></pre>
+
+          <h3><code>join()</code>, <code>yield()</code>, <code>sleep()</code></h3>
+          <ul>
+            <li><code>join()</code>: one thread waits until another completes.</li>
+            <li><code>yield()</code>: current thread hints scheduler to give chance to others.</li>
+            <li><code>sleep(ms)</code>: pauses current thread for given time.</li>
+          </ul>
+          <p><code>join()</code> and <code>sleep()</code> can throw <code>InterruptedException</code>.</p>
+
+          <pre><code>class Demo extends Thread
+{
+  public void run()
+  {
+    for(int i=1;i<=5;i++)
+    {
+      System.out.println("Ajay thread");
+      try
+      {
+        Thread.sleep(1000);
+      }
+      catch(InterruptedException e)
+      {
+      }
+    }
+  }
+  public static void main(String[] args) throws InterruptedException
+  {
+    Demo d=new Demo();
+    d.start();
+    d.join(); // or d.join(3000)
+
+    for(int i=1;i<=5;i++)
+    {
+      System.out.println("Mohan thread");
+    }
+  }
+}</code></pre>
+
+          <h3>Synchronization vs Asynchronization</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Behavior</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Synchronization</td><td>Threads execute one-by-one for critical section</td><td>Data consistency</td></tr>
+              <tr><td>Asynchronization</td><td>Threads run at same time</td><td>May cause data inconsistency</td></tr>
+            </tbody>
+          </table>
+
+          <p>Synchronization can be applied to method or block using <code>synchronized</code>.</p>
+
+          <pre><code>class ClassRoom
+{
+  synchronized void takeClass(String faculty)
+  {
+    for(int i=1;i<=5;i++)
+    {
+      System.out.println(i+" class is taking by : "+faculty);
+    }
+  }
+}
+class UserThread extends Thread
+{
+  ClassRoom c1;
+  String faculty;
+  UserThread(ClassRoom c1,String faculty)
+  {
+    this.c1=c1;
+    this.faculty=faculty;
+  }
+  public void run()
+  {
+    c1.takeClass(faculty);
+  }
+}</code></pre>
+
+          <pre><code>class ClassRoom
+{
+  void takeClass(String faculty)
+  {
+    System.out.println("1st 100 lines");
+    synchronized(this)
+    {
+      for(int i=1;i<=5;i++)
+      {
+        System.out.println(i+" class is taking by : "+faculty);
+      }
+    }
+    System.out.println("last 20 lines");
+  }
+}</code></pre>
+
+          <h3>Daemon Thread</h3>
+          <ol>
+            <li>Daemon thread runs in background to support non-daemon threads.</li>
+            <li>Main thread cannot be made daemon.</li>
+            <li>User-defined child threads can be daemon.</li>
+            <li>Examples: Garbage collector, Signal Dispatcher, Finalizer.</li>
+          </ol>
+
+          <p>Methods: <code>setDaemon(boolean)</code> and <code>isDaemon()</code>.</p>
+          <pre><code>class UserDefineThread extends Thread
+{
+  public void run()
+  {
+    System.out.println("child thread");
+    System.out.println(Thread.currentThread().isDaemon());
+  }
+  public static void main(String[] args)
+  {
+    UserDefineThread u1=new UserDefineThread();
+    u1.setDaemon(true);
+    u1.start();
+    System.out.println("main thread");
+  }
+}</code></pre>
+
+          <h3>InterThread communication</h3>
+          <ol>
+            <li>Communication between threads using <code>wait()</code>, <code>notify()</code>, <code>notifyAll()</code>.</li>
+            <li>Applied on synchronized context/monitor objects.</li>
+          </ol>
+          <ul>
+            <li><code>wait()</code>: current thread waits for update.</li>
+            <li><code>notify()</code>: wakes one waiting thread.</li>
+            <li><code>notifyAll()</code>: wakes all waiting threads.</li>
+          </ul>
+
+          <pre><code>class AjayThread extends Thread
+{
+  int sum=0;
+  public void run()
+  {
+    synchronized(this)
+    {
+      for(int i=1;i<=100;i++)
+      {
+        sum=sum+i;
+      }
+      this.notify();
+    }
+  }
+}
+class Demo
+{
+  public static void main(String[] args) throws Exception
+  {
+    AjayThread a1=new AjayThread();
+    a1.start();
+    synchronized(a1)
+    {
+      a1.wait();
+      System.out.println(a1.sum); // 5050
+    }
+  }
+}</code></pre>
+
+          <h3>Deadlock and Starvation</h3>
+          <p><strong>Deadlock:</strong> Two threads wait forever for each other.</p>
+          <p><strong>Starvation:</strong> A thread waits too long (or indefinitely) due to resource/scheduling unfairness.</p>
+
+          <h3>Deadlock example</h3>
+          <pre><code>class A
+{
+  public synchronized void d1(B b)
+  {
+    System.out.println("Thread1 starts execution of d1 method");
+    try { Thread.sleep(2000); } catch(Exception e) {}
+    b.last();
+  }
+  public synchronized void last()
+  {
+    System.out.println("Inside A last method");
+  }
+}
+class B
+{
+  public synchronized void d2(A a)
+  {
+    System.out.println("Thread2 starts execution of d2 method");
+    try { Thread.sleep(2000); } catch(Exception e) {}
+    a.last();
+  }
+  public synchronized void last()
+  {
+    System.out.println("Inside B last method");
+  }
+}
+class MyThread extends Thread
+{
+  A a=new A();
+  B b=new B();
+  public void m1()
+  {
+    this.start();
+    a.d1(b);
+  }
+  public void run()
+  {
+    b.d2(a);
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    MyThread t=new MyThread();
+    t.m1();
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="exception-handling">
+        <details>
+          <summary>33.Exception Handling</summary>
+
+          <h3>Purpose of Exception Handling</h3>
+          <ol>
+            <li>To make robust applications.</li>
+            <li>To convert abnormal termination into normal termination.</li>
+            <li>To convert technical exceptions into user-friendly messages.</li>
+          </ol>
+
+          <h3>Throwable and Exception</h3>
+          <p><code>Throwable</code> is the predefined root class for exception hierarchy (<code>Exception</code>, <code>RuntimeException</code>, etc).</p>
+          <p>Exception is runtime problem object. It can be handled using <code>try/catch</code> or <code>throws</code>.</p>
+
+          <h3>Exception vs Error</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Why it happens</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Exception</td>
+                <td>Usually invalid input/operation at runtime</td>
+                <td><code>ArithmeticException</code>, <code>NumberFormatException</code></td>
+              </tr>
+              <tr>
+                <td>Error</td>
+                <td>System/resource level severe issues</td>
+                <td><code>OutOfMemoryError</code>, <code>StackOverflowError</code></td>
+              </tr>
+              <tr>
+                <td>Compile-time syntax error</td>
+                <td>Programmer syntax mistakes</td>
+                <td>Missing <code>;</code>, unbalanced braces</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Types of Exceptions</h3>
+          <h3>1.Checked Exceptions</h3>
+          <ol>
+            <li>Derived from <code>java.lang.Exception</code> (excluding runtime exceptions).</li>
+            <li>Checked by compiler.</li>
+            <li>Must be handled explicitly.</li>
+          </ol>
+          <p>Examples: <code>FileNotFoundException</code>, <code>ClassNotFoundException</code>, <code>InterruptedException</code>, <code>SQLException</code>.</p>
+
+          <h3>2.Unchecked Exceptions</h3>
+          <ol>
+            <li>Derived from <code>java.lang.RuntimeException</code>.</li>
+            <li>Not checked by compiler.</li>
+            <li>Handling is optional (but recommended for user-friendly behavior).</li>
+          </ol>
+          <p>Examples: <code>ArithmeticException</code>, <code>NumberFormatException</code>, <code>NullPointerException</code>, <code>ArrayIndexOutOfBoundsException</code>, <code>StringIndexOutOfBoundsException</code>.</p>
+
+          <h3>Predefined vs User-defined exceptions</h3>
+          <ul>
+            <li><strong>Predefined:</strong> already available in JDK (e.g., <code>ArithmeticException</code>).</li>
+            <li><strong>User-defined/custom:</strong> created by programmer (e.g., <code>InvalidAgeException</code>).</li>
+          </ul>
+
+          <h3><code>ClassNotFoundException</code> vs <code>NoClassDefFoundError</code></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>When it occurs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ClassNotFoundException</code> (checked)</td>
+                <td>Requested class cannot be found while loading by name.</td>
+              </tr>
+              <tr>
+                <td><code>NoClassDefFoundError</code> (unchecked/error)</td>
+                <td>Class was present at compile-time but missing at runtime.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Program errors classification</h3>
+          <ol>
+            <li>Compile time errors (syntax mistakes).</li>
+            <li>Logical errors (wrong logic; program runs but output wrong).</li>
+            <li>Runtime errors (exceptions while executing).</li>
+          </ol>
+
+          <h3><code>try</code>, <code>catch</code>, <code>finally</code></h3>
+          <ul>
+            <li><code>try</code>: risky code (exception can occur).</li>
+            <li><code>catch</code>: handles exception and can provide friendly message.</li>
+            <li><code>finally</code>: close-up activities (file/db/sql close), executes whether exception occurs or not.</li>
+          </ul>
+
+          <h3><code>throws</code> and <code>throw</code></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Keyword</th>
+                <th>Use</th>
+                <th>Where</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>throws</code></td>
+                <td>Delegate exception handling responsibility to caller/JVM</td>
+                <td>Method signature</td>
+              </tr>
+              <tr>
+                <td><code>throw</code></td>
+                <td>Explicitly throw one exception object (often custom)</td>
+                <td>Method body</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Difference: <code>final</code>, <code>finally</code>, <code>finalize()</code></h3>
+          <ul>
+            <li><code>final</code>: modifier for variable/method/class restrictions.</li>
+            <li><code>finally</code>: block for cleanup code.</li>
+            <li><code>finalize()</code>: method (legacy GC hook) called before object cleanup.</li>
+          </ul>
+
+          <h3>try-with-resources</h3>
+          <ol>
+            <li>Introduced from Java 1.7.</li>
+            <li>Resources declared in <code>try(...)</code> are auto-closed.</li>
+            <li>Reduces complexity compared with explicit close in <code>finally</code>.</li>
+          </ol>
+
+          <h3>Case I: cleanup with finally (explicit close)</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    FileInputStream fis=null;
+    try
+    {
+      fis=new FileInputStream("virat.txt");
+    }
+    catch(Exception e)
+    {
+    }
+    finally
+    {
+      try
+      {
+        if(fis!=null) fis.close();
+      }
+      catch(Exception e)
+      {
+        System.out.println("explicitly closed");
+      }
+    }
+  }
+}</code></pre>
+
+          <h3>Case II: cleanup with try-with-resources (automatic close)</h3>
+          <pre><code>import java.io.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    try(FileInputStream fis=new FileInputStream("virat.txt"))
+    {
+    }
+    catch(Exception e)
+    {
+      System.out.println("automatic close");
+    }
+  }
+}</code></pre>
+
+          <h3>Valid/Invalid combinations</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>try</th>
+                <th>catch</th>
+                <th>finally</th>
+                <th>Valid?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>1</td><td>1</td><td>Valid</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>Valid</td></tr>
+              <tr><td>1</td><td>multiple</td><td>1</td><td>Valid</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>Valid</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>Invalid</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>Invalid</td></tr>
+              <tr><td>0</td><td>0</td><td>1</td><td>Invalid</td></tr>
+              <tr><td>1</td><td>0</td><td>multiple</td><td>Invalid</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Checked exception examples</h3>
+          <h3><code>FileNotFoundException</code></h3>
+          <pre><code>import java.io.*;
+class Dhoni
+{
+  public static void main(String[] args)
+  {
+    try
+    {
+      FileInputStream fis=new FileInputStream("virat.txt");
+    }
+    catch(FileNotFoundException e)
+    {
+      System.out.println("file is not there but donot open");
+    }
+  }
+}</code></pre>
+
+          <h3><code>InterruptedException</code></h3>
+          <pre><code>class Dhoni
+{
+  public static void main(String[] args)
+  {
+    try
+    {
+      Thread.sleep(100);
+    }
+    catch(InterruptedException e)
+    {
+      System.out.println("Thread is sleeping");
+    }
+  }
+}</code></pre>
+
+          <h3>Unchecked exception examples</h3>
+          <h3><code>ArithmeticException</code></h3>
+          <pre><code>try
+{
+  int a=15;
+  int b=0;
+  int c=a/b;
+  System.out.println(c);
+}
+catch(ArithmeticException e)
+{
+  System.out.println("cannot divide by zero");
+}</code></pre>
+
+          <h3><code>NumberFormatException</code></h3>
+          <pre><code>try
+{
+  String s="Bhavadeesh";
+  int a=Integer.parseInt(s);
+  System.out.println(a);
+}
+catch(NumberFormatException e)
+{
+  System.out.println("please enter only number");
+}</code></pre>
+
+          <h3><code>ArrayIndexOutOfBoundsException</code></h3>
+          <pre><code>try
+{
+  int[] a={1,2,3};
+  System.out.println(a[6]);
+}
+catch(ArrayIndexOutOfBoundsException e)
+{
+  System.out.println("index out of range");
+}</code></pre>
+
+          <h3><code>StringIndexOutOfBoundsException</code></h3>
+          <pre><code>try
+{
+  String s="virat";
+  char ch=s.charAt(12);
+  System.out.println(ch);
+}
+catch(StringIndexOutOfBoundsException e)
+{
+  System.out.println("string index out of range");
+}</code></pre>
+
+          <h3><code>NullPointerException</code></h3>
+          <pre><code>try
+{
+  String s=null;
+  int l=s.length();
+  System.out.println(l);
+}
+catch(NullPointerException e)
+{
+  System.out.println("string is null");
+}</code></pre>
+
+          <h3>Technical to user-friendly message (ATM pin example)</h3>
+          <pre><code>import java.util.*;
+class B
+{
+  public static void main(String[] args)
+  {
+    System.out.println("file opened");
+    try
+    {
+      Scanner sc=new Scanner(System.in);
+      System.out.println("enter pin");
+      String pinnumber=sc.next();
+      int pn=Integer.parseInt(pinnumber);
+      System.out.println("Atm opened happy");
+    }
+    catch(NumberFormatException e)
+    {
+      System.out.println("uncle please donot enter pin in alphabets");
+    }
+    finally
+    {
+      System.out.println("file close");
+    }
+  }
+}</code></pre>
+
+          <h3>Delegation using <code>throws</code></h3>
+          <pre><code>class Demo
+{
+  void m1() throws InterruptedException
+  {
+    System.out.println("Hi in m1");
+    Thread.sleep(6000);
+    System.out.println("Bye in m1");
+  }
+  void m2() throws InterruptedException
+  {
+    System.out.println("Hi in m2");
+    m1();
+  }
+  void m3() throws InterruptedException
+  {
+    System.out.println("Hi in m3");
+    m2();
+  }
+  public static void main(String[] args) throws InterruptedException
+  {
+    Demo d1=new Demo();
+    d1.m3();
+  }
+}</code></pre>
+
+          <h3>Custom exceptions using <code>throw</code></h3>
+          <pre><code>class NotEligibleMarriageException extends Exception
+{
+  NotEligibleMarriageException(String msg)
+  {
+    super(msg);
+  }
+}
+class Demo
+{
+  void status(int age) throws NotEligibleMarriageException
+  {
+    if(age>21)
+    {
+      System.out.println("Eligible for marriage happy");
+    }
+    else
+    {
+      throw new NotEligibleMarriageException("study first");
+    }
+  }
+}</code></pre>
+
+          <pre><code>class InvalidAgeException extends Exception
+{
+  InvalidAgeException(String msg)
+  {
+    super(msg);
+  }
+}
+class Demo
+{
+  void checkVote(int age) throws InvalidAgeException
+  {
+    if(age>=18)
+    {
+      System.out.println("eligible for vote");
+    }
+    else
+    {
+      throw new InvalidAgeException("not eligible for vote");
+    }
+  }
+}</code></pre>
+
+          <h3>Try with multiple catches</h3>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    try
+    {
+      Scanner sc=new Scanner(System.in);
+      System.out.println("enter num:");
+      String s=sc.next();
+      int a=Integer.parseInt(s);
+      int b=0;
+      int c=a/b;
+    }
+    catch(NumberFormatException e)
+    {
+      System.out.println("NumberFormatException solved");
+    }
+    catch(ArithmeticException e)
+    {
+      System.out.println("ArithmeticException solved");
+    }
+    finally
+    {
+      System.out.println("1 try with multiple catch blocks");
+    }
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="wrapper-classes">
+        <details>
+          <summary>34.Wrapper Classes</summary>
+
+          <h3>Wrapper classes</h3>
+          <ol>
+            <li>8 primitive datatypes have 8 corresponding wrapper classes.</li>
+            <li>Purpose: conversion between primitive type and object/reference type.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Primitive</th>
+                <th>Wrapper</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>byte</td><td>Byte</td></tr>
+              <tr><td>short</td><td>Short</td></tr>
+              <tr><td>int</td><td>Integer</td></tr>
+              <tr><td>long</td><td>Long</td></tr>
+              <tr><td>float</td><td>Float</td></tr>
+              <tr><td>double</td><td>Double</td></tr>
+              <tr><td>char</td><td>Character</td></tr>
+              <tr><td>boolean</td><td>Boolean</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Boxing (explicit)</h3>
+          <p>Converting primitive datatype into reference/object type explicitly.</p>
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    int primitiveValue = 42;
+    Integer boxedValue = Integer.valueOf(primitiveValue);
+    System.out.println(boxedValue);
+  }
+}</code></pre>
+
+          <h3>UnBoxing (explicit)</h3>
+          <p>Converting reference/object type into primitive type explicitly.</p>
+          <pre><code>class Demo
+{
+  public static void main(String[] args)
+  {
+    Integer boxedValue = Integer.valueOf(42);
+    int primitiveValue = boxedValue.intValue();
+    System.out.println(primitiveValue);
+
+    Float f1 = Float.valueOf(1.2f);
+    float f2 = f1.floatValue();
+    System.out.println(f2);
+  }
+}</code></pre>
+
+          <h3>AutoBoxing (implicit)</h3>
+          <pre><code>int a=12;
+Integer b=a;
+System.out.println(b);
+
+float x=1.3f;
+Float y=x;
+System.out.println(y);</code></pre>
+
+          <h3>AutoUnBoxing (implicit)</h3>
+          <pre><code>Integer a=Integer.valueOf(12);
+int b=a;
+System.out.println(b);
+
+Float f1=Float.valueOf(1.3f);
+float f2=f1;
+System.out.println(f2);</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="collections-framework">
+        <details>
+          <summary>35.Collections Framework</summary>
+
+          <h3>Collections framework roadmap</h3>
+          <ol>
+            <li>Difference between Arrays and Collections</li>
+            <li>Difference between collection and Collections</li>
+            <li>Collection vs Map</li>
+            <li>List, Set, Queue, Deque, Map interfaces and implementations</li>
+            <li>Important differences: ArrayList/LinkedList/Vector/Stack</li>
+            <li>Important differences: HashSet/LinkedHashSet/TreeSet</li>
+            <li>Important differences: HashMap/LinkedHashMap/TreeMap/Hashtable/Properties</li>
+            <li>FailFast vs FailSafe collections</li>
+            <li>HashMap vs IdentityHashMap and WeakHashMap</li>
+            <li>Comparable vs Comparator</li>
+            <li>Cursors: Enumeration, Iterator, ListIterator</li>
+          </ol>
+
+          <h3>Arrays vs Collections</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Arrays</th>
+                <th>Collections</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Fixed size</td><td>Growable size</td></tr>
+              <tr><td>Mainly homogeneous data</td><td>Homogeneous or heterogeneous</td></tr>
+              <tr><td>Limited operations</td><td>Rich predefined APIs</td></tr>
+              <tr><td>Stores primitive + object</td><td>Stores object types</td></tr>
+            </tbody>
+          </table>
+
+          <h3>collection vs Collections</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>collection</th>
+                <th>Collections</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Interface family (List, Set, Queue, Deque)</td><td>Utility class in <code>java.util</code></td></tr>
+              <tr><td>Stores group of objects</td><td>Provides utility methods (<code>sort</code>, <code>reverse</code>, <code>max</code>, <code>min</code>, etc.)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Collection vs Map</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Collection</th>
+                <th>Map</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Stores elements</td><td>Stores key-value entries</td></tr>
+              <tr><td>Mostly 1-dimensional data</td><td>2-dimensional key-value mapping</td></tr>
+              <tr><td>Usually index/iterator traversal</td><td>Key-based access</td></tr>
+              <tr><td>Duplicates depend on implementation</td><td>Keys unique, values can repeat</td></tr>
+            </tbody>
+          </table>
+
+          <h3>List interface</h3>
+          <ol>
+            <li>Allows duplicates.</li>
+            <li>Maintains insertion order.</li>
+            <li>Allows multiple null values.</li>
+            <li>Implementations: <code>ArrayList</code>, <code>LinkedList</code>, <code>Vector</code>, <code>Stack</code>.</li>
+          </ol>
+
+          <h3>ArrayList overview</h3>
+          <ul>
+            <li>Growable array-backed structure; default capacity 10.</li>
+            <li>Fast random access (index-based fetch).</li>
+            <li>Not synchronized, not thread-safe.</li>
+          </ul>
+
+          <h3>Generics in collections</h3>
+          <p>Generics provide type safety and reduce explicit type casting.</p>
+          <pre><code>ArrayList<String> snames=new ArrayList<String>();
+snames.add("venky");
+snames.add("parithosh");
+snames.add("mohan");
+System.out.println(snames);</code></pre>
+
+          <h3>Common List APIs</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>add()</code>, <code>addAll()</code></td><td>Insert elements</td></tr>
+              <tr><td><code>get()</code>, <code>set()</code></td><td>Read/update by index</td></tr>
+              <tr><td><code>size()</code></td><td>Total elements</td></tr>
+              <tr><td><code>indexOf()</code>, <code>lastIndexOf()</code></td><td>Find index</td></tr>
+              <tr><td><code>subList()</code>, <code>contains()</code></td><td>Slice/membership</td></tr>
+              <tr><td><code>remove()</code>, <code>clear()</code>, <code>isEmpty()</code></td><td>Delete/clear checks</td></tr>
+              <tr><td><code>Collections.sort()</code>, <code>reverse()</code>, <code>max()</code>, <code>min()</code>, <code>frequency()</code></td><td>Utility operations</td></tr>
+              <tr><td><code>clone()</code></td><td>Shallow copy</td></tr>
+              <tr><td><code>Arrays.asList()</code></td><td>Array to List conversion</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Shallow copy vs deep copy reference assignment</h3>
+          <pre><code>ArrayList<String> al1=new ArrayList<String>();
+al1.add("rohit");
+al1.add("virat");
+al1.add("gill");
+
+ArrayList<String> al2=(ArrayList<String>)al1.clone(); // shallow copy
+al2.set(2,"venky"); // al1 unchanged
+
+ArrayList<String> al3=al1; // reference assignment
+al3.set(2,"manju"); // al1 also changed</code></pre>
+
+          <h3>LinkedList, Vector, Stack quick differences</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Best use</th>
+                <th>Sync/Thread safety</th>
+                <th>Special behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>LinkedList</td><td>Frequent insertion/deletion</td><td>Not synchronized</td><td>Doubly linked structure</td></tr>
+              <tr><td>Vector</td><td>Legacy synchronized list</td><td>Synchronized, thread-safe</td><td>Legacy collection</td></tr>
+              <tr><td>Stack</td><td>LIFO operations</td><td>Synchronized, thread-safe</td><td><code>push()</code>, <code>peek()</code>, <code>pop()</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>Set interface</h3>
+          <ol>
+            <li>No duplicates.</li>
+            <li>Typically not index-based.</li>
+            <li>Implementations: <code>HashSet</code>, <code>LinkedHashSet</code>, <code>TreeSet</code>.</li>
+          </ol>
+
+          <h3>HashSet vs LinkedHashSet vs TreeSet</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Order</th>
+                <th>Null</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>HashSet</td><td>No insertion order</td><td>One null allowed</td><td>Hash table based</td></tr>
+              <tr><td>LinkedHashSet</td><td>Maintains insertion order</td><td>One null allowed</td><td>Hash + linked list</td></tr>
+              <tr><td>TreeSet</td><td>Sorted ascending</td><td>No null</td><td>Tree based, homogeneous comparable data</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Queue and Deque</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Interface</th>
+                <th>Implementation</th>
+                <th>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Queue</td><td>PriorityQueue</td><td>Head-tail processing, no null, duplicates allowed</td></tr>
+              <tr><td>Deque</td><td>ArrayDeque</td><td>Insert/delete at both ends, no null</td></tr>
+            </tbody>
+          </table>
+
+          <h3>PriorityQueue methods</h3>
+          <p><code>offer()</code> inserts, <code>peek()</code> reads head, <code>poll()</code> removes head.</p>
+          <pre><code>PriorityQueue<Integer> p1=new PriorityQueue<Integer>();
+p1.offer(3);
+p1.offer(4);
+p1.offer(2);
+System.out.println(p1);
+System.out.println(p1.peek());
+p1.poll();
+System.out.println(p1);</code></pre>
+
+          <h3>Map interface</h3>
+          <ol>
+            <li>Stores key-value pairs (entries).</li>
+            <li>Keys must be unique; values may duplicate.</li>
+            <li>Implementations: <code>HashMap</code>, <code>LinkedHashMap</code>, <code>TreeMap</code>, <code>Hashtable</code>, <code>Properties</code>.</li>
+          </ol>
+
+          <h3>Map implementations difference</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Order</th>
+                <th>Null key/value</th>
+                <th>Sync</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>HashMap</td><td>No insertion order</td><td>1 null key, multiple null values</td><td>Not synchronized</td></tr>
+              <tr><td>LinkedHashMap</td><td>Maintains insertion order</td><td>1 null key, multiple null values</td><td>Not synchronized</td></tr>
+              <tr><td>TreeMap</td><td>Sorted by key</td><td>No null key</td><td>Not synchronized</td></tr>
+              <tr><td>Hashtable</td><td>No insertion order</td><td>No null key/value</td><td>Synchronized</td></tr>
+              <tr><td>Properties</td><td>Hashtable subclass</td><td>Used for config key-value files</td><td>Typically synchronized via Hashtable</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Common Map APIs</h3>
+          <p><code>put()</code>, <code>size()</code>, <code>get()</code>, <code>containsKey()</code>, <code>containsValue()</code>, <code>keySet()</code>, <code>values()</code>, <code>entrySet()</code>, <code>clear()</code>, <code>isEmpty()</code>.</p>
+          <pre><code>HashMap<Integer,String> hm=new HashMap<Integer,String>();
+hm.put(12,"venky");
+hm.put(11,"Hemanth");
+hm.put(10,"parithosh");
+System.out.println(hm);
+System.out.println(hm.size());
+System.out.println(hm.get(12));
+System.out.println(hm.containsKey(11));
+System.out.println(hm.containsValue("Hemanth"));
+System.out.println(hm.keySet());
+System.out.println(hm.values());
+System.out.println(hm.entrySet());</code></pre>
+
+          <h3>Properties file use (avoid hardcoding)</h3>
+          <pre><code>// db.properties
+Username="Bhavadeesh"
+Password="Bhavi123"</code></pre>
+          <pre><code>import java.io.*;
+import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    try
+    {
+      FileInputStream fis=new FileInputStream("db.properties");
+      Properties p=new Properties();
+      p.load(fis);
+      String un=p.getProperty("Username");
+      String pw=p.getProperty("Password");
+      System.out.println(un);
+      System.out.println(pw);
+    }
+    catch(Exception e)
+    {
+      System.out.println(e);
+    }
+  }
+}</code></pre>
+
+          <h3>FailFast vs FailSafe</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Behavior while modifying during traversal</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>FailFast</td><td>Throws <code>ConcurrentModificationException</code></td><td>ArrayList, LinkedList, HashSet, etc.</td></tr>
+              <tr><td>FailSafe</td><td>No CME; works on copy/concurrent structure</td><td>CopyOnWriteArrayList, concurrent collections</td></tr>
+            </tbody>
+          </table>
+
+          <pre><code>import java.util.concurrent.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    CopyOnWriteArrayList<Integer> al=new CopyOnWriteArrayList<Integer>();
+    al.add(1); al.add(2); al.add(3); al.add(4);
+    for(int rs:al)
+    {
+      if(rs==1)
+      {
+        al.add(5678);
+      }
+    }
+    System.out.println(al);
+  }
+}</code></pre>
+
+          <h3>HashMap vs IdentityHashMap</h3>
+          <p>HashMap compares keys by <code>equals()</code>; IdentityHashMap compares by reference identity (<code>==</code>).</p>
+          <pre><code>HashMap<String,Integer> hm=new HashMap<String,Integer>();
+hm.put("ajay",200);
+hm.put(new String("ajay"),600);
+System.out.println(hm.size()); // 1 key replaced
+
+IdentityHashMap<String,Integer> ihm=new IdentityHashMap<String,Integer>();
+ihm.put("ajay",200);
+ihm.put(new String("ajay"),600);
+System.out.println(ihm.size()); // 2 different key objects</code></pre>
+
+          <h3>HashMap vs WeakHashMap</h3>
+          <p>WeakHashMap uses weak references for keys and entries can be garbage-collected when key has no strong reference.</p>
+
+          <h3>Cursors in collections</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Cursor</th>
+                <th>Applicable on</th>
+                <th>Capabilities</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Enumeration</td><td>Legacy collections (Vector, Stack)</td><td>Read only</td></tr>
+              <tr><td>Iterator</td><td>All collections</td><td>Read + remove</td></tr>
+              <tr><td>ListIterator</td><td>List only</td><td>Bidirectional, read/remove/add/set</td></tr>
+            </tbody>
+          </table>
+
+          <pre><code>ArrayList<Integer> al=new ArrayList<Integer>();
+al.add(1); al.add(2); al.add(3); al.add(4); al.add(5);
+Iterator<Integer> i=al.iterator();
+while(i.hasNext())
+{
+  Integer x=i.next();
+  if(x%2!=0)
+  {
+    i.remove();
+  }
+}
+System.out.println(al); // [2, 4]</code></pre>
+
+          <pre><code>ArrayList<String> al=new ArrayList<String>();
+al.add("Balakrishna");
+al.add("venky");
+al.add("nag");
+al.add("chiru");
+ListIterator<String> li=al.listIterator();
+while(li.hasNext())
+{
+  String s=li.next();
+  if(s.equals("venky"))
+  {
+    li.remove();
+  }
+  else if(s.equals("nag"))
+  {
+    li.add("chaitu");
+  }
+  else if(s.equals("chiru"))
+  {
+    li.set("charan");
+  }
+}
+System.out.println(al);</code></pre>
+
+          <h3>Comparable vs Comparator</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Comparable</th>
+                <th>Comparator</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>In <code>java.lang</code></td><td>In <code>java.util</code></td></tr>
+              <tr><td><code>compareTo(T o)</code></td><td><code>compare(T o1, T o2)</code></td></tr>
+              <tr><td>Sorting logic inside same business class</td><td>Sorting logic in separate class</td></tr>
+              <tr><td>Best for one natural order</td><td>Best for multiple sorting strategies</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Comparable example</h3>
+          <pre><code>import java.util.*;
+class Student implements Comparable<Student>
+{
+  int sno;
+  String sname;
+  Student(int sno,String sname)
+  {
+    this.sno=sno;
+    this.sname=sname;
+  }
+  public int compareTo(Student s)
+  {
+    return this.sno-s.sno;
+  }
+  public String toString()
+  {
+    return sno+" "+sname;
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    ArrayList<Student> al=new ArrayList<Student>();
+    al.add(new Student(121,"parithosh"));
+    al.add(new Student(25,"venky"));
+    al.add(new Student(32,"Manju"));
+    Collections.sort(al);
+    for(Student s:al)
+    {
+      System.out.println(s);
+    }
+  }
+}</code></pre>
+
+          <h3>Comparator example</h3>
+          <pre><code>import java.util.*;
+class Emp
+{
+  int eno;
+  String ename;
+  Emp(int eno,String ename)
+  {
+    this.eno=eno;
+    this.ename=ename;
+  }
+  public String toString()
+  {
+    return eno+" "+ename;
+  }
+}
+class Enamecom implements Comparator<Emp>
+{
+  public int compare(Emp e1,Emp e2)
+  {
+    return e1.ename.compareTo(e2.ename);
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    ArrayList<Emp> al=new ArrayList<Emp>();
+    al.add(new Emp(65,"bhavi"));
+    al.add(new Emp(45,"hari"));
+    al.add(new Emp(75,"ravi"));
+    Collections.sort(al,new Enamecom());
+    for(Emp e:al)
+    {
+      System.out.println(e);
+    }
   }
 }</code></pre>
         </details>
