@@ -212,6 +212,7 @@ const noteSource = `
       position: relative;
       font-size: clamp(1.08rem, 1.6vw, 1.3rem);
       font-weight: 700;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     }
 
     summary::-webkit-details-marker {
@@ -333,6 +334,10 @@ const noteSource = `
     }
 
     code {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    pre code {
       font-family: Consolas, "Courier New", monospace;
     }
 
