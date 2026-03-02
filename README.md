@@ -1,4 +1,4 @@
-# Java Full Stack Notes (Pure React)
+# Java Full Stack Notes
 
 This project is now a pure React + React Router app.  
 All note modules are served through React routes and rendered inline in React.
