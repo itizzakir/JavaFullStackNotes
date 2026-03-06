@@ -500,6 +500,172 @@ const noteSource = `
       max-width: 220px;
     }
 
+    .exception-hierarchy {
+      padding: 6px 4px 2px;
+    }
+
+    .exception-root {
+      position: relative;
+      max-width: 300px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .exception-root::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 4px);
+      height: 24px;
+      border-left: 3px solid #111827;
+      transform: translateX(-50%);
+    }
+
+    .exception-label {
+      margin: 0 0 8px;
+      color: #0f766e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .exception-node {
+      border: 3px solid #111827;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .exception-node code {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    .exception-node-root {
+      background: linear-gradient(180deg, #ecfeff 0%, #f8fafc 100%);
+    }
+
+    .exception-node-exception {
+      border-color: #0f766e;
+      background: linear-gradient(180deg, #ecfdf5 0%, #f8fafc 100%);
+    }
+
+    .exception-node-error {
+      border-color: #b91c1c;
+      background: linear-gradient(180deg, #fff1f2 0%, #f8fafc 100%);
+    }
+
+    .exception-caption {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .exception-branches {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .exception-branches::before {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      top: -18px;
+      border-top: 3px solid #111827;
+    }
+
+    .exception-branch {
+      position: relative;
+      padding-top: 16px;
+    }
+
+    .exception-branch::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -18px;
+      height: 16px;
+      border-left: 3px solid #111827;
+      transform: translateX(-50%);
+    }
+
+    .exception-branch-note {
+      margin: 10px 0 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    .exception-panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .exception-panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .exception-panel h4 {
+      margin: 0 0 6px;
+      font-size: 0.97rem;
+      color: #0f172a;
+    }
+
+    .exception-panel p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .exception-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.9rem;
+    }
+
+    .exception-panel.checked {
+      border-color: #99f6e4;
+      background: #f0fdfa;
+    }
+
+    .exception-panel.unchecked {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .exception-panel.custom {
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .exception-panel.error {
+      border-color: #fecaca;
+      background: #fff1f2;
+    }
+
+    .exception-footnote {
+      margin: 16px 0 0;
+      padding: 12px 14px;
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      background: #f8fbff;
+      color: #334155;
+      font-size: 0.93rem;
+    }
+
     .topic-sep {
       margin: 18px 0 10px;
       border: 0;
@@ -584,6 +750,22 @@ const noteSource = `
         border-radius: 16px;
         padding: 12px 16px;
       }
+
+      .exception-root {
+        margin-bottom: 20px;
+      }
+
+      .exception-root::after,
+      .exception-branches::before,
+      .exception-branch::before {
+        display: none;
+      }
+
+      .exception-branches {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 0;
+      }
     }
 
     @media (max-width: 700px) {
@@ -657,6 +839,14 @@ const noteSource = `
       .keyword-box,
       .keyword-box.long {
         min-height: 0;
+      }
+
+      .exception-node {
+        font-size: 0.96rem;
+      }
+
+      .exception-panels {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -8411,6 +8601,92 @@ class Demo
           <p><code>Throwable</code> is the predefined root class for exception hierarchy (<code>Exception</code>, <code>RuntimeException</code>, etc).</p>
           <p>Exception is runtime problem object. It can be handled using <code>try/catch</code> or <code>throws</code>.</p>
 
+          <h3>Java Exception Hierarchy Diagram</h3>
+          <div class="diagram-wrap">
+            <div class="exception-hierarchy">
+              <div class="exception-root">
+                <p class="exception-label">Root class</p>
+                <div class="exception-node exception-node-root"><code>Throwable</code></div>
+                <p class="exception-caption">Base type for everything that can be thrown in Java.</p>
+              </div>
+
+              <div class="exception-branches">
+                <div class="exception-branch">
+                  <div class="exception-node exception-node-exception"><code>Exception</code></div>
+                  <p class="exception-branch-note">Application-level problems that can usually be handled.</p>
+                  <div class="exception-panels">
+                    <article class="exception-panel checked">
+                      <h4>Checked Exceptions</h4>
+                      <p>Checked by compiler. Must be handled or declared with <code>throws</code>.</p>
+                      <ul>
+                        <li><code>IOException</code></li>
+                        <li><code>SQLException</code></li>
+                        <li><code>ClassNotFoundException</code></li>
+                        <li><code>InterruptedException</code></li>
+                      </ul>
+                    </article>
+
+                    <article class="exception-panel unchecked">
+                      <h4>Unchecked Exceptions</h4>
+                      <p>Subclasses of <code>RuntimeException</code>. Not checked by compiler.</p>
+                      <ul>
+                        <li><code>ArithmeticException</code></li>
+                        <li><code>NullPointerException</code></li>
+                        <li><code>NumberFormatException</code></li>
+                        <li><code>ArrayIndexOutOfBoundsException</code></li>
+                      </ul>
+                    </article>
+
+                    <article class="exception-panel custom">
+                      <h4>Custom Exceptions</h4>
+                      <p>User-defined exceptions for business rules and domain validation.</p>
+                      <ul>
+                        <li><code>InvalidAgeException</code></li>
+                        <li><code>InsufficientBalanceException</code></li>
+                        <li><code>UserNotFoundException</code></li>
+                      </ul>
+                    </article>
+                  </div>
+                </div>
+
+                <div class="exception-branch">
+                  <div class="exception-node exception-node-error"><code>Error</code></div>
+                  <p class="exception-branch-note">Serious JVM or environment failures that applications rarely recover from.</p>
+                  <div class="exception-panels">
+                    <article class="exception-panel error">
+                      <h4>Virtual Machine Errors</h4>
+                      <p>Usually caused by memory or stack exhaustion.</p>
+                      <ul>
+                        <li><code>OutOfMemoryError</code></li>
+                        <li><code>StackOverflowError</code></li>
+                      </ul>
+                    </article>
+
+                    <article class="exception-panel error">
+                      <h4>Linkage / Loading Errors</h4>
+                      <p>Class files are missing or incompatible at runtime.</p>
+                      <ul>
+                        <li><code>NoClassDefFoundError</code></li>
+                        <li><code>UnsatisfiedLinkError</code></li>
+                      </ul>
+                    </article>
+
+                    <article class="exception-panel error">
+                      <h4>Other Serious Errors</h4>
+                      <p>These indicate failures outside normal application flow.</p>
+                      <ul>
+                        <li><code>AssertionError</code></li>
+                        <li><code>InternalError</code></li>
+                      </ul>
+                    </article>
+                  </div>
+                </div>
+              </div>
+
+              <p class="exception-footnote"><strong>Important:</strong> syntax mistakes like missing <code>;</code> or unbalanced braces are compile-time errors, but they are not part of Java's <code>Throwable</code> hierarchy.</p>
+            </div>
+          </div>
+
           <h3>Exception vs Error</h3>
           <table>
             <thead>
@@ -8431,13 +8707,9 @@ class Demo
                 <td>System/resource level severe issues</td>
                 <td><code>OutOfMemoryError</code>, <code>StackOverflowError</code></td>
               </tr>
-              <tr>
-                <td>Compile-time syntax error</td>
-                <td>Programmer syntax mistakes</td>
-                <td>Missing <code>;</code>, unbalanced braces</td>
-              </tr>
             </tbody>
           </table>
+          <p class="sub">Compile-time syntax mistakes belong to program errors classification, not to the Java exception hierarchy.</p>
 
           <h3>Types of Exceptions</h3>
           <h3>1.Checked Exceptions</h3>
