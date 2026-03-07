@@ -397,6 +397,193 @@ const noteSource = `
       overflow-x: auto;
     }
 
+    .collection-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .collection-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .collection-legend-chip {
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      flex: 0 0 auto;
+    }
+
+    .collection-legend-chip.interface {
+      background: #84cc16;
+      border-color: #3f6212;
+    }
+
+    .collection-legend-chip.class {
+      background: #fdba74;
+      border-color: #c2410c;
+    }
+
+    .collection-legend-line {
+      width: 28px;
+      border-top: 3px solid #334155;
+      flex: 0 0 auto;
+    }
+
+    .collection-legend-line.dashed {
+      border-top-style: dashed;
+    }
+
+    .collection-diagram-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 1080px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    .collection-diagram-svg .line-solid {
+      stroke: #334155;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .collection-diagram-svg .line-dashed {
+      stroke: #64748b;
+      stroke-width: 3;
+      fill: none;
+      stroke-dasharray: 7 7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .collection-diagram-svg .node-label {
+      fill: #0f172a;
+      font-size: 18px;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .collection-diagram-svg .note-label {
+      fill: #475569;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .collection-diagram-svg .interface-node {
+      fill: #84cc16;
+      stroke: #3f6212;
+      stroke-width: 1.5;
+    }
+
+    .collection-diagram-svg .class-node {
+      fill: #fdba74;
+      stroke: #c2410c;
+      stroke-width: 1.5;
+    }
+
+    .cursor-diagram {
+      position: relative;
+      padding: 6px 6px 0;
+    }
+
+    .cursor-root {
+      width: min(200px, 100%);
+      margin: 0 auto 42px;
+      padding: 14px 16px;
+      border: 4px solid #111827;
+      background: #fff;
+      text-align: center;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #ef4444;
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    .cursor-root::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -28px;
+      height: 28px;
+      border-left: 3px solid #111827;
+      transform: translateX(-50%);
+    }
+
+    .cursor-branches {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .cursor-branches::before {
+      content: "";
+      position: absolute;
+      left: 16.5%;
+      right: 16.5%;
+      top: -18px;
+      border-top: 3px solid #111827;
+    }
+
+    .cursor-branch {
+      position: relative;
+      padding-top: 28px;
+    }
+
+    .cursor-branch::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -18px;
+      height: 28px;
+      border-left: 3px solid #111827;
+      transform: translateX(-50%);
+    }
+
+    .cursor-card {
+      height: 100%;
+      border: 3px solid #111827;
+      background: #fff;
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cursor-card h4 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 1.04rem;
+      color: #ef4444;
+    }
+
+    .cursor-direction {
+      margin: 0 0 8px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .cursor-facts {
+      margin: 0;
+      padding-left: 18px;
+      color: #334155;
+      font-size: 0.94rem;
+    }
+
+    .cursor-facts li {
+      margin: 6px 0;
+    }
+
     .datatype-map {
       min-width: 960px;
       position: relative;
@@ -931,6 +1118,25 @@ const noteSource = `
 
       .diagram-wrap {
         padding: 10px;
+      }
+
+      .cursor-root {
+        margin-bottom: 18px;
+      }
+
+      .cursor-root::after,
+      .cursor-branches::before,
+      .cursor-branch::before {
+        display: none;
+      }
+
+      .cursor-branches {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .cursor-branch {
+        padding-top: 0;
       }
 
       .keyword-box,
@@ -9378,6 +9584,153 @@ System.out.println(f2);</code></pre>
             </tbody>
           </table>
 
+          <h3>Collection framework hierarchy diagram</h3>
+          <div class="diagram-wrap">
+            <div class="collection-legend">
+              <span class="collection-legend-item"><span class="collection-legend-chip interface"></span>Interface</span>
+              <span class="collection-legend-item"><span class="collection-legend-chip class"></span>Class</span>
+              <span class="collection-legend-item"><span class="collection-legend-line"></span>extends</span>
+              <span class="collection-legend-item"><span class="collection-legend-line dashed"></span>implements</span>
+            </div>
+
+            <svg class="collection-diagram-svg" viewBox="0 0 1120 660" role="img" aria-labelledby="collection-framework-title">
+              <title id="collection-framework-title">Java collection framework hierarchy</title>
+
+              <text class="note-label" x="70" y="32">Collection side</text>
+              <text class="note-label" x="750" y="32">Map side</text>
+
+              <path class="line-solid" d="M300 84 L300 110" />
+              <path class="line-solid" d="M300 154 L300 205 M130 205 L470 205 M130 205 L130 240 M300 205 L300 240 M470 205 L470 240" />
+              <path class="line-dashed" d="M130 284 L130 338 L90 338 L90 360 M90 338 L90 430 M90 338 L90 500" />
+              <path class="line-solid" d="M90 544 L90 570" />
+              <path class="line-solid" d="M300 284 L300 380" />
+              <path class="line-dashed" d="M300 284 L300 310" />
+              <path class="line-dashed" d="M300 424 L300 450" />
+              <path class="line-dashed" d="M160 452 L205 452 L205 402 L230 402" />
+              <path class="line-solid" d="M470 284 L470 500" />
+              <path class="line-dashed" d="M470 284 L470 338 L630 338 L630 360" />
+              <path class="line-solid" d="M630 404 L630 430" />
+              <path class="line-dashed" d="M470 544 L470 570" />
+
+              <path class="line-solid" d="M830 84 L830 190" />
+              <path class="line-solid" d="M830 234 L830 340" />
+              <path class="line-dashed" d="M830 108 L920 108 L920 382 M920 202 L950 202 M920 382 L950 382" />
+              <path class="line-solid" d="M1020 224 L1020 270" />
+
+              <g transform="translate(230 40)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Iterable</text>
+              </g>
+
+              <g transform="translate(230 110)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Collection</text>
+              </g>
+
+              <g transform="translate(60 240)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">List</text>
+              </g>
+
+              <g transform="translate(230 240)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Queue</text>
+              </g>
+
+              <g transform="translate(400 240)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Set</text>
+              </g>
+
+              <g transform="translate(20 360)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">ArrayList</text>
+              </g>
+
+              <g transform="translate(20 430)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">LinkedList</text>
+              </g>
+
+              <g transform="translate(20 500)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Vector</text>
+              </g>
+
+              <g transform="translate(20 570)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Stack</text>
+              </g>
+
+              <g transform="translate(230 310)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">PriorityQueue</text>
+              </g>
+
+              <g transform="translate(230 380)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Deque</text>
+              </g>
+
+              <g transform="translate(230 450)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">ArrayDeque</text>
+              </g>
+
+              <g transform="translate(560 360)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">HashSet</text>
+              </g>
+
+              <g transform="translate(560 430)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">LinkedHashSet</text>
+              </g>
+
+              <g transform="translate(400 500)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">SortedSet</text>
+              </g>
+
+              <g transform="translate(400 570)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">TreeSet</text>
+              </g>
+
+              <g transform="translate(760 40)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Map</text>
+              </g>
+
+              <g transform="translate(760 190)">
+                <rect class="interface-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">SortedMap</text>
+              </g>
+
+              <g transform="translate(760 340)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">TreeMap</text>
+              </g>
+
+              <g transform="translate(950 180)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">HashMap</text>
+              </g>
+
+              <g transform="translate(950 270)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">LinkedHashMap</text>
+              </g>
+
+              <g transform="translate(950 360)">
+                <rect class="class-node" width="140" height="44" rx="12" ry="12"></rect>
+                <text class="node-label" x="70" y="22">Hashtable</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="tip">This is a simplified revision diagram. Interfaces like <code>NavigableSet</code> and <code>NavigableMap</code> are skipped so the most-used interview hierarchy stays easy to remember.</div>
+
           <h3>List interface</h3>
           <ol>
             <li>Allows duplicates.</li>
@@ -9570,19 +9923,35 @@ class Demo
 }</code></pre>
 
           <h3>FailFast vs FailSafe</h3>
+          <p><strong>Fail-fast / non-concurrent collections:</strong> iterators work on the original collection. If the collection is structurally modified during traversal, they usually throw <code>ConcurrentModificationException</code>.</p>
+          <p><strong>Fail-safe / concurrent collections:</strong> iterators work on a snapshot or concurrent view, so they do not throw <code>ConcurrentModificationException</code> during traversal.</p>
           <table>
             <thead>
               <tr>
                 <th>Type</th>
+                <th>Iterator works on</th>
                 <th>Behavior while modifying during traversal</th>
                 <th>Examples</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>FailFast</td><td>Throws <code>ConcurrentModificationException</code></td><td>ArrayList, LinkedList, HashSet, etc.</td></tr>
-              <tr><td>FailSafe</td><td>No CME; works on copy/concurrent structure</td><td>CopyOnWriteArrayList, concurrent collections</td></tr>
+              <tr><td>FailFast</td><td>Original collection</td><td>Throws <code>ConcurrentModificationException</code></td><td>ArrayList, LinkedList, Vector, HashSet, LinkedHashSet, HashMap</td></tr>
+              <tr><td>FailSafe</td><td>Snapshot or weakly consistent view</td><td>No CME; changes are handled through copy/concurrent structure</td><td>CopyOnWriteArrayList, ConcurrentHashMap, <code>ConcurrentHashMap.newKeySet()</code></td></tr>
             </tbody>
           </table>
+
+          <div class="tip">Interview note: <code>Iterator.remove()</code> is allowed for fail-fast iterators. The exception usually happens when the collection is modified directly while traversal is still running.</div>
+
+          <pre><code>ArrayList<Integer> al=new ArrayList<Integer>();
+al.add(10); al.add(20); al.add(30);
+for(Integer x:al)
+{
+  if(x==20)
+  {
+    al.add(99); // direct structural change during traversal
+  }
+}
+System.out.println(al); // throws ConcurrentModificationException</code></pre>
 
           <pre><code>import java.util.concurrent.*;
 class Demo
@@ -9618,20 +9987,77 @@ System.out.println(ihm.size()); // 2 different key objects</code></pre>
           <p>WeakHashMap uses weak references for keys and entries can be garbage-collected when key has no strong reference.</p>
 
           <h3>Cursors in collections</h3>
+          <div class="diagram-wrap">
+            <div class="cursor-diagram">
+              <div class="cursor-root">CURSORS</div>
+
+              <div class="cursor-branches">
+                <article class="cursor-branch">
+                  <div class="cursor-card">
+                    <h4>Enumeration</h4>
+                    <p class="cursor-direction">Forward direction only</p>
+                    <ul class="cursor-facts">
+                      <li>Read-only cursor.</li>
+                      <li>Used with legacy classes such as <code>Vector</code>, <code>Stack</code> and <code>Hashtable</code>.</li>
+                      <li>Main methods: <code>hasMoreElements()</code> and <code>nextElement()</code>.</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <article class="cursor-branch">
+                  <div class="cursor-card">
+                    <h4>Iterator</h4>
+                    <p class="cursor-direction">Forward direction only</p>
+                    <ul class="cursor-facts">
+                      <li>Can read and remove data while traversing.</li>
+                      <li>Applicable to almost all collection types such as <code>ArrayList</code>, <code>Vector</code> and <code>HashSet</code>.</li>
+                      <li>Main methods: <code>hasNext()</code>, <code>next()</code> and <code>remove()</code>.</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <article class="cursor-branch">
+                  <div class="cursor-card">
+                    <h4>ListIterator</h4>
+                    <p class="cursor-direction">Forward and backward (bidirectional)</p>
+                    <ul class="cursor-facts">
+                      <li>Can read, remove, add and set data.</li>
+                      <li>Applicable only to <code>List</code> implementations such as <code>ArrayList</code>, <code>LinkedList</code>, <code>Vector</code> and <code>Stack</code>.</li>
+                      <li>Main methods: <code>hasPrevious()</code>, <code>previous()</code>, <code>add()</code> and <code>set()</code>.</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="tip">Quick memory rule: <code>Enumeration</code> = read only, <code>Iterator</code> = read + remove, <code>ListIterator</code> = read + remove + add + set in both directions.</div>
+
           <table>
             <thead>
               <tr>
                 <th>Cursor</th>
                 <th>Applicable on</th>
+                <th>Direction</th>
                 <th>Capabilities</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Enumeration</td><td>Legacy collections (Vector, Stack)</td><td>Read only</td></tr>
-              <tr><td>Iterator</td><td>All collections</td><td>Read + remove</td></tr>
-              <tr><td>ListIterator</td><td>List only</td><td>Bidirectional, read/remove/add/set</td></tr>
+              <tr><td>Enumeration</td><td>Legacy collections / classes</td><td>Forward only</td><td>Read only</td></tr>
+              <tr><td>Iterator</td><td>Most collection types</td><td>Forward only</td><td>Read + remove</td></tr>
+              <tr><td>ListIterator</td><td>List only</td><td>Forward + backward</td><td>Read + remove + add + set</td></tr>
             </tbody>
           </table>
+
+          <pre><code>Vector<String> v=new Vector<String>();
+v.add("A");
+v.add("B");
+v.add("C");
+Enumeration<String> e=v.elements();
+while(e.hasMoreElements())
+{
+  System.out.println(e.nextElement());
+}</code></pre>
 
           <pre><code>ArrayList<Integer> al=new ArrayList<Integer>();
 al.add(1); al.add(2); al.add(3); al.add(4); al.add(5);
