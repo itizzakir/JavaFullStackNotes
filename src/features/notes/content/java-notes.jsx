@@ -666,6 +666,99 @@ const noteSource = `
       font-size: 0.93rem;
     }
 
+    .exception-mini-tree {
+      padding: 4px 4px 0;
+    }
+
+    .exception-super-root {
+      width: fit-content;
+      margin: 0 auto 6px;
+      padding: 6px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .exception-super-arrow {
+      margin: 0 0 8px;
+      text-align: center;
+      color: #475569;
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .exception-mini-tree .exception-node {
+      max-width: 280px;
+      margin: 0 auto 18px;
+      text-align: center;
+    }
+
+    .exception-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .exception-mini-box {
+      border: 1px solid var(--line);
+      border-top-width: 5px;
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .exception-mini-box.exception {
+      border-top-color: #14b8a6;
+      background: #f0fdfa;
+    }
+
+    .exception-mini-box.error {
+      border-top-color: #ef4444;
+      background: #fff1f2;
+    }
+
+    .exception-mini-box h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .exception-mini-list,
+    .exception-mini-sublist {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .exception-mini-list li,
+    .exception-mini-sublist li {
+      position: relative;
+      margin: 6px 0;
+      padding-left: 20px;
+    }
+
+    .exception-mini-list li::before,
+    .exception-mini-sublist li::before {
+      content: "->";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #64748b;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .exception-mini-sublist {
+      margin-top: 6px;
+      margin-left: 14px;
+      padding-left: 12px;
+      border-left: 2px solid #cbd5e1;
+    }
+
     .topic-sep {
       margin: 18px 0 10px;
       border: 0;
@@ -765,6 +858,10 @@ const noteSource = `
         grid-template-columns: 1fr;
         gap: 16px;
         margin-top: 0;
+      }
+
+      .exception-mini-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -8684,6 +8781,50 @@ class Demo
               </div>
 
               <p class="exception-footnote"><strong>Important:</strong> syntax mistakes like missing <code>;</code> or unbalanced braces are compile-time errors, but they are not part of Java's <code>Throwable</code> hierarchy.</p>
+            </div>
+          </div>
+
+          <h3>Quick Tree View</h3>
+          <div class="diagram-wrap">
+            <div class="exception-mini-tree">
+              <div class="exception-super-root"><code>Object</code></div>
+              <p class="exception-super-arrow">&darr;</p>
+              <div class="exception-node exception-node-root"><code>Throwable</code></div>
+
+              <div class="exception-mini-grid">
+                <article class="exception-mini-box exception">
+                  <h4><code>Exception</code></h4>
+                  <ul class="exception-mini-list">
+                    <li><code>IOException</code></li>
+                    <li><code>ClassNotFoundException</code></li>
+                    <li><code>SQLException</code></li>
+                    <li>
+                      <code>RuntimeException</code>
+                      <ul class="exception-mini-sublist">
+                        <li><code>ArithmeticException</code></li>
+                        <li><code>NullPointerException</code></li>
+                        <li><code>NumberFormatException</code></li>
+                        <li>
+                          <code>IndexOutOfBoundsException</code>
+                          <ul class="exception-mini-sublist">
+                            <li><code>StringIndexOutOfBoundsException</code></li>
+                            <li><code>ArrayIndexOutOfBoundsException</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </article>
+
+                <article class="exception-mini-box error">
+                  <h4><code>Error</code></h4>
+                  <ul class="exception-mini-list">
+                    <li><code>StackOverflowError</code></li>
+                    <li><code>VirtualMachineError</code></li>
+                    <li><code>OutOfMemoryError</code></li>
+                  </ul>
+                </article>
+              </div>
             </div>
           </div>
 
