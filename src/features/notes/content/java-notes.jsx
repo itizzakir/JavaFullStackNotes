@@ -1231,6 +1231,7 @@ const noteSource = `
         <a href="#wrapper-classes">Wrapper</a>
         <a href="#collections-framework">Collections</a>
         <a href="#slip-tests">Slip Tests</a>
+        <a href="#java-8-features">Java 8</a>
       </nav>
       <div class="tag-row">
         <span class="tag">Collapsible Notes</span>
@@ -10186,6 +10187,1191 @@ class Demo
     }
   }
 }</code></pre>
+
+          <h3>Final revision: Comparable and Comparator</h3>
+          <div class="qa-group">
+            <div class="qa-item">
+              <p>Comparable</p>
+              <ol>
+                <li><code>Comparable</code> is a predefined interface from <code>java.lang</code>.</li>
+                <li>It contains the method <code>public int compareTo(T o)</code>.</li>
+                <li>Many predefined classes such as wrapper classes and <code>String</code> already implement it, and user-defined classes can also implement it.</li>
+                <li>Sorting logic and business logic stay in the same class, so it is best when one natural ordering is enough.</li>
+              </ol>
+            </div>
+
+            <div class="qa-item">
+              <p>Comparator</p>
+              <ol>
+                <li><code>Comparator</code> is a predefined interface from <code>java.util</code>.</li>
+                <li>It contains the method <code>public int compare(T o1, T o2)</code>.</li>
+                <li>It is mainly used for user-defined classes or whenever multiple sorting orders are needed.</li>
+                <li>Sorting logic is written in a separate class, so the business class remains unchanged.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="tip">If you change sorting logic in <code>Comparable</code>, you edit the business class itself. If you change sorting logic in <code>Comparator</code>, you only edit the separate comparator class.</div>
+
+          <h3>Return value rule</h3>
+          <ul>
+            <li>If current object &gt; specified object, return a positive value.</li>
+            <li>If current object &lt; specified object, return a negative value.</li>
+            <li>If both objects are equal, return <code>0</code>.</li>
+          </ul>
+
+          <h3>Comparable example by student number</h3>
+          <pre><code>import java.util.*;
+class Student implements Comparable<Student>
+{
+  int sno;
+  String sname;
+  Student(int sno,String sname)
+  {
+    this.sno=sno;
+    this.sname=sname;
+  }
+  public int compareTo(Student s)
+  {
+    if(sno&gt;s.sno)
+    {
+      return 1;
+    }
+    else if(sno&lt;s.sno)
+    {
+      return -1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+  public String toString()
+  {
+    return sno+" "+sname;
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    ArrayList<Student> al=new ArrayList<Student>();
+    al.add(new Student(102,"arjun"));
+    al.add(new Student(100,"nakul"));
+    al.add(new Student(101,"madhu"));
+    System.out.println(al);
+    Collections.sort(al);
+    System.out.println(al);
+  }
+}</code></pre>
+
+          <h3>Comparator example with separate sorting class</h3>
+          <pre><code>import java.util.*;
+class Student
+{
+  int sno;
+  String sname;
+  Student(int sno,String sname)
+  {
+    this.sno=sno;
+    this.sname=sname;
+  }
+  public String toString()
+  {
+    return sno+" "+sname;
+  }
+}
+class StudentSor implements Comparator<Student>
+{
+  public int compare(Student s1,Student s2)
+  {
+    if(s1.sno&gt;s2.sno)
+    {
+      return 1;
+    }
+    else if(s1.sno&lt;s2.sno)
+    {
+      return -1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    ArrayList<Student> al=new ArrayList<Student>();
+    al.add(new Student(102,"arjun"));
+    al.add(new Student(100,"nakul"));
+    al.add(new Student(101,"madhu"));
+    System.out.println(al);
+    Collections.sort(al,new StudentSor());
+    System.out.println(al);
+  }
+}</code></pre>
+        </details>
+      </section>
+
+      <section class="card" id="java-8-features" data-keywords="java 8 features lambda expression functional interface default method static method predefined functional interfaces predicate function consumer supplier foreach method reference constructor reference stream api optional localdate localtime localdatetime date api">
+        <details>
+          <summary>36.Java 8 Features</summary>
+
+          <h3>Java 8 overview</h3>
+          <ol>
+            <li>Java 8 simplifies Java programming.</li>
+            <li>It encourages functional programming style.</li>
+            <li>It helps write more readable and concise code.</li>
+          </ol>
+
+          <p>In Java 8, behavior can be represented and passed more easily by using lambda expressions, method references, and functional interfaces.</p>
+
+          <h3>Main Java 8 topics</h3>
+          <ol>
+            <li>Lambda expression (<code>-&gt;</code>)</li>
+            <li>Functional interface with <code>default</code> and <code>static</code> methods</li>
+            <li>Predefined functional interfaces</li>
+            <li><code>forEach()</code></li>
+            <li>Method reference and constructor reference (<code>::</code>)</li>
+            <li>Stream API</li>
+            <li>Optional class</li>
+            <li>Date and Time API</li>
+          </ol>
+
+          <h3>Lambda expression</h3>
+          <ol>
+            <li>Lambda expression is an anonymous method.</li>
+            <li>An anonymous method has no access modifier, no return type, and no method name.</li>
+            <li>Lambda expression is mainly used to implement a functional interface.</li>
+            <li>Lambda expression uses the arrow symbol <code>-&gt;</code>.</li>
+            <li>If only one statement is present, curly braces are optional.</li>
+            <li>If multiple statements are present, curly braces are mandatory.</li>
+            <li>For formal parameters, datatype is optional.</li>
+            <li>If there is only one formal parameter, brackets are optional.</li>
+          </ol>
+
+          <div class="tip">Quick rule: lambda is a short way to provide the implementation of one abstract method.</div>
+
+          <h3>Lambda syntax examples</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Form</th>
+                <th>Status</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>(int a) -&gt; { return a; }</code></td><td>Valid</td><td>Block body with explicit <code>return</code></td></tr>
+              <tr><td><code>(int a) -&gt; a</code></td><td>Valid</td><td>Expression body returns automatically</td></tr>
+              <tr><td><code>(a) -&gt; a</code></td><td>Valid</td><td>Datatype removed</td></tr>
+              <tr><td><code>a -&gt; a</code></td><td>Valid</td><td>Single parameter, so brackets are optional</td></tr>
+              <tr><td><code>(int a) -&gt; return a;</code></td><td>Invalid</td><td><code>return</code> needs a block body</td></tr>
+              <tr><td><code>a -&gt; return a;</code></td><td>Invalid</td><td>Use either a block body or a plain expression</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Single statement vs multiple statements</h3>
+          <pre><code>// Single statement: braces optional
+() -&gt; System.out.println("welcome");
+
+// Multiple statements: braces mandatory
+() -&gt;
+{
+  System.out.println("welcome");
+  System.out.println("to");
+  System.out.println("java");
+};</code></pre>
+
+          <h3>Functional interface</h3>
+          <ol>
+            <li>A functional interface contains exactly one abstract method.</li>
+            <li>It may also contain any number of <code>default</code> methods and <code>static</code> methods.</li>
+            <li>The <code>@FunctionalInterface</code> annotation is optional but recommended.</li>
+            <li>Lambda expressions can be used only with functional interfaces.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Interface type</th>
+                <th>Abstract methods</th>
+                <th>Lambda compatible</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Normal interface</td><td>More than one abstract method</td><td>No</td></tr>
+              <tr><td>Marker interface</td><td>Zero abstract methods</td><td>No</td></tr>
+              <tr><td>Functional interface</td><td>Exactly one abstract method</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warn">If an interface has two abstract methods, it is not a functional interface even if you write <code>@FunctionalInterface</code>.</div>
+
+          <h3>Valid and invalid functional interface forms</h3>
+          <pre><code>// Not a functional interface: two abstract methods
+interface A
+{
+  void m1();
+  void m2();
+}
+
+// Marker interface: zero abstract methods
+interface B
+{
+}
+
+// Valid functional interface
+@FunctionalInterface
+interface C
+{
+  void m1();
+}
+
+// Valid: one abstract method + static + default methods
+@FunctionalInterface
+interface D
+{
+  void m1();
+
+  static void m2()
+  {
+    System.out.println("Hello");
+  }
+
+  default void m3()
+  {
+    System.out.println("Bye");
+  }
+}</code></pre>
+
+          <h3>Traditional implementation before lambda</h3>
+          <pre><code>interface A
+{
+  void m1();
+}
+class B implements A
+{
+  public void m1()
+  {
+    System.out.println("welcome");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=new B();
+    a1.m1();
+  }
+}</code></pre>
+
+          <h3>Lambda implementation with no parameters</h3>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1();
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=() -&gt; System.out.println("welcome");
+    a1.m1();
+  }
+}</code></pre>
+
+          <h3>Lambda implementation with one parameter</h3>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1(int a);
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=a -&gt; System.out.println(a);
+    a1.m1(55);
+  }
+}</code></pre>
+
+          <h3>Lambda implementation with two parameters</h3>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1(int a,int b);
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=(a,b) -&gt; System.out.println(a+b);
+    a1.m1(5,6);
+  }
+}</code></pre>
+
+          <h3>Functional interface with default and static methods</h3>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1();
+
+  static void m2()
+  {
+    System.out.println("Hello");
+  }
+
+  default void m3()
+  {
+    System.out.println("Bye");
+  }
+}
+class B implements A
+{
+  public void m1()
+  {
+    System.out.println("Happy sankranthi");
+  }
+}
+class Test
+{
+  public static void main(String[] args)
+  {
+    A a1=new B();
+    a1.m1();
+    a1.m3();
+    A.m2();
+  }
+}</code></pre>
+
+          <div class="tip">Memory shortcut: one abstract method decides whether an interface is functional. <code>default</code> and <code>static</code> methods do not break the functional-interface rule.</div>
+
+          <h3>forEach()</h3>
+          <ol>
+            <li><code>forEach()</code> is a Java 8 feature used to process collection elements one by one.</li>
+            <li>It works well with lambda expressions.</li>
+            <li>Internally it expects a <code>Consumer</code>, so it performs an action for each element and does not return anything.</li>
+          </ol>
+
+          <pre><code>import java.util.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    ArrayList&lt;Integer&gt; al=new ArrayList&lt;Integer&gt;();
+    al.add(10);
+    al.add(20);
+    al.add(30);
+    System.out.println(al);
+
+    // print elements by using forEach()
+    al.forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+
+          <h3>Predefined functional interfaces</h3>
+          <p>Java 8 provides ready-made functional interfaces in the <code>java.util.function</code> package.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Interface</th>
+                <th>Main method</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Predicate&lt;T&gt;</code></td><td><code>test(T t)</code></td><td>Takes input, checks a condition, returns <code>boolean</code></td></tr>
+              <tr><td><code>Function&lt;T,R&gt;</code></td><td><code>apply(T t)</code></td><td>Takes input, performs an operation, returns a value</td></tr>
+              <tr><td><code>Consumer&lt;T&gt;</code></td><td><code>accept(T t)</code></td><td>Takes input, performs an action, returns nothing</td></tr>
+              <tr><td><code>Supplier&lt;T&gt;</code></td><td><code>get()</code></td><td>Takes no input and supplies an object/value</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Predicate example</h3>
+          <pre><code>import java.util.function.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    Predicate&lt;Integer&gt; p=n -&gt; n&gt;0;
+    boolean res=p.test(7);
+    System.out.println(res);
+  }
+}</code></pre>
+
+          <h3>Function example</h3>
+          <pre><code>import java.util.function.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    Function&lt;Integer,Integer&gt; f=a -&gt; a*a;
+    int res=f.apply(4);
+    System.out.println(res);
+  }
+}</code></pre>
+
+          <h3>Consumer example</h3>
+          <pre><code>import java.util.function.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    Consumer&lt;String&gt; c=s -&gt; System.out.println(s);
+    c.accept("irfan");
+  }
+}</code></pre>
+
+          <h3>Supplier example</h3>
+          <pre><code>import java.util.function.*;
+import java.util.Date;
+class Test
+{
+  public static void main(String[] args)
+  {
+    Supplier&lt;Date&gt; s=() -&gt; new Date();
+    System.out.println(s.get());
+  }
+}</code></pre>
+
+          <div class="tip">Short memory rule: <code>Predicate</code> checks, <code>Function</code> converts, <code>Consumer</code> consumes, and <code>Supplier</code> supplies.</div>
+
+          <h3>Method reference (<code>::</code>)</h3>
+          <ol>
+            <li>Method reference is a short form or alternative to a lambda expression.</li>
+            <li>It is used to refer an already existing method that matches a functional interface method.</li>
+            <li>It helps implement functional interfaces in a shorter and cleaner way.</li>
+          </ol>
+
+          <h4>Method reference forms</h4>
+          <ol>
+            <li>Static method reference: <code>ClassName::staticMethodName</code></li>
+            <li>Instance method reference: <code>objectReference::instanceMethodName</code></li>
+            <li>Constructor reference: <code>ClassName::new</code></li>
+          </ol>
+
+          <h4>Static method reference example</h4>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1();
+}
+class Sample
+{
+  static void ourMethod()
+  {
+    System.out.println("ourmethod in sample class to m1");
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    A a1=Sample::ourMethod;
+    a1.m1();
+  }
+}</code></pre>
+
+          <h4>Instance method reference example</h4>
+          <pre><code>@FunctionalInterface
+interface A
+{
+  void m1();
+}
+class Sample
+{
+  void ourMethod()
+  {
+    System.out.println("ourmethod in sample class to m1");
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Sample s1=new Sample();
+    A a1=s1::ourMethod;
+    a1.m1();
+  }
+}</code></pre>
+
+          <h4>Constructor reference example</h4>
+          <pre><code>@FunctionalInterface
+interface SampleFactory
+{
+  Sample create();
+}
+class Sample
+{
+  Sample()
+  {
+    System.out.println("sample object created");
+  }
+}
+class Demo
+{
+  public static void main(String[] args)
+  {
+    SampleFactory f=Sample::new;
+    Sample s=f.create();
+  }
+}</code></pre>
+
+          <div class="tip">Method reference reuses an existing method. Constructor reference reuses a constructor to create objects.</div>
+
+          <h3>Stream API</h3>
+          <ol>
+            <li>API stands for Application Programming Interface.</li>
+            <li>Stream API is a group of classes and interfaces used to process data in a functional style.</li>
+            <li>The main purpose of a stream is to process objects, not to store them.</li>
+            <li>We can create a stream in two common ways: <code>Stream.of()</code> and <code>collection.stream()</code>.</li>
+          </ol>
+
+          <h4>Collection vs Stream</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Collection</th>
+                <th>Stream</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Used to store a group of objects</td><td>Used to process objects</td></tr>
+              <tr><td>Data structure</td><td>Processing pipeline</td></tr>
+              <tr><td>Can be reused repeatedly</td><td>Usually consumed once after a terminal operation</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warn">If you print a stream object directly with <code>System.out.println(streamVar)</code>, you do not get the elements. You usually see an object-style representation. Use <code>forEach()</code>, <code>collect()</code>, or another terminal method to inspect results.</div>
+
+          <h4>Creating stream by using <code>Stream.of()</code></h4>
+          <pre><code>import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Stream&lt;Integer&gt; s1=Stream.of(10,20,15,30,25);
+    s1.forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+
+          <h4>Creating stream from a collection by using <code>stream()</code></h4>
+          <pre><code>import java.util.*;
+import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(10,30,20,40);
+    System.out.println(l);
+
+    Stream&lt;Integer&gt; s=l.stream();
+    s.forEach(y -&gt; System.out.println(y));
+  }
+}</code></pre>
+
+          <h4>Common stream methods</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Type</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>forEach()</code></td><td>Terminal</td><td>Process and print each element</td></tr>
+              <tr><td><code>count()</code></td><td>Terminal</td><td>Get total number of elements</td></tr>
+              <tr><td><code>sorted()</code></td><td>Intermediate</td><td>Sort stream elements</td></tr>
+              <tr><td><code>collect()</code></td><td>Terminal</td><td>Convert stream result into collection or another container</td></tr>
+              <tr><td><code>filter()</code></td><td>Intermediate</td><td>Keep only condition-satisfied elements</td></tr>
+              <tr><td><code>map()</code></td><td>Intermediate</td><td>Transform each element</td></tr>
+              <tr><td><code>reduce()</code></td><td>Terminal</td><td>Combine many input values into one output value</td></tr>
+              <tr><td><code>max()</code></td><td>Terminal</td><td>Get maximum element</td></tr>
+              <tr><td><code>min()</code></td><td>Terminal</td><td>Get minimum element</td></tr>
+            </tbody>
+          </table>
+
+          <h4><code>count()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    long c=List.of(10,30,20,40).stream().count();
+    System.out.println(c);
+  }
+}</code></pre>
+
+          <h4><code>sorted()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(10,30,20,40);
+
+    l.stream()
+      .sorted()
+      .forEach(x -&gt; System.out.println(x));
+
+    l.stream()
+      .sorted(Comparator.reverseOrder())
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+
+          <h4><code>collect()</code> example</h4>
+          <pre><code>import java.util.*;
+import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; l=List.of("virat","rohit");
+    List&lt;String&gt; res=l.stream().collect(Collectors.toList());
+    System.out.println(res);
+  }
+}</code></pre>
+
+          <h4><code>filter()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(10,15,20,25,30);
+    l.stream()
+      .filter(x -&gt; x%2==0)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+
+          <h4><code>map()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(2,3,4,5);
+    l.stream()
+      .map(x -&gt; x*x)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+
+          <h4><code>reduce()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    int sum=List.of(10,20,30,40).stream()
+      .reduce(0,(a,b) -&gt; a+b);
+    System.out.println(sum);
+  }
+}</code></pre>
+
+          <h4><code>max()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Optional&lt;Integer&gt; max=List.of(10,30,20,40).stream()
+      .max(Integer::compareTo);
+    System.out.println(max.get());
+  }
+}</code></pre>
+
+          <h4><code>min()</code> example</h4>
+          <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Optional&lt;Integer&gt; min=List.of(10,30,20,40).stream()
+      .min(Integer::compareTo);
+    System.out.println(min.get());
+  }
+}</code></pre>
+
+          <div class="tip"><code>filter()</code> uses a <code>Predicate</code>, <code>map()</code> uses a <code>Function</code>, and <code>reduce()</code> combines all values into one result.</div>
+
+          <h3>Optional class</h3>
+          <ol>
+            <li><code>Optional</code> is a predefined class from the <code>java.util</code> package.</li>
+            <li>Its main purpose is to reduce <code>NullPointerException</code> risk while working with nullable values.</li>
+            <li>It wraps a value and lets you check whether data is present before using it.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>ofNullable(value)</code></td><td>Creates an Optional that may contain a value or <code>null</code></td></tr>
+              <tr><td><code>isPresent()</code></td><td>Checks whether a value is present</td></tr>
+              <tr><td><code>orElse(defaultValue)</code></td><td>Returns the value if present, otherwise the fallback value</td></tr>
+              <tr><td><code>get()</code></td><td>Returns the wrapped value if present</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warn">Use <code>get()</code> only when you are sure a value is present. Otherwise it throws <code>NoSuchElementException</code>.</div>
+
+          <pre><code>import java.util.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    String s1="Bhavadeesh";
+    Optional&lt;String&gt; o=Optional.ofNullable(s1);
+
+    if(o.isPresent())
+    {
+      System.out.println(o.get());
+    }
+    else
+    {
+      System.out.println("element is not there");
+    }
+
+    System.out.println(o.orElse("default value"));
+  }
+}</code></pre>
+
+          <h3>Date and Time API</h3>
+          <ol>
+            <li>Java 8 introduced the modern date and time API in the <code>java.time</code> package.</li>
+            <li>Common classes are <code>LocalDate</code>, <code>LocalTime</code>, and <code>LocalDateTime</code>.</li>
+            <li>These classes make date and time handling much cleaner than the older legacy classes.</li>
+          </ol>
+
+          <pre><code>import java.time.*;
+class Test
+{
+  public static void main(String[] args)
+  {
+    LocalDate ld=LocalDate.now();
+    System.out.println(ld);
+    System.out.println(ld.getYear());
+    System.out.println(ld.getMonthValue());
+    System.out.println(ld.getDayOfMonth());
+
+    LocalTime lt=LocalTime.now();
+    System.out.println(lt);
+    System.out.println(lt.getHour());
+    System.out.println(lt.getMinute());
+    System.out.println(lt.getSecond());
+    System.out.println(lt.getNano());
+
+    LocalDateTime ldt=LocalDateTime.now();
+    System.out.println(ldt);
+
+    LocalDateTime custom=LocalDateTime.of(2000,1,1,6,32,45,56789);
+    System.out.println(custom);
+  }
+}</code></pre>
+
+          <h3>Stream API theory questions</h3>
+          <div class="qa-group">
+            <div class="qa-item">
+              <p>Q1. What is Stream API in Java 8?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>Stream API is a feature used to process groups of objects in a functional style. It supports operations like filtering, mapping, sorting, counting, reducing, and collecting.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q2. What is the main difference between a <code>Collection</code> and a <code>Stream</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>A collection is mainly used to store data, while a stream is mainly used to process data. A collection keeps elements in memory, but a stream represents a pipeline of operations.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q3. What are the common ways to create a stream?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>The two common ways are <code>Stream.of(...)</code> and <code>collection.stream()</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q4. Why does printing a stream variable directly not print all elements?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>Because a stream object does not automatically expose all elements through <code>toString()</code>. Use a terminal operation such as <code>forEach()</code>, <code>collect()</code>, or <code>count()</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q5. What does <code>forEach()</code> do?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>forEach()</code> is a terminal operation that processes each stream element one by one, usually for printing or executing an action.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q6. What does <code>count()</code> return?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>count()</code> returns the total number of elements in the stream as a <code>long</code> value.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q7. What is the use of <code>sorted()</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>sorted()</code> sorts elements in ascending order by default. For descending order, pass a comparator such as <code>Comparator.reverseOrder()</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q8. What is the use of <code>collect()</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>collect()</code> is a terminal operation used to convert stream output into another form such as <code>List</code>, <code>Set</code>, or <code>Map</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q9. What is the difference between <code>filter()</code> and <code>map()</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>filter()</code> keeps only matching elements based on a condition. <code>map()</code> transforms every input element into another output value.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q10. Which functional interface is used by <code>filter()</code> and <code>map()</code>?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>filter()</code> uses <code>Predicate</code>. <code>map()</code> uses <code>Function</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q11. What does <code>reduce()</code> do?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>reduce()</code> combines multiple input values and returns one final value, such as sum, product, or concatenated output.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q12. What do <code>max()</code> and <code>min()</code> return?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><code>max()</code> returns the largest element and <code>min()</code> returns the smallest element. They usually return <code>Optional&lt;T&gt;</code>.</p>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q13. What is the difference between intermediate and terminal stream methods?</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p>Intermediate methods return another stream and allow chaining, like <code>filter()</code>, <code>map()</code>, and <code>sorted()</code>. Terminal methods finish the pipeline and return a value or perform an action, like <code>forEach()</code>, <code>count()</code>, <code>collect()</code>, and <code>reduce()</code>.</p>
+              </details>
+            </div>
+          </div>
+
+          <h3>Stream API coding questions with answers</h3>
+          <div class="qa-group">
+            <div class="qa-item">
+              <p>Q1. Write a Java program to create a stream by using <code>Stream.of()</code> and print all elements.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>Stream.of()</code> to create the stream and <code>forEach()</code> to print each element.</p>
+                <pre><code>import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Stream&lt;Integer&gt; s=Stream.of(10,20,30,40);
+    s.forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q2. Write a Java program to convert a list into a stream and print the elements.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Call <code>stream()</code> on the list and then use <code>forEach()</code>.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; l=List.of("virat","rohit");
+    l.stream().forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q3. Write a Java program to count the number of elements in a stream.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use the terminal method <code>count()</code>.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    long c=List.of(10,30,20,40).stream().count();
+    System.out.println(c);
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q4. Write a Java program to sort stream elements in ascending order and descending order.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>sorted()</code> for ascending order and <code>sorted(Comparator.reverseOrder())</code> for descending order.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(10,30,20,40);
+
+    l.stream()
+      .sorted()
+      .forEach(x -&gt; System.out.println(x));
+
+    l.stream()
+      .sorted(Comparator.reverseOrder())
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q5. Write a Java program to convert stream elements into a list.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>collect(Collectors.toList())</code>.</p>
+                <pre><code>import java.util.*;
+import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; l=List.of("virat","rohit");
+    List&lt;String&gt; res=l.stream().collect(Collectors.toList());
+    System.out.println(res);
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q6. Write a Java program to print only even numbers from a list by using <code>filter()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> <code>filter()</code> keeps only the elements that satisfy the condition.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(10,15,20,25,30);
+    l.stream()
+      .filter(x -&gt; x%2==0)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q7. Write a Java program to square every number by using <code>map()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> <code>map()</code> transforms every input element into another output value.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; l=List.of(2,3,4,5);
+    l.stream()
+      .map(x -&gt; x*x)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q8. Write a Java program to find the sum of all elements by using <code>reduce()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>reduce()</code> to combine all stream values into one result.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    int sum=List.of(10,20,30,40).stream()
+      .reduce(0,(a,b) -&gt; a+b);
+    System.out.println(sum);
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q9. Write a Java program to find the maximum element in a list by using stream.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>max()</code> with a comparator.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Optional&lt;Integer&gt; max=List.of(10,30,20,40).stream()
+      .max(Integer::compareTo);
+    System.out.println(max.get());
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q10. Write a Java program to find the minimum element in a list by using stream.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>min()</code> with a comparator.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    Optional&lt;Integer&gt; min=List.of(10,30,20,40).stream()
+      .min(Integer::compareTo);
+    System.out.println(min.get());
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q11. Write a Java program to print names whose length is greater than 4 by using <code>filter()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Filter names using the required condition and print the matched names.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; names=List.of("virat","rohit","sky","hardik");
+    names.stream()
+      .filter(x -&gt; x.length()&gt;4)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q12. Write a Java program to convert all names into uppercase by using <code>map()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>map(String::toUpperCase)</code> or an equivalent lambda.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; names=List.of("virat","rohit","surya");
+    names.stream()
+      .map(String::toUpperCase)
+      .forEach(x -&gt; System.out.println(x));
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q13. Write a Java program to filter even numbers, square them, and collect the result into a list.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Chain <code>filter()</code>, <code>map()</code>, and <code>collect()</code>.</p>
+                <pre><code>import java.util.*;
+import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;Integer&gt; res=List.of(1,2,3,4,5,6).stream()
+      .filter(x -&gt; x%2==0)
+      .map(x -&gt; x*x)
+      .collect(Collectors.toList());
+    System.out.println(res);
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q14. Write a Java program to sort string names and collect them into a list.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>sorted()</code> followed by <code>collect(Collectors.toList())</code>.</p>
+                <pre><code>import java.util.*;
+import java.util.stream.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    List&lt;String&gt; res=List.of("virat","rohit","abd","gill").stream()
+      .sorted()
+      .collect(Collectors.toList());
+    System.out.println(res);
+  }
+}</code></pre>
+              </details>
+            </div>
+
+            <div class="qa-item">
+              <p>Q15. Write a Java program to find the product of all numbers by using <code>reduce()</code>.</p>
+              <details class="qa-answer">
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong> Use <code>reduce()</code> with multiplication logic.</p>
+                <pre><code>import java.util.*;
+class Demo
+{
+  public static void main(String[] args)
+  {
+    int product=List.of(1,2,3,4).stream()
+      .reduce(1,(a,b) -&gt; a*b);
+    System.out.println(product);
+  }
+}</code></pre>
+              </details>
+            </div>
+          </div>
         </details>
       </section>
     </main>
