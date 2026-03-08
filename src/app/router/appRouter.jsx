@@ -26,6 +26,10 @@ export const appRouter = createBrowserRouter([
         element: <Navigate to="/notes/java" replace />
       },
       {
+        path: "mysql-notes.html",
+        element: <Navigate to="/notes/mysql" replace />
+      },
+      {
         path: "react-notes.html",
         element: <Navigate to="/notes/react" replace />
       },

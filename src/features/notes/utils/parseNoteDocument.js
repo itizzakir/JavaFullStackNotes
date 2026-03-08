@@ -2,6 +2,7 @@ const legacyPathMap = Object.freeze({
   "/html-notes.html": "/notes/html",
   "/javascript-notes.html": "/notes/javascript",
   "/java-notes.html": "/notes/java",
+  "/mysql-notes.html": "/notes/mysql",
   "/react-notes.html": "/notes/react",
   "/notes.html": "/notes/javascript"
 });

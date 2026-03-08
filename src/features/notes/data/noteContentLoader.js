@@ -6,6 +6,7 @@ const contentPathByNoteId = Object.freeze({
   html: "../content/html-notes.jsx",
   javascript: "../content/javascript-notes.jsx",
   java: "../content/java-notes.jsx",
+  mysql: "../content/mysql-notes.jsx",
   react: "../content/react-notes.jsx"
 });
 

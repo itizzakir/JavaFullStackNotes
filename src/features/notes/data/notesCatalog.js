@@ -23,6 +23,14 @@ export const notesCatalog = Object.freeze([
     summary: "Java section with matching design and starter structure for expansion."
   },
   {
+    id: "mysql",
+    title: "MySQL Notes",
+    shortLabel: "MySQL",
+    status: "Ready",
+    summary:
+      "Organized MySQL notes covering SQL, constraints, joins, subqueries, objects, procedures, functions, cursors, and triggers."
+  },
+  {
     id: "react",
     title: "React Notes",
     shortLabel: "React",
