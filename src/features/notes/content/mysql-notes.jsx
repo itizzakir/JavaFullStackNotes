@@ -387,10 +387,110 @@ const noteSource = `
       white-space: nowrap;
     }
 
+    .language-map {
+      margin: 16px 0 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .language-map__root {
+      width: fit-content;
+      margin: 0 auto;
+      padding: 10px 22px;
+      border: 3px solid #0f172a;
+      border-radius: 16px;
+      background: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      position: relative;
+      z-index: 1;
+    }
+
+    .language-map__grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .language-map__grid::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0f172a 0%, #1d4ed8 100%);
+    }
+
+    .language-map__item {
+      position: relative;
+      padding-top: 30px;
+    }
+
+    .language-map__item::before {
+      content: "";
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      width: 3px;
+      height: 42px;
+      border-radius: 999px;
+      background: #0f172a;
+      transform: translateX(-50%);
+    }
+
+    .language-map__node {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      border: 3px solid #0f172a;
+      border-radius: 14px;
+      background: #fff;
+      color: #4f46e5;
+      font-size: 1.12rem;
+      font-weight: 900;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .language-map__item ol {
+      margin: 12px 0 0;
+      padding-left: 22px;
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    .language-map__item li::marker {
+      color: #dc2626;
+    }
+
     @media (max-width: 900px) {
       .toolbar,
       .split {
         grid-template-columns: 1fr;
+      }
+
+      .language-map__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .language-map__grid::before {
+        display: none;
+      }
+
+      .language-map__item::before {
+        top: -10px;
+        height: 26px;
       }
     }
 
@@ -407,6 +507,18 @@ const noteSource = `
       .mini-nav a {
         width: 100%;
         text-align: center;
+      }
+
+      .language-map {
+        padding: 14px;
+      }
+
+      .language-map__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .language-map__item {
+        padding-top: 22px;
       }
     }
   </style>
@@ -1008,6 +1120,55 @@ WHERE (sno, sname) NOT IN (
             <span>DQL</span>
             <span>TCL</span>
             <span>DCL</span>
+          </div>
+
+          <div class="language-map" aria-label="SQL sublanguage diagram">
+            <div class="language-map__root">Sub Languages</div>
+
+            <div class="language-map__grid">
+              <div class="language-map__item">
+                <div class="language-map__node">DDL</div>
+                <ol>
+                  <li>CREATE</li>
+                  <li>ALTER: add, drop, rename, modify</li>
+                  <li>DROP</li>
+                  <li>TRUNCATE</li>
+                </ol>
+              </div>
+
+              <div class="language-map__item">
+                <div class="language-map__node">DML</div>
+                <ol>
+                  <li>INSERT</li>
+                  <li>UPDATE</li>
+                  <li>DELETE</li>
+                </ol>
+              </div>
+
+              <div class="language-map__item">
+                <div class="language-map__node">DQL / DRL</div>
+                <ol>
+                  <li>SELECT</li>
+                </ol>
+              </div>
+
+              <div class="language-map__item">
+                <div class="language-map__node">TCL</div>
+                <ol>
+                  <li>COMMIT</li>
+                  <li>ROLLBACK</li>
+                  <li>SAVEPOINT</li>
+                </ol>
+              </div>
+
+              <div class="language-map__item">
+                <div class="language-map__node">DCL</div>
+                <ol>
+                  <li>GRANT</li>
+                  <li>REVOKE</li>
+                </ol>
+              </div>
+            </div>
           </div>
 
           <h3>1. DDL: Data Definition Language</h3>
