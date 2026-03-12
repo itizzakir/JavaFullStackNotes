@@ -344,6 +344,280 @@ System.out.println(s1);</code></pre>
     </article>
 
     <article class="card">
+      <h2>Spring application can be configured in 3 ways</h2>
+      <div>1.By using xml configuration</div>
+      <div>2.By using java based configuration</div>
+      <div>3.By using Annotation based configuration</div>
+    </article>
+
+    <article class="card">
+      <h2>1. XML based configuration example</h2>
+      <div>Required files: pom.xml(spring context dependency), Car.java file, config.xml file, Main.java file.</div>
+      <pre><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.excelr&lt;/groupId&gt;
+  &lt;artifactId&gt;SpringApplicationin3waysPro&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+      &lt;version&gt;5.3.20&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+      <pre><code>package com.excelr;
+
+public class Car {
+	
+	private Integer carId;
+	private String carName;
+	public Car() { super(); }
+	public Car(Integer carId, String carName) { this.carId = carId; this.carName = carName; }
+	public Integer getCarId() { return carId; }
+	public void setCarId(Integer carId) { this.carId = carId; }
+	public String getCarName() { return carName; }
+	public void setCarName(String carName) { this.carName = carName; }
+	@Override
+	public String toString() { return "Car [carId=" + carId + ", carName=" + carName + "]"; }
+}</code></pre>
+      <pre><code>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
+  &lt;bean id="car1" class="com.excelr.Car"&gt;
+    &lt;property name="carId"&gt;
+      &lt;value&gt;1234&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property name="carName"&gt;
+      &lt;value&gt;Tata punch&lt;/value&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+&lt;/beans&gt;</code></pre>
+      <pre><code>ApplicationContext cc =new ClassPathXmlApplicationContext("config.xml");
+Car ca=cc.getBean("car1",Car.class);
+System.out.println(ca);</code></pre>
+    </article>
+
+    <article class="card">
+      <h2>2. Java based configuration example</h2>
+      <div>Required files: pom.xml(spring context dependency), Car.java file, Congig.java file, Main.java file.</div>
+      <pre><code>&lt;artifactId&gt;SpringApplicationinJavabased&lt;/artifactId&gt; (spring-context 5.3.20)</code></pre>
+      <pre><code>package com.excelr;
+
+public class Car {
+	
+	private Integer carId;
+	private String carName;
+	public void setCarId(Integer carId) { this.carId = carId; }
+	public void setCarName(String carName) { this.carName = carName; }
+	@Override
+	public String toString() { return "Car [carId=" + carId + ", carName=" + carName + "]"; }
+}</code></pre>
+      <pre><code>package com.excelr;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class Config {
+	
+	@Bean
+	public Car methodFromConfig()
+	{
+		Car c1=new Car();
+		c1.setCarId(5555);
+		c1.setCarName("Audi");
+		
+		return c1;
+	}
+}</code></pre>
+      <pre><code>ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+Car car = context.getBean("methodFromConfig", Car.class);
+System.out.println(car);</code></pre>
+    </article>
+
+    <article class="card">
+      <h2>3. Annotation based configuration example</h2>
+      <div>Required files: pom.xml(spring context dependency), Car.java file, Congig.xml, Main.java file.</div>
+      <pre><code>&lt;artifactId&gt;SpringApplicationAnnotation&lt;/artifactId&gt; (spring-context 5.3.20)</code></pre>
+      <pre><code>package com.excelr;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component("namecar")
+public class Car {
+	
+	@Value("10000")
+	private Integer carPrice;
+	
+	@Value("Ferari")
+	private String carName;
+
+	@Override
+	public String toString() {
+		return "Car [carPrice=" + carPrice + ", carName=" + carName + "]";
+	}
+}</code></pre>
+      <pre><code>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"&gt;
+
+    &lt;context:component-scan base-package="com.excelr"/&gt;
+&lt;/beans&gt;</code></pre>
+      <pre><code>ApplicationContext cc=new ClassPathXmlApplicationContext("config.xml");
+Car c1=cc.getBean("namecar",Car.class);
+System.out.println(c1);</code></pre>
+    </article>
+
+    <article class="card">
+      <h2>Bean Life Cycle (verbatim note)</h2>
+      <pre><code>Bean Life Cycle
+===============
+1.The java class which is managed by IOC Container is called Bean class.
+2.For spring bean object creation and destruction will be taken by IOC Container.
+3.Spring bean life cycle will be managed IOC Container.
+4.In spring we can work with bean lifecycle methods in 2ways.They are
+    1.By implementing 2 interfaces
+            1.InitializingBean=========&gt;afterPropertiesSet()=========&gt;for initialization.
+            2.DisposableBean===========&gt;destroy()====================&gt;for destruction
+
+    2.By using Annotations
+            1.@PostConstruct===========&gt;for initialization.
+            2.@PreDestroy==============&gt;for destruction
+
+1.write a spring app to manage life cycle methods by using Interfaces.
+
+Required Files
+--------------
+1.pom.xml(spring context dependency)
+2.Engine.java file
+3.Motor.java file
+4.config.xml
+5.Main.java</code></pre>
+    </article>
+
+    <article class="card">
+      <h2>Bean Life Cycle</h2>
+      <ul>
+        <li>1.The java class which is managed by IOC Container is called Bean class.</li>
+        <li>2.For spring bean object creation and destruction will be taken by IOC Container.</li>
+        <li>3.Spring bean life cycle will be managed IOC Container.</li>
+        <li>4.In spring we can work with bean lifecycle methods in 2ways.They are
+          <ul>
+            <li>1.By implementing 2 interfaces
+              <ul>
+                <li>InitializingBean========&gt;afterPropertiesSet()========&gt;for initialization.</li>
+                <li>DisposableBean=============&gt;destroy()================&gt;for destruction</li>
+              </ul>
+            </li>
+            <li>2.By using Annotations
+              <ul>
+                <li>@PostConstruct============&gt;for initialization.</li>
+                <li>@PreDestroy===============&gt;for destruction</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Lifecycle by interfaces example</h2>
+      <div>Required Files: pom.xml(springcontext dependency), Engine.java, Motor.java, config.xml, Main.java</div>
+      <pre><code>&lt;artifactId&gt;SpringLifeCycleByInterfaces&lt;/artifactId&gt;</code></pre>
+      <pre><code>package com.excelr;
+
+import org.springframework.beans.factory.InitializingBean;
+
+public class Engine implements InitializingBean {
+
+	public Engine() {
+		System.out.println("Engine constructor executed");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("after properties set method or init method");
+	}
+}</code></pre>
+      <pre><code>package com.excelr;
+
+import org.springframework.beans.factory.DisposableBean;
+
+public class Motor implements DisposableBean{
+
+	public Motor() {
+		System.out.println("Motor constructor executed");
+	}
+
+	@Override
+	public void destroy() throws Exception {
+	  System.out.println("destroy method called");
+	}
+}</code></pre>
+      <pre><code>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;
+  &lt;bean id="eng1" class="com.excelr.Engine"&gt;
+  &lt;/bean&gt;
+  &lt;bean id="mot1" class="com.excelr.Motor"&gt;
+  &lt;/bean&gt;
+&lt;/beans&gt;</code></pre>
+      <pre><code>ConfigurableApplicationContext cc=new ClassPathXmlApplicationContext("config.xml");
+Engine e1=cc.getBean("eng1",Engine.class);
+Motor m1=cc.getBean("mot1",Motor.class);
+cc.close();</code></pre>
+    </article>
+
+    <article class="card">
+      <h2>Lifecycle by Annotations example</h2>
+      <div>Required Files: pom.xml(springcontext,annotations dependency), Engine.java, config.xml, Main.java</div>
+      <pre><code>&lt;artifactId&gt;Lifeproject&lt;/artifactId&gt;</code></pre>
+      <pre><code>package com.excelr;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+public class Engine  {
+
+    public Engine() {
+        super();
+        System.out.println("Engine constructor called");
+    }
+
+    @PostConstruct
+    public void init()  {
+        System.out.println("init method called");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("destroy method called");
+    }
+}</code></pre>
+      <pre><code>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd"&gt;
+
+    &lt;context:annotation-config/&gt;
+    
+    &lt;bean id="en1" class="com.excelr.Engine"/&gt;
+&lt;/beans&gt;</code></pre>
+      <pre><code>ConfigurableApplicationContext cc=new ClassPathXmlApplicationContext("config.xml");
+Engine e1=cc.getBean("en1",Engine.class);
+cc.close();</code></pre>
+    </article>
+
+    <article class="card">
       <h2>Additional headings from provided text</h2>
       <div>Springboot introduction, Spring Data JPA, Spring Web MVC, RESTful services, CircuitBreaker app, Actuators, Spring Security, Exception Handling, Monolith Arch, Git Hub — noted in feed; core details preserved above.</div>
     </article>
