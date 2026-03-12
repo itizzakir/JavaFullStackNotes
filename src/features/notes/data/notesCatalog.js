@@ -39,6 +39,14 @@ export const notesCatalog = Object.freeze([
       "React module notes with CommonJS vs ES modules and proper import/export examples."
   },
   {
+    id: "springcore",
+    title: "Spring Core Notes",
+    shortLabel: "Spring Core",
+    status: "Ready",
+    summary:
+      "Full Springboot & Microservices notes as provided (languages, Spring core, IoC/DI, scopes, wiring, examples)."
+  },
+  {
     id: "springboot",
     title: "Spring Boot Notes",
     shortLabel: "Spring Boot",

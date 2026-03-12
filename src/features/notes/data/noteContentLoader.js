@@ -8,6 +8,7 @@ const contentPathByNoteId = Object.freeze({
   java: "../content/java-notes.jsx",
   mysql: "../content/mysql-notes.jsx",
   react: "../content/react-notes.jsx",
+  springcore: "../content/springcore-notes.jsx",
   springboot: "../content/springboot-notes.jsx"
 });
 
