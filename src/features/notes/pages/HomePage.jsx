@@ -7,7 +7,7 @@ export default function HomePage() {
       <header className="hero">
         <h1>ShazeeVerse</h1>
         <p>
-          Pure React notes portal with route-based modules for HTML, JavaScript, Java, MySQL, and React.
+          Pure React notes portal with route-based modules for HTML, JavaScript, Java, MySQL, React, and a Spring Boot scaffold.
         </p>
       </header>
       <NotesGrid notes={notesCatalog} />

@@ -7,7 +7,8 @@ const contentPathByNoteId = Object.freeze({
   javascript: "../content/javascript-notes.jsx",
   java: "../content/java-notes.jsx",
   mysql: "../content/mysql-notes.jsx",
-  react: "../content/react-notes.jsx"
+  react: "../content/react-notes.jsx",
+  springboot: "../content/springboot-notes.jsx"
 });
 
 export async function loadNoteDocument(noteId) {
